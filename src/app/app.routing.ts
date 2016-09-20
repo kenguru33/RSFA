@@ -1,0 +1,18 @@
+import {RouterModule, Routes} from "@angular/router";
+import {VesselsComponent} from "./vessels/vessels.component";
+import {ModuleWithProviders} from "@angular/core";
+import {AppComponent} from "./app.component";
+import {LoginComponent} from "./login/login.component";
+
+
+const appRoutes: Routes = [
+    //{ path: '', redirectTo: 'skøyter', pathMatch: 'full' }
+    { path: '', component: LoginComponent},
+    { path: 'skøyter', component: VesselsComponent }
+];
+
+export const appRoutingProviders: any[] = [
+
+];
+
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
