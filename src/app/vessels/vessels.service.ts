@@ -1,0 +1,72 @@
+import {Injectable} from "@angular/core";
+import {Http, Response, Headers, RequestOptions} from "@angular/http";
+import {Observable} from "rxjs";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
+import "rxjs/add/observable/throw";
+import {Vessel} from "./models/vessel.model";
+import {VesselStatusCode} from "./models/vessel-status-code";
+
+@Injectable()
+export class VesselsService {
+
+    constructor(private http: Http) {}
+
+    baseUrl = 'https://rsfa-e3c2f.firebaseio.com';
+
+    getVessels(): Observable<Vessel[]> {
+        return this.http.get(`${this.baseUrl}/vessels.json`).map((response: Response) => {
+            let vessels = response.json() || {};
+            let vesselArray = [];
+
+            for (let key in vessels) {
+                vessels[key].key = key;
+                vesselArray.push(vessels[key])
+            }
+            return vesselArray;
+
+
+        }).catch(error=> {
+            console.log(error);
+            let errorMsg = `${error.statusText}(${error.statusCode})`;
+            return Observable.throw(errorMsg);
+        });
+    }
+    getVessel(key: any):Observable<Vessel> {
+        return this.http.get(`${this.baseUrl}/vessels/${key}.json`).map((response: Response) =>{
+            console.log('from getvessel',response.json());
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            let errorMsg = `${error.statusText}(${error.statusCode})`;
+            return Observable.throw(errorMsg);
+        });
+    }
+
+    storeVessel(vessel: Vessel): Observable<string> {
+        return this.http.post(`${this.baseUrl}/vessels.json`, JSON.stringify(vessel)).map((response: Response) => {
+            console.log('stored vessel',response.json());
+            return response.json().name;
+        }).catch(error=>{
+            console.log(error);
+            let errorMsg = `${error.statusText}(${error.statusCode})`;
+            return Observable.throw(errorMsg);
+        });
+    }
+
+    deleteVessel(vessel: Vessel): Observable<Response> {
+        return this.http.delete(`${this.baseUrl}/vessels/${vessel.key}.json`).catch(error=> {
+            console.log(error);
+            let errorMsg = `${error.statusText}(${error.statusCode})`;
+            return Observable.throw(errorMsg);
+        });
+    }
+
+    getStatusCodes(): Array<VesselStatusCode> {
+        return [
+            { code: 'Operativ', color: '#5cb85c' },
+            { code: 'Ute av tjeneste', color: '	#d9534f'},
+            { code: 'Reserve', color: '#428bca'}
+        ]
+    }
+}

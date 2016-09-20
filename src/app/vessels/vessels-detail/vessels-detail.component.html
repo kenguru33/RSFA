@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4><i class="fa fa-ship" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel?.status]?.color"></i>&nbsp;&nbsp;{{vessel?.prefix}}-{{vessel?.id}} {{vessel?.name}}</h4>
+  </div>
+  <div class="panel-body">
+    <div class="media">
+      <div class="media-body media-left">
+
+        <p><strong>Stasjon:</strong> {{vessel?.station}}</p>
+        <p><strong>Telefon:</strong> {{vessel?.phone}}</p>
+        <p><strong>Status:</strong> {{vesselsService.getStatusCodes()[vessel?.status]?.code}}</p>
+        <p><strong>Fartøysklasse:</strong> {{vessel?.vesselClass}}</p>
+        <p><strong>Bemannning:</strong> {{vessel?.staff}}</p>
+        <p><strong>MMSI:</strong> {{vessel?.mmsi}}</p>
+      </div>
+      <div class="media-right">
+        <a>
+          <img class="media-object img-circle" src="{{vessel?.imgUrl}}" alt="{{vessel?.imgUrl}}">
+        </a>
+      </div>
+    </div>
+    <div class=" col-sm-12" style="margin-top: 10px" >
+      <div style="border-bottom: solid 1px; border-color: black">
+        <h4><i class="fa fa-asterisk" aria-hidden="true"></i>&nbsp;&nbsp;Teknisk informasjon<i class="fa pull-right" [class.fa-chevron-left]="!viewTechnicalData" style="cursor: pointer;" [class.fa-chevron-down]="viewTechnicalData"  aria-hidden="true" (click)="onTechnicalDataClicked()"></i></h4>
+      </div>
+      <div [hidden]="!viewTechnicalData" style="margin-top: 10px">
+        <p><strong>Hastighet: </strong>30</p>
+        <p><strong>Rekkevidde: </strong>300</p>
+        <p><strong>Vekt: </strong>33tonn</p>
+        <p><strong>Dypgang: </strong>3m</p>
+      </div>
+    </div>
+    <button style="margin-top: 20px" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Rediger</button>
+  </div>
+</div>
