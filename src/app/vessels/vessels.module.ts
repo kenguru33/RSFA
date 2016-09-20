@@ -10,6 +10,16 @@ import {VesselsListComponent} from "./vessels-list/vessels-list.component";
 import {VesselsService} from "./vessels.service";
 import {VesselsDetailComponent} from "./vessels-detail/vessels-detail.component";
 import { VesselsDetailEditComponent } from './vessels-detail/vessels-detail-edit.component';
+import {AngularFireModule} from "angularfire2";
+
+// Initialize Firebase
+export const firebaseConfig = {
+  apiKey: "AIzaSyDgAkPHkC2KabvWelAFggwWQvGB-dTU5eI",
+  authDomain: "rsfa-e3c2f.firebaseapp.com",
+  databaseURL: "https://rsfa-e3c2f.firebaseio.com",
+  storageBucket: "rsfa-e3c2f.appspot.com",
+  messagingSenderId: "439046788820"
+};
 
 @NgModule({
   declarations: [
@@ -24,7 +34,8 @@ import { VesselsDetailEditComponent } from './vessels-detail/vessels-detail-edit
     FormsModule,
     HttpModule,
     vesselsRouting,
-    ModalWindowModule
+    ModalWindowModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   exports:[
     VesselsComponent

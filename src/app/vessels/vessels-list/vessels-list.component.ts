@@ -30,8 +30,7 @@ export class VesselsListComponent implements OnInit {
   private vesselsLoading;
 
   constructor(private vesselsService: VesselsService, private router: Router) {}
-
-  ngOnInit(): void {
+    ngOnInit(): void {
     this.getVessels();
   }
 
