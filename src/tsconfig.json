@@ -1,8 +1,5 @@
 {
   "compilerOptions": {
-    "types": [
-      "firebase"
-    ],
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

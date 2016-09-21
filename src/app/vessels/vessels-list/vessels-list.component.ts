@@ -3,12 +3,14 @@ import {Response} from "@angular/http";
 import {Router} from "@angular/router";
 import {VesselsService} from "../vessels.service";
 import {Vessel} from "../models/vessel.model";
+import {Subscription} from "rxjs";
 @Component({
   selector: 'rs-vessels-list',
   templateUrl: 'vessels-list.component.html',
   styleUrls: ['vessels-list.component.css']
 })
-export class VesselsListComponent implements OnInit {
+export class VesselsListComponent implements OnInit, OnDestroy {
+
   private vessels: Vessel[] = [];
 
   private selectedVessel: Vessel;
@@ -29,10 +31,21 @@ export class VesselsListComponent implements OnInit {
 
   private vesselsLoading;
 
+    private sub: Subscription;
+
   constructor(private vesselsService: VesselsService, private router: Router) {}
-    ngOnInit(): void {
-    this.getVessels();
+
+  ngOnInit(): void {
+      this.sub = this.vesselsService.vesselListChanged.subscribe( key => {
+          console.log(key);
+          this.getVessels();
+      });
+      this.getVessels();
   }
+
+    ngOnDestroy(): void {
+        this.sub.unsubscribe();
+    }
 
   private getVessels() {
     this.vesselsLoading = true;
@@ -42,14 +55,6 @@ export class VesselsListComponent implements OnInit {
     }, error => {
       console.error(error);
     })
-  }
-
-  private addVessel(vessel: Vessel) {
-    this.vesselsService.storeVessel(vessel).subscribe(() => {
-      this.getVessels();
-    }, error => {
-      console.log(error);
-    });
   }
 
   private deleteVessel(value: boolean) {
@@ -89,7 +94,6 @@ export class VesselsListComponent implements OnInit {
 
   onAddVessel() {
     //this.addVessel({key: 0 , id: 150, prefix:'rs', name: 'rumpebalja ratata'});
-
   }
 
   onSelectVessel(index: number) {

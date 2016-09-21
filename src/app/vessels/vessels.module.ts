@@ -10,7 +10,6 @@ import {VesselsListComponent} from "./vessels-list/vessels-list.component";
 import {VesselsService} from "./vessels.service";
 import {VesselsDetailComponent} from "./vessels-detail/vessels-detail.component";
 import { VesselsDetailEditComponent } from './vessels-detail/vessels-detail-edit.component';
-import {AngularFireModule} from "angularfire2";
 
 // Initialize Firebase
 export const firebaseConfig = {
@@ -34,8 +33,7 @@ export const firebaseConfig = {
     FormsModule,
     HttpModule,
     vesselsRouting,
-    ModalWindowModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    ModalWindowModule
   ],
   exports:[
     VesselsComponent

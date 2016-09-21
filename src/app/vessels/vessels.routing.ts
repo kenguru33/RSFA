@@ -13,8 +13,8 @@ const vesselsRoutes: Routes = [
         component: VesselsComponent,
         children: [
             { path: 'edit',  component: VesselsDetailEditComponent },
+            { path: 'edit/:key',  component: VesselsDetailEditComponent },
             { path: ':key',  component: VesselsDetailComponent},
-            //{ path: 'edit/:id',  component: VesselEditComponent },
             //{ path: '*', component: VesselDetailStarterComponent }
         ]
     }

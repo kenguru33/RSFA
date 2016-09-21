@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable, EventEmitter} from "@angular/core";
 import {Http, Response, Headers, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs";
 import "rxjs/add/operator/catch";
@@ -14,6 +14,8 @@ export class VesselsService {
 
     baseUrl = 'https://rsfa-e3c2f.firebaseio.com';
 
+    vesselListChanged: EventEmitter<string> = new EventEmitter<string>();
+
     getVessels(): Observable<Vessel[]> {
         return this.http.get(`${this.baseUrl}/vessels.json`).map((response: Response) => {
             let vessels = response.json() || {};
@@ -25,7 +27,6 @@ export class VesselsService {
             }
             return vesselArray;
 
-
         }).catch(error=> {
             console.log(error);
             let errorMsg = `${error.statusText}(${error.statusCode})`;
@@ -34,8 +35,9 @@ export class VesselsService {
     }
     getVessel(key: any):Observable<Vessel> {
         return this.http.get(`${this.baseUrl}/vessels/${key}.json`).map((response: Response) =>{
-            console.log('from getvessel',response.json());
-            return response.json();
+            let vessel = response.json();
+            vessel.key = key;
+            return vessel;
         }).catch(error => {
             console.log(error);
             let errorMsg = `${error.statusText}(${error.statusCode})`;
@@ -46,7 +48,21 @@ export class VesselsService {
     storeVessel(vessel: Vessel): Observable<string> {
         return this.http.post(`${this.baseUrl}/vessels.json`, JSON.stringify(vessel)).map((response: Response) => {
             console.log('stored vessel',response.json());
+            this.vesselListChanged.emit(response.json().name);
             return response.json().name;
+        }).catch(error=>{
+            console.log(error);
+            let errorMsg = `${error.statusText}(${error.statusCode})`;
+            return Observable.throw(errorMsg);
+        });
+    }
+
+    updateVessel(vessel: Vessel): Observable<string> {
+        let key = vessel.key;
+        delete vessel['key'];
+        return this.http.put(`${this.baseUrl}/vessels/${key}.json`, JSON.stringify(vessel)).map((response: Response) => {
+            this.vesselListChanged.emit(key);
+            return key;
         }).catch(error=>{
             console.log(error);
             let errorMsg = `${error.statusText}(${error.statusCode})`;
