@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Vessel} from "../models/vessel.model";
 import {VesselsService} from "../vessels.service";
 import {VesselStatusCode} from "../models/vessel-status-code";
@@ -11,8 +11,7 @@ import {Subscription} from "rxjs";
   templateUrl: 'vessels-detail-edit.component.html',
   styleUrls: ['vessels-detail.component.css']
 })
-export class VesselsDetailEditComponent implements OnInit {
-
+export class VesselsDetailEditComponent implements OnInit, OnDestroy {
     vessel: Vessel;
     statusCodes: Array<VesselStatusCode>;
 
@@ -44,6 +43,10 @@ export class VesselsDetailEditComponent implements OnInit {
               }
 
           });
+  }
+
+  ngOnDestroy(): void {
+    this.activatedRouteSubscription.unsubscribe();
   }
 
   onCancel() {

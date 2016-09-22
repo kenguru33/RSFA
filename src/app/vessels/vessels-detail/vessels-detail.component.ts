@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {Vessel} from "../models/vessel.model";
@@ -10,7 +10,7 @@ import {Location} from "@angular/common";
   templateUrl: 'vessels-detail.component.html',
   styleUrls: ['vessels-detail.component.css']
 })
-export class VesselsDetailComponent implements OnInit {
+export class VesselsDetailComponent implements OnInit, OnDestroy {
   vessel: Vessel;
   vesselId: number;
   activatedRouteSubscription: Subscription;
@@ -27,6 +27,10 @@ export class VesselsDetailComponent implements OnInit {
         this.vesselIsLoading = false;
       })
     });
+  }
+
+  ngOnDestroy(): void {
+    this.activatedRouteSubscription.unsubscribe();
   }
 
   onTechnicalDataClicked() {

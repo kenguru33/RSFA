@@ -9,7 +9,7 @@
     </div>
       <form style="margin-top: 20px;" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
         <div class="form-group col-md-12">
-          <label for="imgurl">Bildesti</label>
+          <label for="imgurl">Bildesti <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
           <input type="text" class="form-control" id="imgurl" name="imgUrl" aria-describedby="emailHelp" placeholder="url" [(ngModel)]="vessel.imgUrl"
             pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)">
         </div>
@@ -61,14 +61,14 @@
 
       <fieldset class="form-group col-md-12">
         <legend>Operativ status</legend>
+        <div class="form-group">
         <div class="form-check" *ngFor="let statusCode of statusCodes; let i = index;">
-          <label class="form-check-label">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="status" [value]="i" [(ngModel)]="vessel.status" [style.background-color]="statusCode?.color" required>
+          <label class="form-check-label col-sm-4">
+              <input type="radio" class="form-check-input col-xs-2" name="status" [value]="i" [(ngModel)]="vessel.status" [style.background-color]="statusCode?.color" required>
               {{statusCode?.code}}
-            </label>
           </label>
        </div>
+        </div>
       </fieldset>
         <button type="submit" class="btn btn-primary" *ngIf="form.valid&&!editMode">Opprett</button>
         <button type="submit" class="btn btn-primary" *ngIf="form.valid&&editMode&&form.dirty">Lagre</button>
