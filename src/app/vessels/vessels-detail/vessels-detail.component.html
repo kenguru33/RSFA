@@ -7,10 +7,10 @@
     <div class="media">
       <div class="media-body media-left">
 
-        <p><strong>Stasjon:</strong> {{vessel?.station}}</p>
+        <p><strong>Stasjon:</strong> <a href="stasjoner/{{station?.key}}">{{station?.name}}</a></p>
         <p><strong>Telefon:</strong> {{vessel?.phone}}</p>
         <p><strong>Status:</strong> {{vesselsService.getStatusCodes()[vessel?.status]?.code}}</p>
-        <p><strong>Fartøysklasse:</strong> {{vessel?.vesselClass}}</p>
+        <p><strong>Fartøysklasse:</strong> <a href="klasser/{{vesselClass?.key}}">{{vesselClass?.name}}</a></p>
         <p><strong>Bemannning:</strong> {{vessel?.staff}}</p>
         <p><strong>MMSI:</strong> {{vessel?.mmsi}}</p>
       </div>

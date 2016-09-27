@@ -3,12 +3,16 @@ import {VesselsComponent} from "./vessels/vessels.component";
 import {ModuleWithProviders} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {LoginComponent} from "./login/login.component";
+import {VesselClassesComponent} from "./vessel-classes/vessel-classes.component";
+import {StationsComponent} from "./stations/stations.component";
 
 
 const appRoutes: Routes = [
-    //{ path: '', redirectTo: 'skøyter', pathMatch: 'full' }
-    { path: '', component: LoginComponent},
-    { path: 'skøyter', component: VesselsComponent }
+  //{ path: '', redirectTo: 'skøyter', pathMatch: 'full' }
+  { path: '', component: LoginComponent},
+  { path: 'skøyter', component: VesselsComponent },
+  { path: 'klasser', component: VesselClassesComponent},
+  { path: 'stasjoner', component: StationsComponent}
 ];
 
 export const appRoutingProviders: any[] = [

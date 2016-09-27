@@ -4,6 +4,10 @@ import {Subscription} from "rxjs";
 import {Vessel} from "../models/vessel.model";
 import {VesselsService} from "../vessels.service";
 import {Location} from "@angular/common";
+import {StationsService} from "../../stations/stations.service";
+import {Station} from "../../stations/models/station";
+import {VesselClass} from "../models/vessel-class.model";
+import {VesselClassesService} from "../../vessel-classes/vessel-classes.service";
 
 @Component({
   selector: 'rs-vessel-detail',
@@ -16,14 +20,27 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
   activatedRouteSubscription: Subscription;
   viewTechnicalData = false;
   vesselIsLoading;
+  station: Station;
+  vesselClass: VesselClass;
 
-  constructor(private vesselsService: VesselsService, private activatedRoute: ActivatedRoute, private router: Router, private location: Location) { }
+  constructor(private vesselsService: VesselsService,
+              private stationsService: StationsService,
+              private vesselClassesService: VesselClassesService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private location: Location) { }
 
   ngOnInit() {
     this.vesselIsLoading = true;
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
       this.vesselsService.getVessel(params['key']).subscribe(vessel=>{
         this.vessel = vessel;
+        this.stationsService.getStation(vessel.stationKey).subscribe((station: Station) => {
+          this.station = station;
+        });
+        this.vesselClassesService.getVesselClass(vessel.vesselClassKey).subscribe((vesselClass: VesselClass) => {
+          this.vesselClass = vesselClass;
+        });
         this.vesselIsLoading = false;
       })
     });

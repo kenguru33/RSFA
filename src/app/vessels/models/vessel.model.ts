@@ -1,7 +1,7 @@
 import {VesselClass} from "./vessel-class.model";
-import {Station} from "../../stations/station";
 import {VesselLocation} from "./vessel-location.model";
 import {VesselStatusCode} from "./vessel-status-code";
+import {Station} from "../../stations/models/station";
 
 export class Vessel {
     key: any;
@@ -13,16 +13,7 @@ export class Vessel {
     imgUrl: string;
     status: number;
     mmsi: number;
-    vesselClass: VesselClass;
-    private station: Station;
+    vesselClassKey: any;
+    stationKey: any;
     //private Position: VesselLocation;
-
-
-    public get Station() {
-        return this.station;
-    }
-
-    public set Station(station: Station) {
-        this.station = station;
-    }
 }

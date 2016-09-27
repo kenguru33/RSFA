@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {VesselsService} from "../vessels.service";
 import {Vessel} from "../models/vessel.model";
 import {Subscription} from "rxjs";
+import {Station} from "../../stations/models/station";
+import {StationsService} from "../../stations/stations.service";
 @Component({
   selector: 'rs-vessels-list',
   templateUrl: 'vessels-list.component.html',

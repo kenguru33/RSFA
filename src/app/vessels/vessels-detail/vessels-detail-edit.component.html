@@ -31,16 +31,18 @@
       </div>
         <div class="form-group col-md-6">
           <label for="station">Stasjon</label>
-          <select class="form-control" id="station" name="station">
-            <option>Stasjon1</option>
-            <option>Stasjon2</option>
+          <select class="form-control" id="station" name="station"  [(ngModel)]="vessel.stationKey">
+            <option *ngFor="let station of stations;" [value]="station.key">
+              {{station.name}}
+            </option>
           </select>
         </div>
         <div class="form-group col-md-6">
           <label for="vesselClass">Klasse</label>
-          <select class="form-control" id="vesselClass" name="vesselClass">
-            <option>Klasse1</option>
-            <option>Klasse2</option>
+          <select class="form-control" id="vesselClass" name="vesselClass" [(ngModel)]="vessel.vesselClassKey">
+            <option *ngFor="let vesselClass of vesselClasses;" [value]="vesselClass.key">
+              {{vesselClass.name}}
+            </option>
           </select>
         </div>
         <div class="form-group col-md-3">

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -8,20 +8,27 @@ import {VesselsModule} from "./vessels/vessels.module";
 import {routing} from "./app.routing";
 import {LoginComponent} from "./login/login.component";
 import {HeaderComponent} from "./header/header.component";
+import {VesselClassesModule} from "./vessel-classes/vessel-classes.module";
+import {StationsModule} from "./stations/stations.module";
+import {SpinnerComponent} from "./shared/spinner/spinner.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     VesselsModule,
-    routing
+    routing,
+    VesselClassesModule,
+    StationsModule
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
   bootstrap: [AppComponent]
 })

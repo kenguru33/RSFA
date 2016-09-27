@@ -1,0 +1,17 @@
+<div class="col-md-5">
+  <rs-modal-window [primaryButtonText]="'Slett'" [secondaryButtonText]="'Avbryt'" [show]="showDialog" [contentText]="dialogMessage" [title]="dialogTitle"></rs-modal-window>
+  <div class="col-md-12" style="margin-top: 10px">
+    <button class="btn btn-success" (click)="onAddVesselClass()" [disabled]="isLoading"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Ny klasse</button>
+  </div>
+  <div class="col-md-12" style="margin-top: 10px" [hidden]="isLoading">
+    <rs-spinner [visible]="isLoading"></rs-spinner>
+    <a class="list-group-item clearfix" style="cursor: pointer;" *ngFor="let vesselClass of vesselClasses; let i = index">
+      {{vesselClass.name}}
+    </a>
+  </div>
+</div>
+<div class="col-md-7">
+  <div class="col-md-12" style="margin-top: 10px;">
+    Klassedetaljer lastes inn her.
+  </div>
+</div>

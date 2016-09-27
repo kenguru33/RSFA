@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {HttpModule} from "@angular/http";
 import {VesselsComponent} from "./vessels.component";
 import {vesselsRouting} from "./vessels.routing";
-import {SpinnerComponent} from "../shared/spinner/spinner.component";
 import {ModalWindowModule} from "../modal-window/modal-window.module";
 import {VesselsListComponent} from "./vessels-list/vessels-list.component";
 import {VesselsService} from "./vessels.service";
@@ -21,10 +20,12 @@ export const firebaseConfig = {
 };
 
 @NgModule({
+
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+
   declarations: [
     VesselsComponent,
     VesselsListComponent,
-    SpinnerComponent,
     VesselsDetailComponent,
     VesselsDetailEditComponent
   ],
