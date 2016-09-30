@@ -1,80 +1,101 @@
-<rs-spinner [visible]="vesselsLoading"></rs-spinner>
-<div class="panel panel-default" *ngIf="!vesselsLoading">
+<spinner [visible]="isLoading"></spinner>
+<div class="panel panel-default" *ngIf="!isLoading">
   <div class="panel-heading">
-    <h3 class="panel-title"> <i class="fa fa-ship" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel?.status]?.color"></i>&nbsp;&nbsp;{{vessel?.prefix}}-{{+vessel?.id}} {{vessel?.name}}</h3>
+    <div class="panel-title">
+      <h4><i class="fa fa-ship" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel?.status]?.color"></i>&nbsp;&nbsp;{{vessel?.prefix}}-{{+vessel?.id}} {{vessel?.name}}</h4>
+    </div>
   </div>
   <div class="panel-body">
     <div>
-      <img class="center-block img-circle" [src]="vessel?.imgUrl ? vessel?.imgUrl:'http://imagineathena.com/wp-content/plugins/special-recent-posts/images/no-thumb.png'">
+      <img class="center-block img-circle" [src]="vessel?.imgUrl ? vessel?.imgUrl:'http://imagineathena.com/wp-content/plugins/special-recent-posts/images/no-thumb.png'" (click)="toggleImagePath()" style="cursor: pointer;">
     </div>
-      <form style="margin-top: 20px;" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
-        <div class="form-group col-md-12">
-          <label for="imgurl">Bildesti <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-          <input type="text" class="form-control" id="imgurl" name="imgUrl" aria-describedby="emailHelp" placeholder="url" [(ngModel)]="vessel.imgUrl"
-            pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)">
-        </div>
-        <div class="form-group col-md-3">
+    <form style="margin-top: 20px;" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+      <!-- Bilde -->
+      <div class="form-group col-md-12" [hidden]="!showImagePath">
+        <label for="imgurl">Bildesti</label>
+        <input type="text" class="form-control" id="imgurl" name="imgUrl" aria-describedby="emailHelp" placeholder="url" [(ngModel)]="vessel.imgUrl"
+               pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)">
+      </div>
+      <!-- Prefiks -->
+      <div class="form-group col-md-3">
         <label for="exampleSelect1">Prefiks</label>
         <select class="form-control" id="exampleSelect1" name="prefix" [(ngModel)]="vessel.prefix" required>
           <option>RS</option>
           <option>EYR</option>
         </select>
       </div>
+      <!-- RS Nummer -->
       <div class="form-group col-md-3">
         <label for="rsid">Id</label>
         <input type="text" class="form-control" id="rsid" aria-describedby="emailHelp" placeholder="nummer" name="id" [(ngModel)]="vessel.id" required
                pattern="^[0-9]*$">
       </div>
+      <!-- Fartøysnavn -->
       <div class="form-group col-md-6">
         <label for="exampleInputEmail1">Fartøysnavn</label>
         <input type="text" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" placeholder="Skriv inn fartøyets navn" [(ngModel)]="vessel.name" required>
       </div>
-        <div class="form-group col-md-6">
-          <label for="station">Stasjon</label>
-          <select class="form-control" id="station" name="station"  [(ngModel)]="vessel.stationKey">
-            <option *ngFor="let station of stations;" [value]="station.key">
-              {{station.name}}
-            </option>
-          </select>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="vesselClass">Klasse</label>
-          <select class="form-control" id="vesselClass" name="vesselClass" [(ngModel)]="vessel.vesselClassKey">
-            <option *ngFor="let vesselClass of vesselClasses;" [value]="vesselClass.key">
-              {{vesselClass.name}}
-            </option>
-          </select>
-        </div>
-        <div class="form-group col-md-3">
-          <label for="rsid">MMSI</label>
-          <input type="text" class="form-control" id="mmsi" aria-describedby="emailHelp" placeholder="nummer" name="mmsi" [(ngModel)]="vessel.mmsi"
-            pattern="\d{9}">
-        </div>
-        <div class="form-group col-md-3">
-          <label for="phone">Telefon</label>
-          <input type="text" class="form-control" id="phone" name="phone" aria-describedby="emailHelp" placeholder="Skriv inn fartøyets navn" [(ngModel)]="vessel.phone"
-          pattern="^(?:\+?\d{2}[ -]?\d{3}[ -]?\d{5}|\d{4})$">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="email">Epost</label>
-          <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Skriv inn fartøyets navn" [(ngModel)]="vessel.email"
-                 pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
-        </div>
 
-      <fieldset class="form-group col-md-12">
+      <!-- MMSI -->
+      <div class="form-group col-md-3">
+        <label for="rsid">MMSI</label>
+        <input type="text" class="form-control" id="mmsi" aria-describedby="emailHelp" placeholder="9 siffer" name="mmsi" [(ngModel)]="vessel.mmsi"
+               pattern="\d{9}">
+      </div>
+      <!-- Telefon -->
+      <div class="form-group col-md-3">
+        <label for="phone">Telefon</label>
+        <input type="text" class="form-control" id="phone" name="phone" aria-describedby="emailHelp" placeholder="land + 8 tall" [(ngModel)]="vessel.phone"
+               pattern="^(?:\+?\d{2}[ -]?\d{3}[ -]?\d{5}|\d{4})$">
+      </div>
+      <!-- EPOST -->
+      <div class="form-group col-md-6">
+        <label for="email">Epost</label>
+        <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Skriv inn fartøyets epost"[(ngModel)]="vessel.email"
+               pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+      </div>
+      <!-- Stasjon -->
+      <div class="form-group col-md-4">
+        <label for="station">Stasjon</label>
+        <select class="form-control" id="station" name="station"  [(ngModel)]="vessel.stationKey" required>
+          <option *ngFor="let station of stations;" [value]="station?.key">
+            {{station.name}}
+          </option>
+        </select>
+      </div>
+      <!-- Klasse -->
+      <div class="form-group col-md-4">
+        <label for="vesselClass">Klasse</label>
+        <select class="form-control" id="vesselClass" name="vesselClass" [(ngModel)]="vessel.vesselClassKey" required>
+          <option *ngFor="let vesselClass of vesselClasses;" [value]="vesselClass.key">
+            {{vesselClass.name}}
+          </option>
+        </select>
+      </div>
+      <!-- Bemanningstype -->
+      <div class="form-group col-md-4">
+        <label for="vesselClass">Bemanningstype</label>
+        <select class="form-control" id="bemanning" name="bemanning" [(ngModel)]="vessel.staff" required>
+          <option>Fast</option>
+          <option>RSRK</option>
+        </select>
+      </div>
+      <!-- Operativ Status -->
+      <fieldset class="form-group col-md-12" style="margin-bottom: 20px;">
         <legend>Operativ status</legend>
         <div class="form-group">
-        <div class="form-check" *ngFor="let statusCode of statusCodes; let i = index;">
-          <label class="form-check-label col-sm-4">
+          <div class="form-check" *ngFor="let statusCode of statusCodes; let i = index;">
+            <label class="form-check-label col-sm-4">
               <input type="radio" class="form-check-input col-xs-2" name="status" [value]="i" [(ngModel)]="vessel.status" [style.background-color]="statusCode?.color" required>
               {{statusCode?.code}}
-          </label>
-       </div>
+            </label>
+          </div>
         </div>
       </fieldset>
-        <button type="submit" class="btn btn-primary" *ngIf="form.valid&&!editMode">Opprett</button>
-        <button type="submit" class="btn btn-primary" *ngIf="form.valid&&editMode&&form.dirty">Lagre</button>
-        <button type="button" class="btn btn-warning" (click)="onCancel()">Avbryt</button>
+      <!-- Knapper -->
+      <button type="submit" class="btn btn-primary" *ngIf="form.valid&&!editMode">Opprett</button>
+      <button type="submit" class="btn btn-primary" *ngIf="form.valid&&editMode&&form.dirty">Lagre</button>
+      <button type="button" class="btn btn-warning" (click)="onCancel()">Avbryt</button>
     </form>
   </div>
 </div>

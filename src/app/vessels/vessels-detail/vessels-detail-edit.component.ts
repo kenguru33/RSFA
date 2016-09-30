@@ -21,7 +21,7 @@ export class VesselsDetailEditComponent implements OnInit, OnDestroy {
 
   activatedRouteSubscription: Subscription;
 
-  private vesselsLoading;
+  private isLoading;
 
   private editMode=false;
 
@@ -29,7 +29,7 @@ export class VesselsDetailEditComponent implements OnInit, OnDestroy {
 
   vesselClasses: VesselClass[] = [];
 
-  selectedVesselClass: any;
+  showImagePath = false;
 
   constructor(private vesselsService: VesselsService,
               private stationsService: StationsService,
@@ -41,22 +41,23 @@ export class VesselsDetailEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.vesselsLoading = true;
+    this.isLoading = true;
     this.statusCodes = this.vesselsService.getStatusCodes();
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
       if (params['key']) {
         this.vesselsService.getVessel(params['key']).subscribe(vessel=>{
           this.vessel = vessel;
           this.editMode = true;
-          this.vesselsLoading = false;
+          this.isLoading = false;
         })
       } else {
         this.vessel = new Vessel;
+        this.vessel.prefix="";
+        this.vessel.staff = "";
         this.vessel.status = 0;
         this.editMode = false;
-        this.vesselsLoading = false;
+        this.isLoading = false;
       }
-
     });
 
     this.stationsService.getStations().subscribe((stations: Station[]) => {
@@ -80,7 +81,6 @@ export class VesselsDetailEditComponent implements OnInit, OnDestroy {
 
   onSubmit(vessel) {
     if (this.editMode) {
-      console.log('do we have key?',this.vessel.key);
       this.vesselsService.updateVessel(this.vessel).subscribe((key: string) => {
         this.router.navigate(['skøyter', key]);
       }, error => {
@@ -94,5 +94,13 @@ export class VesselsDetailEditComponent implements OnInit, OnDestroy {
       });
     }
 
+  }
+
+  onStationChanged(index) {
+    this.vessel.station = this.stations[0];
+  }
+
+  toggleImagePath() {
+    this.showImagePath = !this.showImagePath;
   }
 }

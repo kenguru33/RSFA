@@ -9,6 +9,8 @@ import {VesselsListComponent} from "./vessels-list/vessels-list.component";
 import {VesselsService} from "./vessels.service";
 import {VesselsDetailComponent} from "./vessels-detail/vessels-detail.component";
 import { VesselsDetailEditComponent } from './vessels-detail/vessels-detail-edit.component';
+import {SpinnerModule} from "../spinner/spinner.module";
+
 
 // Initialize Firebase
 export const firebaseConfig = {
@@ -21,8 +23,6 @@ export const firebaseConfig = {
 
 @NgModule({
 
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-
   declarations: [
     VesselsComponent,
     VesselsListComponent,
@@ -34,7 +34,8 @@ export const firebaseConfig = {
     FormsModule,
     HttpModule,
     vesselsRouting,
-    ModalWindowModule
+    ModalWindowModule,
+    SpinnerModule
   ],
   exports:[
     VesselsComponent

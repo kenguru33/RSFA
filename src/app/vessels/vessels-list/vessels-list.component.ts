@@ -31,7 +31,7 @@ export class VesselsListComponent implements OnInit, OnDestroy {
   private buttonPrimaryText = '';
   private buttonSecondaryText = '';
 
-  private vesselsLoading;
+  private isLoading;
 
     private sub: Subscription;
 
@@ -50,10 +50,10 @@ export class VesselsListComponent implements OnInit, OnDestroy {
     }
 
   private getVessels() {
-    this.vesselsLoading = true;
+    this.isLoading = true;
     this.vesselsService.getVessels().subscribe(vessels => {
       this.vessels = vessels;
-      this.vesselsLoading = false;
+      this.isLoading = false;
     }, error => {
       console.error(error);
     })

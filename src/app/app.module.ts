@@ -10,14 +10,13 @@ import {LoginComponent} from "./login/login.component";
 import {HeaderComponent} from "./header/header.component";
 import {VesselClassesModule} from "./vessel-classes/vessel-classes.module";
 import {StationsModule} from "./stations/stations.module";
-import {SpinnerComponent} from "./shared/spinner/spinner.component";
+import {SpinnerModule} from "./spinner/spinner.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +27,6 @@ import {SpinnerComponent} from "./shared/spinner/spinner.component";
     VesselClassesModule,
     StationsModule
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
   bootstrap: [AppComponent]
 })

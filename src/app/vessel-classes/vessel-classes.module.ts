@@ -9,7 +9,6 @@ import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
 
 @NgModule({
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
     CommonModule,
     FormsModule,

@@ -1,14 +1,16 @@
 import {Routes, RouterModule} from "@angular/router";
 import {ModuleWithProviders} from "@angular/core";
 import {StationsComponent} from "./stations.component";
+import {StationsDetailComponent} from "./stations-detail/stations-detail.component";
+import {StationsDetailEditComponent} from "./stations-detail/stations-detail-edit.component";
 const vesselsRoutes: Routes = [
   {
     path: 'stasjoner',
     component: StationsComponent,
     children: [
-      //{ path: 'edit',  component: VesselClassDetailEditComponent },
+      { path: 'edit', component: StationsDetailEditComponent},
       //{ path: 'edit/:key',  component: VesselClassDetailEditComponent },
-      //{ path: ':key',  component: VesselClassDetailComponent},
+      { path: ':key',  component: StationsDetailComponent},
     ]
   }
 ];

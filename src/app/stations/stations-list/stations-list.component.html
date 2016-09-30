@@ -1,11 +1,11 @@
 <div class="col-md-5">
   <rs-modal-window [primaryButtonText]="'Slett'" [secondaryButtonText]="'Avbryt'" [show]="showDialog" (response)="deleteVessel($event)" [contentText]="dialogMessage" [title]="dialogTitle"></rs-modal-window>
   <div class="col-lg-6 col-md-6" style="margin-top: 10px">
-    <button class="btn btn-success" (click)="onAddVessel()" [disabled]="vesselsLoading" [routerLink]="'edit'"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Opprett stasjon</button>
+    <button class="btn btn-success" (click)="onAddStation()" [disabled]="isLoading" [routerLink]="'edit'"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Opprett stasjon</button>
   </div>
   <div class="col-md-6" style="margin-top: 10px">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Søk stasjon" [disabled]="vesselsLoading">
+      <input type="text" class="form-control" placeholder="Søk stasjon" [disabled]="isLoading">
       <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search" aria-hidden="true"></i></span>
     </div>
   </div><!-- /.col-lg-6 -->
@@ -26,15 +26,16 @@
       </button>
     </div>
   </div>
-  <rs-spinner [visible]="isLoading"></rs-spinner>
+  <spinner [visible]="isLoading"></spinner>
   <div class="col-md-12" style="margin-top: 10px" [hidden]="isLoading">
-    <a class="list-group-item clearfix" style="cursor: pointer;" *ngFor="let station of stations; let i = index">
-      {{station.name}}
+    <a class="list-group-item clearfix" style="cursor: pointer;" *ngFor="let station of stations; let i = index" (click)="onStationSelect(i)" [routerLink]="station.key">
+      <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{station.name}}
+      <span class="btn btn-danger btn-xs pull-right" (click)="onDeleteStation(i)"><i class="fa fa-times" aria-hidden="true"></i></span>
     </a>
   </div>
 </div>
 <div class="col-md-7">
   <div class="col-md-12" style="margin-top: 10px;">
-    <router-outlet>Stasjonsdetaljer lastes her</router-outlet>
+    <router-outlet></router-outlet>
   </div>
 </div>

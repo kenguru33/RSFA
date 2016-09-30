@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {StationsService} from "../stations.service";
 import {Station} from "../models/station";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'rs-stations-list',
@@ -10,13 +11,23 @@ import {Station} from "../models/station";
 export class StationsListComponent implements OnInit {
 
   stations = [];
-
-  constructor(private stationsService: StationsService) { }
+  stationSelectedIndex: number;
+  isLoading = true;
+  constructor(private stationsService: StationsService, private router: Router) { }
 
   ngOnInit() {
     this.stationsService.getStations().subscribe((stations: Station[]) => {
+      this.isLoading = true;
       this.stations = stations;
+      this.isLoading = false;
     })
   }
 
+  onStationSelect(index) {
+    this.stationSelectedIndex = index;
+  }
+
+  onAddStation() {
+
+  }
 }

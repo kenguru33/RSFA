@@ -29,4 +29,21 @@ export class StationsService {
       return station;
     })
   }
+
+  storeStation(station: Station): Observable<string> {
+    return this.http.post(`${this.baseUrl}/stations.json`, JSON.stringify(station)).map((response: Response) => {
+      console.log('stored station',response.json());
+      //this.vesselListChanged.emit(response.json().name);
+      return response.json().name;
+    }).catch(error=>{
+      console.log(error);
+      let errorMsg = `${error.statusText}(${error.statusCode})`;
+      return Observable.throw(errorMsg);
+    });
+  }
+
+  updateStation(station: Station): Observable<string> {
+    console.log('update station');
+    return new Observable;
+  }
 }

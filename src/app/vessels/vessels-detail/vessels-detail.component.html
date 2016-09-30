@@ -1,5 +1,5 @@
-<rs-spinner [visible]="vesselsLoading"></rs-spinner>
-<div class="panel panel-default" *ngIf="!vesselsLoading">
+<spinner [visible]="isLoading"></spinner>
+<div class="panel panel-default" *ngIf="!isLoading">
   <div class="panel-heading">
     <h4><i class="fa fa-ship" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel?.status]?.color"></i>&nbsp;&nbsp;{{vessel?.prefix}}-{{vessel?.id}} {{vessel?.name}}</h4>
   </div>
@@ -7,9 +7,9 @@
     <div class="media">
       <div class="media-body media-left">
 
+        <p><strong>Status:</strong> {{vesselsService.getStatusCodes()[vessel?.status]?.code}}</p>
         <p><strong>Stasjon:</strong> <a href="stasjoner/{{station?.key}}">{{station?.name}}</a></p>
         <p><strong>Telefon:</strong> {{vessel?.phone}}</p>
-        <p><strong>Status:</strong> {{vesselsService.getStatusCodes()[vessel?.status]?.code}}</p>
         <p><strong>Fartøysklasse:</strong> <a href="klasser/{{vesselClass?.key}}">{{vesselClass?.name}}</a></p>
         <p><strong>Bemannning:</strong> {{vessel?.staff}}</p>
         <p><strong>MMSI:</strong> {{vessel?.mmsi}}</p>

@@ -1,0 +1,21 @@
+<spinner [visible]="isLoading"></spinner>
+<div class="panel panel-default" *ngIf="!isLoading">
+  <div class="panel-heading">
+    <div class="panel-heading">
+      <h4><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{station?.name}}</h4>
+    </div>
+  </div>
+  <div class="panel-body">
+    <form style="margin-top: 20px;" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+      <!-- Stasjonssnavn -->
+      <div class="form-group col-md-12">
+        <label for="stationName">Stasjonsnavn</label>
+        <input type="text" class="form-control" id="stationName" name="name" aria-describedby="stationNameHelp" placeholder="Skriv inn stasjonens navn" [(ngModel)]="station.name" required>
+      </div>
+      <!-- Knapper -->
+      <button type="submit" class="btn btn-primary" *ngIf="form.valid&&!editMode">Opprett</button>
+      <button type="submit" class="btn btn-primary" *ngIf="form.valid&&editMode&&form.dirty">Lagre</button>
+      <button type="button" class="btn btn-warning" (click)="onCancel()">Avbryt</button>
+    </form>
+  </div>
+</div>

@@ -15,5 +15,7 @@ export class Vessel {
     mmsi: number;
     vesselClassKey: any;
     stationKey: any;
+    station: Station;
+    staff: string;
     //private Position: VesselLocation;
 }
