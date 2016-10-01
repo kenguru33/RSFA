@@ -23,6 +23,8 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
   station: Station;
   vesselClass: VesselClass;
 
+  fadein = true;
+
   constructor(private vesselsService: VesselsService,
               private stationsService: StationsService,
               private vesselClassesService: VesselClassesService,
@@ -31,17 +33,17 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
               private location: Location) { }
 
   ngOnInit() {
-    this.isLoading = true;
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
+      this.isLoading = true;
       this.vesselsService.getVessel(params['key']).subscribe(vessel=>{
         this.vessel = vessel;
         this.stationsService.getStation(vessel.stationKey).subscribe((station: Station) => {
           this.station = station;
+          this.vesselClassesService.getVesselClass(vessel.vesselClassKey).subscribe((vesselClass: VesselClass) => {
+            this.vesselClass = vesselClass;
+            this.isLoading = false;
+          });
         });
-        this.vesselClassesService.getVesselClass(vessel.vesselClassKey).subscribe((vesselClass: VesselClass) => {
-          this.vesselClass = vesselClass;
-        });
-        this.isLoading = false;
       })
     });
   }

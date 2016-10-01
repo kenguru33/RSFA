@@ -17,7 +17,6 @@ export class VesselsListComponent implements OnInit, OnDestroy {
 
   private selectedVessel: Vessel;
   private selectedIndex: number;
-    //private selectedVesselKey: any;
 
   private showFilterOptions = false;
   private filterBemannet = false;
@@ -33,12 +32,12 @@ export class VesselsListComponent implements OnInit, OnDestroy {
 
   private isLoading;
 
-    private sub: Subscription;
+  private vesselChangedSubscription: Subscription;
 
   constructor(private vesselsService: VesselsService, private router: Router) {}
 
   ngOnInit(): void {
-      this.sub = this.vesselsService.vesselListChanged.subscribe( key => {
+      this.vesselChangedSubscription = this.vesselsService.vesselListChanged.subscribe( key => {
           console.log(key);
           this.getVessels();
       });
@@ -46,7 +45,7 @@ export class VesselsListComponent implements OnInit, OnDestroy {
   }
 
     ngOnDestroy(): void {
-        this.sub.unsubscribe();
+        this.vesselChangedSubscription.unsubscribe();
     }
 
   private getVessels() {
@@ -95,18 +94,12 @@ export class VesselsListComponent implements OnInit, OnDestroy {
   }
 
   onAddVessel() {
-    //this.addVessel({key: 0 , id: 150, prefix:'rs', name: 'rumpebalja ratata'});
   }
 
   onSelectVessel(index: number) {
 
     this.selectedVessel = this.vessels[index];
-      this.selectedIndex = index;
-    //this.selectedVesselKey = this.selectedVessel.key;
-    //console.log('navigating to: /skøyte/'+this.selectedVesselId);
-    //this.router.navigate(['/skøyter', +this.selectedVesselId ]);
-
-    //console.log('vessel selected', this.selectedVessel);
+    this.selectedIndex = index;
   }
 
   onShowFilterOptions() {

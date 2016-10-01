@@ -1,25 +1,25 @@
 <spinner [visible]="isLoading"></spinner>
-<div class="panel panel-default" *ngIf="!isLoading">
+<div class="panel panel-default animated fadeIn" *ngIf="!isLoading">
+  <div style="position: relative; left: 0; top: 0;">
+    <img class="img-circle"  src="{{vessel?.imgUrl}}" onError="this.onerror=null;this.src='assets/img/camera.png';" style="position: absolute; top: 10px; left: 10px;"/>
+  </div>
   <div class="panel-heading">
-    <h4><i class="fa fa-ship" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel?.status]?.color"></i>&nbsp;&nbsp;{{vessel?.prefix}}-{{vessel?.id}} {{vessel?.name}}</h4>
+    <div class="panel-title">
+      <div style="margin-left: 130px;">
+        <h4>{{vessel?.prefix}}-{{vessel?.id}} {{vessel?.name}}</h4>
+        <p><span [style.color]="vesselsService.getStatusCodes()[vessel?.status]?.color"><i class="fa fa-circle" aria-hidden="true"></i></span>&nbsp;&nbsp;{{vesselsService.getStatusCodes()[vessel?.status]?.code}}</p>
+      </div>
+      </div>
   </div>
   <div class="panel-body">
-    <div class="media">
-      <div class="media-body media-left">
-
-        <p><strong>Status:</strong> {{vesselsService.getStatusCodes()[vessel?.status]?.code}}</p>
+      <div style="margin-left: 20px; margin-top: 20px;">
         <p><strong>Stasjon:</strong> <a href="stasjoner/{{station?.key}}">{{station?.name}}</a></p>
-        <p><strong>Telefon:</strong> {{vessel?.phone}}</p>
         <p><strong>Fartøysklasse:</strong> <a href="klasser/{{vesselClass?.key}}">{{vesselClass?.name}}</a></p>
+        <p><strong>Epost:</strong> {{vessel?.email}}</p>
+        <p><strong>Telefon:</strong> {{vessel?.phone}}</p>
         <p><strong>Bemannning:</strong> {{vessel?.staff}}</p>
         <p><strong>MMSI:</strong> {{vessel?.mmsi}}</p>
       </div>
-      <div class="media-right">
-        <a>
-          <img class="media-object img-circle" src="{{vessel?.imgUrl}}" onError="this.onerror=null;this.src='http://imagineathena.com/wp-content/plugins/special-recent-posts/images/no-thumb.png';">
-        </a>
-      </div>
-    </div>
     <div class=" col-sm-12" style="margin-top: 10px" >
       <div style="border-bottom: solid 1px; border-color: black">
         <h4><i class="fa fa-asterisk" aria-hidden="true"></i>&nbsp;&nbsp;Teknisk informasjon<i class="fa pull-right" [class.fa-chevron-left]="!viewTechnicalData" style="cursor: pointer;" [class.fa-chevron-down]="viewTechnicalData"  aria-hidden="true" (click)="onTechnicalDataClicked()"></i></h4>

@@ -4,4 +4,5 @@ export class Station {
   stationType: string;
   region: string;
   phone: string;
+  imgUrl: string;
 }

@@ -1,17 +1,59 @@
 <spinner [visible]="isLoading"></spinner>
 <div class="panel panel-default" *ngIf="!isLoading">
+  <div style="position: relative; left: 0; top: 0;">
+    <img class="img-circle"  src="/assets/img/lighthouse.jpg" onError="this.onerror=null;this.src='http://imagineathena.com/wp-content/plugins/special-recent-posts/images/no-thumb.png';" style="position: absolute; top: 10px; left: 10px;" (click)="toggleImagePath()"/>
+  </div>
   <div class="panel-heading">
-    <div class="panel-heading">
-      <h4><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{station?.name}}</h4>
+    <div class="panel-title">
+      <div style="margin-left: 130px; min-height: 50px;">
+        <h4>{{station?.name}}</h4>
+      </div>
     </div>
   </div>
   <div class="panel-body">
     <form style="margin-top: 20px;" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+      <!-- Bilde -->
+      <div class="form-group col-md-12" [hidden]="!showImagePath">
+        <label for="imgurl">Bildesti</label>
+        <input type="text" class="form-control" id="imgurl" name="imgUrl" aria-describedby="emailHelp" placeholder="url" [(ngModel)]="station.imgUrl"
+               pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)">
+      </div>
+
       <!-- Stasjonssnavn -->
       <div class="form-group col-md-12">
         <label for="stationName">Stasjonsnavn</label>
         <input type="text" class="form-control" id="stationName" name="name" aria-describedby="stationNameHelp" placeholder="Skriv inn stasjonens navn" [(ngModel)]="station.name" required>
       </div>
+
+      <!-- Stasjonstype -->
+      <div class="form-group col-md-4">
+        <label for="stationType">Stasjonstype</label>
+        <select class="form-control" id="stationType" name="stationType" [(ngModel)]="station.stationType" required>
+          <option>Primærstasjon</option>
+          <option>Sekundærstasjon</option>
+          <option>Sjøredningskorps</option>
+          <option>Ambulansestasjon</option>
+        </select>
+      </div>
+
+      <!-- Region -->
+      <div class="form-group col-md-4">
+        <label for="region">Region</label>
+        <select class="form-control" id="region" name="region" [(ngModel)]="station.region" required>
+          <option>Nord</option>
+          <option>Sør</option>
+          <option>Vest</option>
+          <option>Øst</option>
+        </select>
+      </div>
+
+      <!-- Telefon -->
+      <div class="form-group col-md-4">
+        <label for="phone">Telefon</label>
+        <input type="text" class="form-control" id="phone" name="phone" aria-describedby="emailHelp" placeholder="land + 8 tall" [(ngModel)]="station.phone"
+               pattern="^(?:\+?\d{2}[ -]?\d{3}[ -]?\d{5}|\d{4})$">
+      </div>
+
       <!-- Knapper -->
       <button type="submit" class="btn btn-primary" *ngIf="form.valid&&!editMode">Opprett</button>
       <button type="submit" class="btn btn-primary" *ngIf="form.valid&&editMode&&form.dirty">Lagre</button>

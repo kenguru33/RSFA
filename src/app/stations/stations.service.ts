@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {Observable} from "rxjs";
 import {Station} from "./models/station";
 import {Http, Response} from "@angular/http";
@@ -7,6 +7,8 @@ import {Http, Response} from "@angular/http";
 export class StationsService {
 
   baseUrl = 'https://rsfa-e3c2f.firebaseio.com';
+
+  stationListChanged: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private http: Http) { }
 
@@ -32,8 +34,7 @@ export class StationsService {
 
   storeStation(station: Station): Observable<string> {
     return this.http.post(`${this.baseUrl}/stations.json`, JSON.stringify(station)).map((response: Response) => {
-      console.log('stored station',response.json());
-      //this.vesselListChanged.emit(response.json().name);
+      this.stationListChanged.emit(response.json().name);
       return response.json().name;
     }).catch(error=>{
       console.log(error);
@@ -43,7 +44,15 @@ export class StationsService {
   }
 
   updateStation(station: Station): Observable<string> {
-    console.log('update station');
-    return new Observable;
+    let key = station.key;
+    delete station['key'];
+    return this.http.put(`${this.baseUrl}/vessels/${key}.json`, JSON.stringify(station)).map((response: Response) => {
+      this.stationListChanged.emit(key);
+      return key;
+    }).catch(error=>{
+      console.log(error);
+      let errorMsg = `${error.statusText}(${error.statusCode})`;
+      return Observable.throw(errorMsg);
+    });
   }
 }

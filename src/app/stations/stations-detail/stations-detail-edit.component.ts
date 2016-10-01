@@ -16,6 +16,7 @@ export class StationsDetailEditComponent implements OnInit {
   private station: Station;
   isLoading = true;
   editMode: boolean;
+  private showImagePath;
 
   constructor(private activatedRoute: ActivatedRoute,
               private stationsService: StationsService,
@@ -42,8 +43,10 @@ export class StationsDetailEditComponent implements OnInit {
   }
 
   onSubmit(station: Station) {
+    console.log('editmode', this.editMode);
     if (this.editMode) {
       this.stationsService.updateStation(this.station).subscribe((key: string) => {
+       console.log('editmode submit station', this.station);
         this.router.navigate(['stasjoner', key]);
       }, error => {
         console.log(error);
@@ -62,4 +65,7 @@ export class StationsDetailEditComponent implements OnInit {
     this.location.back();
   }
 
+  toggleImagePath() {
+    this.showImagePath = !this.showImagePath;
+  }
 }

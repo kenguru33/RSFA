@@ -13,6 +13,8 @@ export class StationsDetailComponent implements OnInit {
 
   station: Station;
   activatedRouteSubscription: Subscription;
+  private viewMoreStationData = false;
+
   constructor(private stationsService: StationsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,6 +28,14 @@ export class StationsDetailComponent implements OnInit {
 
   onStationSelect(){
     console.log('station selected');
+  }
+
+  onViewMoreStationData() {
+    this.viewMoreStationData = !this.viewMoreStationData;
+  }
+
+  onEditStation(){
+    console.log('oneditstation');
   }
 
 }
