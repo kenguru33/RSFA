@@ -46,10 +46,18 @@ export class StationsService {
   updateStation(station: Station): Observable<string> {
     let key = station.key;
     delete station['key'];
-    return this.http.put(`${this.baseUrl}/vessels/${key}.json`, JSON.stringify(station)).map((response: Response) => {
+    return this.http.put(`${this.baseUrl}/stations/${key}.json`, JSON.stringify(station)).map((response: Response) => {
       this.stationListChanged.emit(key);
       return key;
     }).catch(error=>{
+      console.log(error);
+      let errorMsg = `${error.statusText}(${error.statusCode})`;
+      return Observable.throw(errorMsg);
+    });
+  }
+
+  deleteStation(station: Station): Observable<Response> {
+    return this.http.delete(`${this.baseUrl}/stations/${station.key}.json`).catch(error=> {
       console.log(error);
       let errorMsg = `${error.statusText}(${error.statusCode})`;
       return Observable.throw(errorMsg);

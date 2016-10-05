@@ -12,10 +12,17 @@ import {Subscription} from "rxjs";
 export class StationsListComponent implements OnInit {
 
   stations = [];
-  stationSelectedIndex: number;
+  selectedIndex: number;
+  selectedStation: Station;
   isLoading = true;
 
   stationChangedSubscription: Subscription;
+
+  private showDialog = false;
+  private dialogMessage = '';
+  private dialogTitle = '';
+  private buttonPrimaryText = '';
+  private buttonSecondaryText = '';
 
   constructor(private stationsService: StationsService, private router: Router) { }
 
@@ -35,10 +42,42 @@ export class StationsListComponent implements OnInit {
   }
 
   onStationSelect(index) {
-    this.stationSelectedIndex = index;
+    this.selectedIndex = index;
+    this.selectedStation = this.stations[index];
   }
 
   onAddStation() {
 
+  }
+
+  private showDialogBox(message: string) {
+    this.dialogTitle = '';
+    this.dialogMessage = message;
+    this.showDialog = true;
+  }
+
+  private deleteStation(value: boolean) {
+    this.showDialog = false;
+    if (!value) return;
+    let index = this.selectedIndex;
+    if (index > -1) {
+      this.stations.splice(index, 1);
+    }
+    this.stationsService.deleteStation(this.selectedStation).subscribe(()=>{
+      console.log('we have a successfull deltion');
+    },error => {
+      console.log(error);
+    });
+  }
+  onDeleteStation(index: number) {
+    if (index > -1) {
+      this.selectedStation= this.stations[index];
+      this.selectedIndex = index;
+    }
+    this.showDialogBox('Slette ' + this.stations[index].name + '?');
+  }
+
+  onFilterOperativ() {
+    console.log ('filter operative...');
   }
 }

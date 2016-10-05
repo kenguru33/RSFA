@@ -19,7 +19,7 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
   vesselId: number;
   activatedRouteSubscription: Subscription;
   viewTechnicalData = false;
-  isLoading;
+  isLoading = true;
   station: Station;
   vesselClass: VesselClass;
 
@@ -34,17 +34,19 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
-      this.isLoading = true;
-      this.vesselsService.getVessel(params['key']).subscribe(vessel=>{
-        this.vessel = vessel;
-        this.stationsService.getStation(vessel.stationKey).subscribe((station: Station) => {
-          this.station = station;
-          this.vesselClassesService.getVesselClass(vessel.vesselClassKey).subscribe((vesselClass: VesselClass) => {
-            this.vesselClass = vesselClass;
-            this.isLoading = false;
+      if(params['key']) {
+        this.isLoading = true;
+        this.vesselsService.getVessel(params['key']).subscribe(vessel=> {
+          this.vessel = vessel;
+          this.isLoading = false;
+          this.stationsService.getStation(vessel.stationKey).subscribe((station: Station) => {
+            this.station = station;
+            this.vesselClassesService.getVesselClass(vessel.vesselClassKey).subscribe((vesselClass: VesselClass) => {
+              this.vesselClass = vesselClass;
+            });
           });
-        });
-      })
+        })
+      }
     });
   }
 

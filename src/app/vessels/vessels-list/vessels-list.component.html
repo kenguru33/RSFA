@@ -21,7 +21,7 @@
       <button class="btn" type="button" [class.btn-link]="!filterRSRK" [class.btn-info]="filterRSRK" (click)="filterRSRK=!filterRSRK">
         RSRK
       </button>
-      <button class="btn" type="button" [class.btn-link]="!filterOperativ" [class.btn-info]="filterOperativ" (click)="filterOperativ=!filterOperativ">
+      <button class="btn" type="button" [class.btn-link]="!filterOperativ" [class.btn-info]="filterOperativ" (click)="filterOperativ=!filterOperativ; onFilterOperativ()">
         Operativ
       </button>
     </div>

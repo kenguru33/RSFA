@@ -11,6 +11,7 @@ const vesselsRoutes: Routes = [
       { path: 'edit', component: StationsDetailEditComponent},
       { path: 'edit/:key',  component: StationsDetailEditComponent },
       { path: ':key',  component: StationsDetailComponent},
+      { path: '', component:StationsDetailComponent}
     ]
   }
 ];

@@ -1,5 +1,5 @@
 <div class="col-md-5">
-  <rs-modal-window [primaryButtonText]="'Slett'" [secondaryButtonText]="'Avbryt'" [show]="showDialog" (response)="deleteVessel($event)" [contentText]="dialogMessage" [title]="dialogTitle"></rs-modal-window>
+  <rs-modal-window [primaryButtonText]="'Slett'" [secondaryButtonText]="'Avbryt'" [show]="showDialog" (response)="deleteStation($event)" [contentText]="dialogMessage" [title]="dialogTitle"></rs-modal-window>
   <div class="col-lg-6 col-md-6" style="margin-top: 10px">
     <button class="btn btn-success" (click)="onAddStation()" [disabled]="isLoading" [routerLink]="'edit'"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Opprett stasjon</button>
   </div>

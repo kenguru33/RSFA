@@ -15,14 +15,19 @@ export class StationsDetailComponent implements OnInit {
   activatedRouteSubscription: Subscription;
   private viewMoreStationData = false;
 
+  isLoading = false;
+
   constructor(private stationsService: StationsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
-      this.stationsService.getStation(params['key']).subscribe((station) => {
-        this.station = station;
-        console.log('from station', this.station);
-      });
+     this.isLoading = true;
+      if(params['key']) {
+        this.stationsService.getStation(params['key']).subscribe((station) => {
+          this.station = station;
+          this.isLoading = false;
+        });
+      }
     });
   }
 

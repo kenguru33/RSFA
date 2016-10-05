@@ -1,4 +1,4 @@
-<div class="panel panel-default" *ngIf="!isLoading">
+<div class="panel panel-default animated fadeIn" *ngIf="!isLoading">
   <div style="position: relative; left: 0; top: 0;">
     <img class="img-circle"  src="/assets/img/lighthouse.jpg" onError="this.onerror=null;this.src='http://imagineathena.com/wp-content/plugins/special-recent-posts/images/no-thumb.png';" style="position: absolute; top: 10px; left: 10px;"/>
   </div>
@@ -14,7 +14,7 @@
 
     <div style="margin-top: 20px; margin-left: 20px;">
 
-      <p><strong>Region:</strong>{{station?.region}}</p>
+      <p><strong>Region:</strong> {{station?.region}}</p>
       <p><strong>Telefon:</strong> {{station?.phone}}</p>
 
     </div>

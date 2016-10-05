@@ -6,6 +6,7 @@ import {Vessel} from "../models/vessel.model";
 import {Subscription} from "rxjs";
 import {Station} from "../../stations/models/station";
 import {StationsService} from "../../stations/stations.service";
+import {VesselStatusCode} from "../models/vessel-status-code";
 @Component({
   selector: 'rs-vessels-list',
   templateUrl: 'vessels-list.component.html',
@@ -38,7 +39,6 @@ export class VesselsListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
       this.vesselChangedSubscription = this.vesselsService.vesselListChanged.subscribe( key => {
-          console.log(key);
           this.getVessels();
       });
       this.getVessels();
@@ -104,5 +104,9 @@ export class VesselsListComponent implements OnInit, OnDestroy {
 
   onShowFilterOptions() {
     this.showFilterOptions = !this.showFilterOptions;
+  }
+
+  onFilterOperativ() {
+      
   }
 }
