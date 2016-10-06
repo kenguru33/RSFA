@@ -10,6 +10,8 @@ import {VesselsService} from "./vessels.service";
 import {VesselsDetailComponent} from "./vessels-detail/vessels-detail.component";
 import { VesselsDetailEditComponent } from './vessels-detail/vessels-detail-edit.component';
 import {SpinnerModule} from "../spinner/spinner.module";
+import {FilterPipe} from "./filter.pipe";
+import { SortPipe } from './sort.pipe';
 
 
 // Initialize Firebase
@@ -27,7 +29,9 @@ export const firebaseConfig = {
     VesselsComponent,
     VesselsListComponent,
     VesselsDetailComponent,
-    VesselsDetailEditComponent
+    VesselsDetailEditComponent,
+    FilterPipe,
+    SortPipe
   ],
   imports: [
     CommonModule,

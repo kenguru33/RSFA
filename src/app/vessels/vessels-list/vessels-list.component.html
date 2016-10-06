@@ -15,20 +15,20 @@
         <i class="fa pull-right" [class.fa-chevron-left]="!showFilterOptions" style="cursor: pointer;" [class.fa-chevron-down]="showFilterOptions"  aria-hidden="true" (click)="onShowFilterOptions()"></i></h5>
     </div>
     <div *ngIf="showFilterOptions" style="margin-top: 10px;">
-      <button class="btn" type="button" [class.btn-link]="!filterBemannet" [class.btn-info]="filterBemannet" (click)="filterBemannet=!filterBemannet">
+      <button class="btn" type="button" [class.btn-link]="!filterBemannet" [class.btn-info]="filterBemannet" (click)="filterBemannet=!filterBemannet;">
         Fast Bemannet
       </button>
-      <button class="btn" type="button" [class.btn-link]="!filterRSRK" [class.btn-info]="filterRSRK" (click)="filterRSRK=!filterRSRK">
+      <button class="btn" type="button" [class.btn-link]="!filterRSRK" [class.btn-info]="filterRSRK" (click)="filterRSRK=!filterRSRK;">
         RSRK
       </button>
-      <button class="btn" type="button" [class.btn-link]="!filterOperativ" [class.btn-info]="filterOperativ" (click)="filterOperativ=!filterOperativ; onFilterOperativ()">
+      <button class="btn" type="button" [class.btn-link]="!filterOperativ" [class.btn-info]="filterOperativ" (click)="filterOperativ=!filterOperativ;">
         Operativ
       </button>
     </div>
   </div>
   <spinner [visible]="isLoading"></spinner>
   <div class="col-md-12 animated fadeIn" style="margin-top: 10px" [hidden]="isLoading">
-    <a class="list-group-item clearfix" style="cursor: pointer;" *ngFor="let vessel of vessels; let i = index" (click)="onSelectVessel(i)" [routerLink]="vessel.key">
+    <a class="list-group-item clearfix" style="cursor: pointer;" *ngFor="let vessel of vessels | filter:[filterOperativ, filterBemannet, filterRSRK]; let i = index" (click)="onSelectVessel(i)" [routerLink]="vessel.key">
       <i class="fa fa-circle" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel.status]?.color"></i>&nbsp;&nbsp;{{vessel.prefix}}-{{vessel.id}} {{vessel.name}}
       <span class="btn btn-danger btn-xs pull-right" (click)="onDeleteVessel(i)"><i class="fa fa-times" aria-hidden="true"></i></span>
       <!--<span class="btn btn-primary btn-sm pull-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>-->

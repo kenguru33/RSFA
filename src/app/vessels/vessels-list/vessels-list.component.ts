@@ -106,7 +106,4 @@ export class VesselsListComponent implements OnInit, OnDestroy {
     this.showFilterOptions = !this.showFilterOptions;
   }
 
-  onFilterOperativ() {
-      
-  }
 }

@@ -1,0 +1,9 @@
+.img-circle {
+  border-radius: 50%; width: 24px; height: 24px; margin-bottom: 20px;
+  margin: 4px 0 0 4px;
+  box-shadow: 0 0 0 4px #888;
+}
+.img-square {
+  width: 150px; height: 150px; margin-bottom: 20px;
+}
+

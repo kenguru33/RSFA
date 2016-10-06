@@ -18,7 +18,7 @@ import {FormsModule} from "@angular/forms";
   declarations: [
     VesselClassesComponent,
     VesselClassesListComponent,
-    VesselClassesDetailComponent
+    VesselClassesDetailComponent,
   ],
 
   providers: [
