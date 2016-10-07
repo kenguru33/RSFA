@@ -60,7 +60,7 @@
       <!-- Stasjon -->
       <div class="form-group col-md-4">
         <label for="station">Stasjon</label>
-        <select class="form-control" id="station" name="station"  [(ngModel)]="vessel.stationKey" required>
+        <select class="form-control" id="station" name="stationKey"  [(ngModel)]="vessel.stationKey" required>
           <option *ngFor="let station of stations;" [value]="station?.key">
             {{station.name}}
           </option>

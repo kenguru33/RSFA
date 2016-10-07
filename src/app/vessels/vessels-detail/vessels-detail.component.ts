@@ -16,14 +16,11 @@ import {VesselClassesService} from "../../vessel-classes/vessel-classes.service"
 })
 export class VesselsDetailComponent implements OnInit, OnDestroy {
   vessel: Vessel;
-  vesselId: number;
   activatedRouteSubscription: Subscription;
   viewTechnicalData = false;
   isLoading = true;
   station: Station;
   vesselClass: VesselClass;
-
-  fadein = true;
 
   constructor(private vesselsService: VesselsService,
               private stationsService: StationsService,
@@ -43,6 +40,8 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
             this.station = station;
             this.vesselClassesService.getVesselClass(vessel.vesselClassKey).subscribe((vesselClass: VesselClass) => {
               this.vesselClass = vesselClass;
+              console.log('stasjon lastet', this.station);
+              console.log('fartøy lastet', this.vessel);
             });
           });
         })
