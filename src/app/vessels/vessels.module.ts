@@ -12,6 +12,7 @@ import { VesselsDetailEditComponent } from './vessels-detail/vessels-detail-edit
 import {SpinnerModule} from "../spinner/spinner.module";
 import {FilterPipe} from "./filter.pipe";
 import { SortPipe } from './sort.pipe';
+import { SearchPipe } from './search.pipe';
 
 
 // Initialize Firebase
@@ -31,7 +32,8 @@ export const firebaseConfig = {
     VesselsDetailComponent,
     VesselsDetailEditComponent,
     FilterPipe,
-    SortPipe
+    SortPipe,
+    SearchPipe
   ],
   imports: [
     CommonModule,

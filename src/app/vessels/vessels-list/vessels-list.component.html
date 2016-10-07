@@ -4,9 +4,13 @@
     <button class="btn btn-success" (click)="onAddVessel()" [disabled]="isLoading" [routerLink]="'edit'"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Opprett fartøy</button>
   </div>
   <div class="col-md-6" style="margin-top: 10px">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Søk fartøy" [disabled]="isLoading">
-      <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search" aria-hidden="true"></i></span>
+    <!--<div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+      <input type="text" class="form-control" placeholder="Søk fartøy" [disabled]="isLoading" name="vesselSearch" [(ngModel)]="vesselSearch">
+    </div>-->
+    <div class="form-group has-feedback">
+      <i class="fa fa-search form-control-feedback"></i>
+      <input type="text" class="form-control" placeholder="Søk fartøy..." [disabled]="isLoading" name="vesselSearch" [(ngModel)]="vesselSearch" />
     </div>
   </div>
   <div class=" col-md-12" style="margin-top: 10px">
@@ -28,7 +32,7 @@
   </div>
   <spinner [visible]="isLoading"></spinner>
   <div class="col-md-12 animated fadeIn" style="margin-top: 10px" [hidden]="isLoading">
-    <a class="list-group-item clearfix" style="cursor: pointer;" *ngFor="let vessel of vessels | filter:[filterOperativ, filterBemannet, filterRSRK]; let i = index" (click)="onSelectVessel(i)" [routerLink]="vessel.key">
+    <a class="list-group-item clearfix" style="cursor: pointer;" *ngFor="let vessel of vessels | filter:[filterOperativ, filterBemannet, filterRSRK] | search: vesselSearch let i = index" (click)="onSelectVessel(i)" [routerLink]="vessel.key">
       <i class="fa fa-circle" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel.status]?.color"></i>&nbsp;&nbsp;{{vessel.prefix}}-{{vessel.id}} {{vessel.name}}
       <span class="btn btn-danger btn-xs pull-right" (click)="onDeleteVessel(i)"><i class="fa fa-times" aria-hidden="true"></i></span>
       <!--<span class="btn btn-primary btn-sm pull-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>-->

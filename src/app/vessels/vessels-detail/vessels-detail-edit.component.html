@@ -69,7 +69,7 @@
       <!-- Klasse -->
       <div class="form-group col-md-4">
         <label for="vesselClass">Klasse</label>
-        <select class="form-control" id="vesselClass" name="vesselClass" [(ngModel)]="vessel.vesselClassKey" required>
+        <select class="form-control" id="vesselClass" name="vesselClassKey" [(ngModel)]="vessel.vesselClassKey" required>
           <option *ngFor="let vesselClass of vesselClasses;" [value]="vesselClass.key">
             {{vesselClass.name}}
           </option>
@@ -78,7 +78,7 @@
       <!-- Bemanningstype -->
       <div class="form-group col-md-4">
         <label for="vesselClass">Bemanningstype</label>
-        <select class="form-control" id="bemanning" name="bemanning" [(ngModel)]="vessel.staff" required>
+        <select class="form-control" id="bemanning" name="staff" [(ngModel)]="vessel.staff" required>
           <option>Fast</option>
           <option>RSRK</option>
         </select>

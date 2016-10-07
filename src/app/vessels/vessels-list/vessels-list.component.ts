@@ -35,6 +35,8 @@ export class VesselsListComponent implements OnInit, OnDestroy {
 
   private vesselChangedSubscription: Subscription;
 
+  private vesselSearch ="";
+
   constructor(private vesselsService: VesselsService, private router: Router) {}
 
   ngOnInit(): void {
