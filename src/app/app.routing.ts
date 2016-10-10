@@ -5,12 +5,13 @@ import {AppComponent} from "./app.component";
 import {LoginComponent} from "./login/login.component";
 import {VesselClassesComponent} from "./vessel-classes/vessel-classes.component";
 import {StationsComponent} from "./stations/stations.component";
+import {LoginGuard} from "./shared/login.guard";
 
 
 const appRoutes: Routes = [
-  //{ path: '', redirectTo: 'skøyter', pathMatch: 'full' }
-  { path: '', component: LoginComponent},
-  { path: 'skøyter', component: VesselsComponent },
+  { path: '', redirectTo: 'logginn', pathMatch: 'full'},
+  { path: 'logginn', component: LoginComponent},
+  { path: 'skøyter', component: VesselsComponent, canActivate:[LoginGuard]},
   { path: 'klasser', component: VesselClassesComponent},
   { path: 'stasjoner', component: StationsComponent}
 ];

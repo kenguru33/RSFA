@@ -3,11 +3,12 @@ import {Routes, RouterModule} from "@angular/router";
 import {ModuleWithProviders} from "@angular/core";
 import {VesselsDetailComponent} from "./vessels-detail/vessels-detail.component";
 import {VesselsDetailEditComponent} from "./vessels-detail/vessels-detail-edit.component";
+import {LoginGuard} from "../shared/login.guard";
 
 const vesselsRoutes: Routes = [
     {
         path: 'skøyter',
-        component: VesselsComponent,
+        component: VesselsComponent, canActivate:[LoginGuard],
         children: [
             { path: 'edit',  component: VesselsDetailEditComponent },
             { path: 'edit/:key',  component: VesselsDetailEditComponent },

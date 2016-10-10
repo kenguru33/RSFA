@@ -6,11 +6,14 @@ import "rxjs/add/operator/map";
 import "rxjs/add/observable/throw";
 import {Vessel} from "./models/vessel.model";
 import {VesselStatusCode} from "./models/vessel-status-code";
+import {AuthService} from "../shared/auth.service";
 
 @Injectable()
 export class VesselsService {
 
-    constructor(private http: Http) {}
+    constructor(private http: Http, private authService: AuthService) {
+      console.log('Getting vesselslist',this.authService.isLoggedIn());
+    }
 
     baseUrl = 'https://rsfa-e3c2f.firebaseio.com';
 

@@ -11,12 +11,14 @@ import {HeaderComponent} from "./header/header.component";
 import {VesselClassesModule} from "./vessel-classes/vessel-classes.module";
 import {StationsModule} from "./stations/stations.module";
 import {SpinnerModule} from "./spinner/spinner.module";
+import {AuthService} from "./shared/auth.service";
+import {LoginGuard} from "./shared/login.guard";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,7 @@ import {SpinnerModule} from "./spinner/spinner.module";
     VesselClassesModule,
     StationsModule
   ],
-  providers: [],
+  providers: [AuthService,LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
