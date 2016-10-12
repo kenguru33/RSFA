@@ -18,17 +18,14 @@ export class AuthService {
   }
 
   login(user: User): Promise<User> {
-    return firebase.auth().signInWithEmailAndPassword(user.email, user.password).then(user=>{
-      console.log(user.email);
-      return user;
-    }).catch(error=>{
+    return firebase.auth().signInWithEmailAndPassword(user.email, user.password).catch(error=>{
       console.log(error);
       return error;
     })
   }
 
   isLoggedIn() {
-    let user = firebase.auth().currentUser;
+    let user = this.getCurrentUser();
     if (user) {
       return true
     } else {
@@ -40,5 +37,18 @@ export class AuthService {
 
     return firebase.auth().signOut();
   }
+
+  getCurrentUser(): User {
+    return firebase.auth().currentUser;
+  }
+
+  /*getToken(): Promise<any> {
+    return firebase.auth().currentUser.getToken(true).then(tokenID=>{
+      return tokenID;
+    }).catch (error=>{
+      return error;
+    });
+  }*/
+
 
 }

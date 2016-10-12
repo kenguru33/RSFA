@@ -34,15 +34,14 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a>Bernt Anker</a></li>
-        <li class="dropdown">
+        <li class="dropdown" *ngIf="authService.isLoggedIn()">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-             aria-expanded="false">Innstillinger <span class="caret"></span></a>
+             aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{authService.getCurrentUser()?.email}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Min Profil</a></li>
             <li><a href="#">Endre passord</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Logg ut</a></li>
+            <li><a routerLink="/logginn" (click)="authService.logout()">Logg ut</a></li>
           </ul>
         </li>
       </ul>

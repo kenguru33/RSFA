@@ -8,35 +8,35 @@ import {Router} from "@angular/router";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnChanges {
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('change detected',changes);
-  }
-
+export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    if(this.isLoggedIn()) {
+      //this.router.navigate(['/skøyter']);
+      //let location = new Location();
+      //location.assign('skøyter');
+    }
   }
 
   login(user: User) {
     this.authService.login(user).then(user=>{
-      console.log(user);
-      this.router.navigate(['skøyter']);
+      this.authService.getCurrentUser()['md'];
+      this.router.navigate(['/skøyter']);
     }).catch(error=>{
       console.log(error);
-    })
+    });
   }
+
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
   logOut() {
-    console.log('isloogedOut:',this.isLoggedIn());
     this.authService.logout().then(()=>{
-
+      localStorage.removeItem('mytoken');
     })
   }
-
 }

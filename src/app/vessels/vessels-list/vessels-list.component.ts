@@ -37,12 +37,14 @@ export class VesselsListComponent implements OnInit, OnDestroy {
 
   private vesselSearch ="";
 
-  constructor(private vesselsService: VesselsService, private router: Router) {}
+  constructor(private vesselsService: VesselsService, private router: Router) {
+
+  }
 
   ngOnInit(): void {
     this.vesselChangedSubscription = this.vesselsService.vesselListChanged.subscribe( key => {
-          this.getVessels();
-      });
+      this.getVessels();
+    });
     this.getVessels();
   }
 
@@ -50,16 +52,14 @@ export class VesselsListComponent implements OnInit, OnDestroy {
         this.vesselChangedSubscription.unsubscribe();
     }
 
-  private getVessels() {
+    getVessels() {
     this.isLoading = true;
     this.vesselsService.getVessels().subscribe(vessels => {
-      console.log(vessels);
       this.vessels = vessels;
       this.isLoading = false;
     }, error => {
       console.error(error);
-    })
-
+    });
   }
 
   private deleteVessel(value: boolean) {

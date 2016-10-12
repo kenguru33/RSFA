@@ -9,11 +9,12 @@ import {LoginGuard} from "./shared/login.guard";
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'logginn', pathMatch: 'full'},
+  //{ path: '', redirectTo: 'logginn', pathMatch: 'full'},
+  { path: '', component: AppComponent, canActivate:[LoginGuard]},
   { path: 'logginn', component: LoginComponent},
-  { path: 'skøyter', component: VesselsComponent, canActivate:[LoginGuard]},
-  { path: 'klasser', component: VesselClassesComponent},
-  { path: 'stasjoner', component: StationsComponent}
+  //{ path: 'skøyter', component: VesselsComponent},
+  //{ path: 'klasser', component: VesselClassesComponent},
+  //{ path: 'stasjoner', component: StationsComponent}
 ];
 
 export const appRoutingProviders: any[] = [

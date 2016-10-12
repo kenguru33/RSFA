@@ -11,8 +11,7 @@ export class VesselClassesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    let t = new VesselClass;
-    console.log(t.properties['speed']);
+
   }
 
 }
