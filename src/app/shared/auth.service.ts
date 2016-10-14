@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {User} from "./user";
 
 declare var firebase: any;
 
 @Injectable()
 export class AuthService {
+
+  private user;
+
+  authStateChanged: EventEmitter<User> = new EventEmitter<User>();
 
   constructor() {
     var config = {
@@ -15,6 +19,11 @@ export class AuthService {
       messagingSenderId: "439046788820"
     };
     firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged(user=>{
+      this.authStateChanged.emit(user);
+    });
+
   }
 
   login(user: User): Promise<User> {
@@ -33,8 +42,10 @@ export class AuthService {
     }
   }
 
-  logout() {
 
+
+  logout() {
+    localStorage.removeItem('userToken');
     return firebase.auth().signOut();
   }
 
@@ -42,13 +53,13 @@ export class AuthService {
     return firebase.auth().currentUser;
   }
 
-  /*getToken(): Promise<any> {
+  getToken(): Promise<any> {
     return firebase.auth().currentUser.getToken(true).then(tokenID=>{
       return tokenID;
     }).catch (error=>{
       return error;
     });
-  }*/
+  }
 
 
 }

@@ -13,12 +13,14 @@ import {StationsModule} from "./stations/stations.module";
 import {SpinnerModule} from "./spinner/spinner.module";
 import {AuthService} from "./shared/auth.service";
 import {LoginGuard} from "./shared/login.guard";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

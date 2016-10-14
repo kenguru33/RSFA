@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {AuthService} from "../shared/auth.service";
 
 @Component({
   selector: 'rs-vessels',

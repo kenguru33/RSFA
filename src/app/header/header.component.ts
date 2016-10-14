@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../shared/auth.service";
+import {User} from "../shared/user";
 
 @Component({
   selector: 'rs-header',
@@ -8,7 +9,7 @@ import {AuthService} from "../shared/auth.service";
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn: boolean;
+
   constructor(private authService: AuthService) { }
 
   ngOnInit() {

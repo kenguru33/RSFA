@@ -6,11 +6,13 @@ import {LoginComponent} from "./login/login.component";
 import {VesselClassesComponent} from "./vessel-classes/vessel-classes.component";
 import {StationsComponent} from "./stations/stations.component";
 import {LoginGuard} from "./shared/login.guard";
+import {HomeComponent} from "./home/home.component";
 
 
 const appRoutes: Routes = [
-  //{ path: '', redirectTo: 'logginn', pathMatch: 'full'},
-  { path: '', component: AppComponent, canActivate:[LoginGuard]},
+  //{ path: '', redirectTo: 'skøyter', pathMatch: 'full'},
+  { path: '', component: HomeComponent, canActivate:[LoginGuard]},
+
   { path: 'logginn', component: LoginComponent},
   //{ path: 'skøyter', component: VesselsComponent},
   //{ path: 'klasser', component: VesselClassesComponent},

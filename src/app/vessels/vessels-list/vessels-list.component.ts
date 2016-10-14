@@ -58,7 +58,12 @@ export class VesselsListComponent implements OnInit, OnDestroy {
       this.vessels = vessels;
       this.isLoading = false;
     }, error => {
-      console.error(error);
+      console.log('error code', error.status);
+      if (error.status === 401) {
+        this.router.navigate(['logginn']).then(()=>{
+          console.log("Are we navigating?");
+        });
+      }
     });
   }
 
@@ -72,7 +77,9 @@ export class VesselsListComponent implements OnInit, OnDestroy {
     this.vesselsService.deleteVessel(this.selectedVessel).subscribe(()=>{
       console.log('we have a successfull deltion');
     },error => {
-      console.log(error);
+      if (error.status === 401) {
+        this.router.navigate(['/logginn']);
+      }
     });
   }
 

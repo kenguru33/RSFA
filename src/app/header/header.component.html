@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" routerLink="/skøyter">
           <img alt="Brand" src="/assets/img/rs-logo.png" height="24">
       </a>
     </div>
@@ -23,7 +23,7 @@
         <li><a routerLink="/klasser">Klasser</a></li>
         <li><a routerLink="/stasjoner">Stasjoner</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
              aria-expanded="false">Lister <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="https://rsfa-e3c2f.firebaseio.com/vessels.json">Vis fartøysliste (JSON)</a></li>
@@ -36,12 +36,13 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" *ngIf="authService.isLoggedIn()">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-             aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{authService.getCurrentUser()?.email}} <span class="caret"></span></a>
+             aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;Innlogget som: {{authService.isLoggedIn()?authService.getCurrentUser()?.email : 'Ikke logget inn'}} <span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <li *ngIf="authService.isLoggedIn()"><a routerLink="/logginn">Logg inn</a></li>
             <li><a href="#">Min Profil</a></li>
             <li><a href="#">Endre passord</a></li>
             <li role="separator" class="divider"></li>
-            <li><a routerLink="/logginn" (click)="authService.logout()">Logg ut</a></li>
+            <li *ngIf="authService.isLoggedIn()"><a routerLink="/logginn" (click)="authService.logout()">Logg ut</a></li>
           </ul>
         </li>
       </ul>

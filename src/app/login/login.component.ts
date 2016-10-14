@@ -2,6 +2,8 @@ import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {AuthService} from "../shared/auth.service";
 import {User} from "../shared/user";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
+import {stringify} from "querystring";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private location: Location ) { }
 
   ngOnInit() {
     if(this.isLoggedIn()) {
@@ -22,8 +24,11 @@ export class LoginComponent implements OnInit {
 
   login(user: User) {
     this.authService.login(user).then(user=>{
-      this.authService.getCurrentUser()['md'];
-      this.router.navigate(['/skøyter']);
+      //this.authService.getCurrentUser()['md'];
+      console.log(user);
+      localStorage.setItem('userToken', user['md']);
+      this.router.navigate(['']);
+      //this.location.back();
     }).catch(error=>{
       console.log(error);
     });
@@ -36,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   logOut() {
     this.authService.logout().then(()=>{
-      localStorage.removeItem('mytoken');
+      localStorage.removeItem('userToken');
     })
   }
 }

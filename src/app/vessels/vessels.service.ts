@@ -19,10 +19,9 @@ export class VesselsService {
   baseUrl = 'https://rsfa-e3c2f.firebaseio.com';
 
   vesselListChanged: EventEmitter<string> = new EventEmitter<string>();
-//{"uid":"j0PuCbm53SfY7CKa89TaruK8KwI2","displayName":null,"photoURL":null,"email":"bernt.anker@gmail.com","emailVerified":false,"isAnonymous":false,"providerData":[{"uid":"bernt.anker@gmail.com","displayName":null,"photoURL":null,"email":"bernt.anker@gmail.com","providerId":"password"}],"apiKey":"AIzaSyDgAkPHkC2KabvWelAFggwWQvGB-dTU5eI","appName":"[DEFAULT]","authDomain":"rsfa-e3c2f.firebaseapp.com","stsTokenManager":{"apiKey":"AIzaSyDgAkPHkC2KabvWelAFggwWQvGB-dTU5eI","refreshToken":"AGl2vTT1GlvTYX3fIDvL4VIQtP2N1zm8lcBc6o_HCwm78PnMjYYMxgKkJxVZZRGkqEYwmjxPAxVarXADH9U3R2Z-7Wif86v1YnnlHjbcGM6Jm-FVeu5YiXjcAqpdNYLA6sb40ubforrLNmJBlRHutpHR1-0GqPt29UumoTrxrQe-2CVjzP05KsUoO_SjkXdVRo-6LcJ6VxmcSs9kPk_8djZ7uLsRG91WMA","accessToken":"eyJhbGciOiJSUzI1NiIsImtpZCI6IjA5MjI0NjM1NDNmNjE1ZmRkMjUyYzNhY2M0OGQyNTk1ZDNlYzdiZWUifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcnNmYS1lM2MyZiIsImF1ZCI6InJzZmEtZTNjMmYiLCJhdXRoX3RpbWUiOjE0NzYzMDE2ODQsInVzZXJfaWQiOiJqMFB1Q2JtNTNTZlk3Q0thODlUYXJ1SzhLd0kyIiwic3ViIjoiajBQdUNibTUzU2ZZN0NLYTg5VGFydUs4S3dJMiIsImlhdCI6MTQ3NjMwMTY4NSwiZXhwIjoxNDc2MzA1Mjg1LCJlbWFpbCI6ImJlcm50LmFua2VyQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJiZXJudC5hbmtlckBnbWFpbC5jb20iLCJiZXJudC5hbmtlckBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.Bpu21jNcGExTS20Jbj_ZLPR3hfGaek_2WXoGPQw5dkt9wKmmJeYxM9K-DhpXjItg5mMIgZytufEysJzOLnagSCTXK81P1UyPJuvf4x1PCyguPdjIc-DRwlrACtub1J3rdSp0ryYKYLuEgtXbjkTgtUgRecbJoAv9m0ZDDE3Exk0dasK7sLUn4Qyq96nL1-LVvvu7rX1I5VNyhKoBpyTfzd21dND9P7J4PWizQloZnBuZkBTklXYSqXfUoQGlCizi5A52BVIBTgW3GKAlomGhqrk6QaVfdJsFe-sxuuWqLjkpqpMYB4YSMUbZHtZxMICH-fhf77-bbJ4W_lj4jZSreA","expirationTime":1476305283611},"redirectEventId":null}
 
   getVessels(): Observable<Vessel[]> {
-    return this.http.get(`${this.baseUrl}/vessels.json?auth=${this.authService.getCurrentUser()['md']}`).map((response: Response) => {
+    return this.http.get(`${this.baseUrl}/vessels.json?auth=${localStorage.getItem('userToken')}`).map((response: Response) => {
       let vessels = response.json() || {};
       let vesselArray = [];
 
@@ -32,14 +31,13 @@ export class VesselsService {
       }
       return vesselArray;
 
-    }).catch(error=> {
+    }).catch( error => {
       console.log(error);
-      let errorMsg = `${error.statusText}(${error.statusCode})`;
-      return Observable.throw(errorMsg);
+      return Observable.throw(error);
     });
   }
   getVessel(key: any):Observable<Vessel> {
-    return this.http.get(`${this.baseUrl}/vessels/${key}.json?auth=${this.authService.getCurrentUser()['md']}`).map((response: Response) =>{
+    return this.http.get(`${this.baseUrl}/vessels/${key}.json?auth=${localStorage.getItem('userToken')}`).map((response: Response) =>{
       let vessel = response.json();
       vessel.key = key;
       return vessel;
