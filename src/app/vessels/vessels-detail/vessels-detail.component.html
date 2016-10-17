@@ -13,8 +13,8 @@
   </div>
   <div class="panel-body">
       <div style="margin-left: 20px; margin-top: 20px;">
-        <p><strong>Stasjon:</strong> <a href="stasjoner/{{station?.key}}">{{station?.name}}</a></p>
-        <p><strong>Fartøysklasse:</strong> <a href="klasser/{{vesselClass?.key}}">{{vesselClass?.name}}</a></p>
+        <p><strong>Stasjon:</strong> <a routerLink="/stasjoner/{{station?.key}}">{{station?.name}}</a></p>
+        <p><strong>Fartøysklasse:</strong> <a routerLink="/klasser/{{vesselClass?.key}}">{{vesselClass?.name}}</a></p>
         <p><strong>Epost:</strong> {{vessel?.email}}</p>
         <p><strong>Telefon:</strong> {{vessel?.phone}}</p>
         <p><strong>Bemannning:</strong> {{vessel?.staff}}</p>

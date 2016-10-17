@@ -60,6 +60,7 @@ export class VesselsListComponent implements OnInit, OnDestroy {
     }, error => {
       console.log('error code', error.status);
       if (error.status === 401) {
+        localStorage.removeItem('userToken');
         this.router.navigate(['logginn']).then(()=>{
           console.log("Are we navigating?");
         });
@@ -78,6 +79,7 @@ export class VesselsListComponent implements OnInit, OnDestroy {
       console.log('we have a successfull deletion');
     },error => {
       if (error.status === 401) {
+        localStorage.removeItem('userToken');
         this.router.navigate(['/logginn']);
       }
     });

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   private userChanged: Subscription;
 
+  private isLoading = false;
 
   constructor(@Inject(UserServiceToken) private userService: UserService, private router: Router, private location: Location ) { }
 
@@ -22,12 +23,15 @@ export class LoginComponent implements OnInit {
     this.userChanged = this.userService.userChanged.subscribe(user=>{
       if(user) {
         this.router.navigate(['skøyter']);
+        this.isLoading = false;
       }
     });
   }
 
   login(user: User) {
     this.userService.login(user);
+    this.isLoading = true;
+    setTimeout(()=>{ this.isLoading = false; }, 5000);
   }
 
   logOut() {

@@ -2,6 +2,8 @@ import {Injectable, EventEmitter} from '@angular/core';
 import {Observable} from "rxjs";
 import {Station} from "./models/station";
 import {Http, Response} from "@angular/http";
+import {Vessel} from "../vessels/models/vessel.model";
+import {VesselsService} from "../vessels/vessels.service";
 
 @Injectable()
 export class StationsService {
@@ -10,7 +12,7 @@ export class StationsService {
 
   stationListChanged: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private vesselsService: VesselsService) { }
 
   getStations(): Observable<Station[]> {
     return this.http.get(`${this.baseUrl}/stations.json`).map((response: Response) => {

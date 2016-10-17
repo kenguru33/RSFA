@@ -30,7 +30,8 @@ import {UserManagerModule} from "./user-manager/user-manager.module";
     routing,
     VesselClassesModule,
     StationsModule,
-    UserManagerModule
+    UserManagerModule,
+    SpinnerModule
   ],
   providers: [LoginGuard],
   bootstrap: [AppComponent]

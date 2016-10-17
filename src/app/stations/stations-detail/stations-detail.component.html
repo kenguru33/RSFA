@@ -16,6 +16,9 @@
 
       <p><strong>Region:</strong> {{station?.region}}</p>
       <p><strong>Telefon:</strong> {{station?.phone}}</p>
+      <div *ngFor="let vessel of vesselsOnStation">
+        <p>{{vessel?.name}}</p>
+      </div>
 
     </div>
     <div class="media-right">

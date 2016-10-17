@@ -3,6 +3,8 @@ import {StationsService} from "../stations.service";
 import {Station} from "../models/station";
 import {ActivatedRoute, Params} from "@angular/router";
 import {Subscription} from "rxjs";
+import {VesselsService} from "../../vessels/vessels.service";
+import {Vessel} from "../../vessels/models/vessel.model";
 
 @Component({
   selector: 'app-stations-detail',
@@ -14,10 +16,11 @@ export class StationsDetailComponent implements OnInit {
   station: Station;
   activatedRouteSubscription: Subscription;
   private viewMoreStationData = false;
+  vesselsOnStation: Vessel[] = [];
 
   isLoading = false;
 
-  constructor(private stationsService: StationsService, private activatedRoute: ActivatedRoute) { }
+  constructor(private stationsService: StationsService,private vesselsService: VesselsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
@@ -26,6 +29,10 @@ export class StationsDetailComponent implements OnInit {
         this.stationsService.getStation(params['key']).subscribe((station) => {
           this.station = station;
           this.isLoading = false;
+          this.vesselsService.getVesselsOnStation(station).subscribe(vessels=>{
+            this.vesselsOnStation = vessels;
+            console.log(this.vesselsOnStation);
+          })
         });
       }
     });

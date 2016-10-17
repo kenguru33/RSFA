@@ -8,13 +8,15 @@ import {Vessel} from "./models/vessel.model";
 import {VesselStatusCode} from "./models/vessel-status-code";
 import {UserServiceToken} from "../user-manager/shared/services/firebase/firebase-user.service";
 import {UserService} from "../user-manager/shared/services/user.service";
+import {Station} from "../stations/models/station";
 
 @Injectable()
 export class VesselsService {
   headers: Headers;
   requestOptions: RequestOptions;
 
-  constructor(private http: Http, @Inject(UserServiceToken) private userService: UserService) {}
+  constructor(private http: Http, @Inject(UserServiceToken) private userService: UserService) {
+  }
 
   baseUrl = 'https://rsfa-e3c2f.firebaseio.com';
 
@@ -31,13 +33,14 @@ export class VesselsService {
       }
       return vesselArray;
 
-    }).catch( error => {
+    }).catch(error => {
       console.log(error);
       return Observable.throw(error);
     });
   }
-  getVessel(key: any):Observable<Vessel> {
-    return this.http.get(`${this.baseUrl}/vessels/${key}.json?auth=${localStorage.getItem('userToken')}`).map((response: Response) =>{
+
+  getVessel(key: any): Observable<Vessel> {
+    return this.http.get(`${this.baseUrl}/vessels/${key}.json?auth=${localStorage.getItem('userToken')}`).map((response: Response) => {
       let vessel = response.json();
       vessel.key = key;
       return vessel;
@@ -50,10 +53,10 @@ export class VesselsService {
 
   storeVessel(vessel: Vessel): Observable<string> {
     return this.http.post(`${this.baseUrl}/vessels.json?auth=${localStorage.getItem('userToken')}`, JSON.stringify(vessel)).map((response: Response) => {
-      console.log('stored vessel',response.json());
+      console.log('stored vessel', response.json());
       this.vesselListChanged.emit(response.json().name);
       return response.json().name;
-    }).catch(error=>{
+    }).catch(error=> {
       console.log(error);
       let errorMsg = `${error.statusText}(${error.statusCode})`;
       return Observable.throw(errorMsg);
@@ -66,7 +69,7 @@ export class VesselsService {
     return this.http.put(`${this.baseUrl}/vessels/${key}.json?auth=${localStorage.getItem('userToken')}`, JSON.stringify(vessel)).map((response: Response) => {
       this.vesselListChanged.emit(key);
       return key;
-    }).catch(error=>{
+    }).catch(error=> {
       console.log(error);
       let errorMsg = `${error.statusText}(${error.statusCode})`;
       return Observable.throw(errorMsg);
@@ -83,9 +86,26 @@ export class VesselsService {
 
   getStatusCodes(): Array<VesselStatusCode> {
     return [
-      { code: 'Operativ', color: '#5cb85c' },
-      { code: 'Ute av tjeneste', color: '	#d9534f'},
-      { code: 'Reserve', color: '#428bca'}
+      {code: 'Operativ', color: '#5cb85c'},
+      {code: 'Ute av tjeneste', color: '	#d9534f'},
+      {code: 'Reserve', color: '#428bca'}
     ]
+  }
+
+  getVesselsOnStation(station: Station): Observable<Vessel[]> {
+    return this.http.get(`${this.baseUrl}/vessels.json?auth=${localStorage.getItem('userToken')}`).map((response: Response) => {
+      let vessels = response.json() || {};
+      let vesselArray = [];
+      for (let key in vessels) {
+        if (vessels[key].stationKey === station.key) {
+          vesselArray.push(vessels[key]);
+        }
+      }
+      return vesselArray;
+
+    }).catch(error => {
+      console.log(error);
+      return Observable.throw(error);
+    });
   }
 }
