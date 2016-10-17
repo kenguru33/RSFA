@@ -11,9 +11,9 @@ import {HeaderComponent} from "./header/header.component";
 import {VesselClassesModule} from "./vessel-classes/vessel-classes.module";
 import {StationsModule} from "./stations/stations.module";
 import {SpinnerModule} from "./spinner/spinner.module";
-import {AuthService} from "./shared/auth.service";
 import {LoginGuard} from "./shared/login.guard";
 import { HomeComponent } from './home/home.component';
+import {UserManagerModule} from "./user-manager/user-manager.module";
 
 @NgModule({
   declarations: [
@@ -29,9 +29,10 @@ import { HomeComponent } from './home/home.component';
     VesselsModule,
     routing,
     VesselClassesModule,
-    StationsModule
+    StationsModule,
+    UserManagerModule
   ],
-  providers: [AuthService,LoginGuard],
+  providers: [LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

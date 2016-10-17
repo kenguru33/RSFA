@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {AuthService} from "./auth.service";
 import {Location} from "@angular/common";
+import {UserService} from "../user-manager/shared/services/user.service";
+import {UserServiceToken} from "../user-manager/shared/services/firebase/firebase-user.service";
 
 @Injectable()
 export class LoginGuard implements CanActivate{
 
-  constructor(private authService: AuthService, private router: Router, private location: Location) {}
+  constructor(@Inject(UserServiceToken) private userService: UserService, private router: Router, private location: Location) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
 

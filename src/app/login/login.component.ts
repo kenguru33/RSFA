@@ -1,9 +1,10 @@
-import {Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
-import {AuthService} from "../shared/auth.service";
-import {User} from "../shared/user";
+import {Component, OnInit, OnChanges, SimpleChanges, EventEmitter, Inject} from '@angular/core';
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
-import {stringify} from "querystring";
+import {UserServiceToken} from "../user-manager/shared/services/firebase/firebase-user.service";
+import {UserService} from "../user-manager/shared/services/user.service";
+import {User} from "../user-manager/shared/models/user";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -12,36 +13,24 @@ import {stringify} from "querystring";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router, private location: Location ) { }
+  private userChanged: Subscription;
+
+
+  constructor(@Inject(UserServiceToken) private userService: UserService, private router: Router, private location: Location ) { }
 
   ngOnInit() {
-    if(this.isLoggedIn()) {
-      //this.router.navigate(['/skøyter']);
-      //let location = new Location();
-      //location.assign('skøyter');
-    }
-  }
-
-  login(user: User) {
-    this.authService.login(user).then(user=>{
-      //this.authService.getCurrentUser()['md'];
-      console.log(user);
-      localStorage.setItem('userToken', user['md']);
-      this.router.navigate(['']);
-      //this.location.back();
-    }).catch(error=>{
-      console.log(error);
+    this.userChanged = this.userService.userChanged.subscribe(user=>{
+      if(user) {
+        this.router.navigate(['skøyter']);
+      }
     });
   }
 
-
-  isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
+  login(user: User) {
+    this.userService.login(user);
   }
 
   logOut() {
-    this.authService.logout().then(()=>{
-      localStorage.removeItem('userToken');
-    })
+    this.userService.logout();
   }
 }

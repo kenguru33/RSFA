@@ -1,4 +1,4 @@
-import {Injectable, EventEmitter, ChangeDetectorRef} from "@angular/core";
+import {Injectable, EventEmitter, ChangeDetectorRef, Inject} from "@angular/core";
 import {Http, Response, Headers, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs";
 import "rxjs/add/operator/catch";
@@ -6,15 +6,15 @@ import "rxjs/add/operator/map";
 import "rxjs/add/observable/throw";
 import {Vessel} from "./models/vessel.model";
 import {VesselStatusCode} from "./models/vessel-status-code";
-import {AuthService} from "../shared/auth.service";
-import {User} from "../shared/user";
+import {UserServiceToken} from "../user-manager/shared/services/firebase/firebase-user.service";
+import {UserService} from "../user-manager/shared/services/user.service";
 
 @Injectable()
 export class VesselsService {
   headers: Headers;
   requestOptions: RequestOptions;
 
-  constructor(private http: Http, private authService: AuthService) {}
+  constructor(private http: Http, @Inject(UserServiceToken) private userService: UserService) {}
 
   baseUrl = 'https://rsfa-e3c2f.firebaseio.com';
 
@@ -49,7 +49,7 @@ export class VesselsService {
   }
 
   storeVessel(vessel: Vessel): Observable<string> {
-    return this.http.post(`${this.baseUrl}/vessels.json`, JSON.stringify(vessel)).map((response: Response) => {
+    return this.http.post(`${this.baseUrl}/vessels.json?auth=${localStorage.getItem('userToken')}`, JSON.stringify(vessel)).map((response: Response) => {
       console.log('stored vessel',response.json());
       this.vesselListChanged.emit(response.json().name);
       return response.json().name;
@@ -63,7 +63,7 @@ export class VesselsService {
   updateVessel(vessel: Vessel): Observable<string> {
     let key = vessel.key;
     delete vessel['key'];
-    return this.http.put(`${this.baseUrl}/vessels/${key}.json`, JSON.stringify(vessel)).map((response: Response) => {
+    return this.http.put(`${this.baseUrl}/vessels/${key}.json?auth=${localStorage.getItem('userToken')}`, JSON.stringify(vessel)).map((response: Response) => {
       this.vesselListChanged.emit(key);
       return key;
     }).catch(error=>{
@@ -74,7 +74,7 @@ export class VesselsService {
   }
 
   deleteVessel(vessel: Vessel): Observable<Response> {
-    return this.http.delete(`${this.baseUrl}/vessels/${vessel.key}.json`).catch(error=> {
+    return this.http.delete(`${this.baseUrl}/vessels/${vessel.key}.json?auth=${localStorage.getItem('userToken')}`).catch(error=> {
       console.log(error);
       let errorMsg = `${error.statusText}(${error.statusCode})`;
       return Observable.throw(errorMsg);

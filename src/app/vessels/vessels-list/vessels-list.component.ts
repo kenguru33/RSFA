@@ -75,7 +75,7 @@ export class VesselsListComponent implements OnInit, OnDestroy {
       this.vessels.splice(index, 1);
     }
     this.vesselsService.deleteVessel(this.selectedVessel).subscribe(()=>{
-      console.log('we have a successfull deltion');
+      console.log('we have a successfull deletion');
     },error => {
       if (error.status === 401) {
         this.router.navigate(['/logginn']);

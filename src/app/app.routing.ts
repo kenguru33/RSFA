@@ -10,8 +10,8 @@ import {HomeComponent} from "./home/home.component";
 
 
 const appRoutes: Routes = [
-  //{ path: '', redirectTo: 'skøyter', pathMatch: 'full'},
-  { path: '', component: HomeComponent, canActivate:[LoginGuard]},
+  { path: '', redirectTo: 'skøyter', pathMatch: 'full'},
+  //{ path: '', component: HomeComponent, canActivate:[LoginGuard]},
 
   { path: 'logginn', component: LoginComponent},
   //{ path: 'skøyter', component: VesselsComponent},
