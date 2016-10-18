@@ -98,6 +98,7 @@ export class VesselsService {
       let vesselArray = [];
       for (let key in vessels) {
         if (vessels[key].stationKey === station.key) {
+          vessels[key].key = key;
           vesselArray.push(vessels[key]);
         }
       }

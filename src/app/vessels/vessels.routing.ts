@@ -7,7 +7,7 @@ import {LoginGuard} from "../shared/login.guard";
 
 const vesselsRoutes: Routes = [
     {
-        path: 'skøyter', component: VesselsComponent, canActivate:[LoginGuard],
+        path: 'fartøyer', component: VesselsComponent, canActivate:[LoginGuard],
         children: [
             { path: 'edit',  component: VesselsDetailEditComponent },
             { path: 'edit/:key',  component: VesselsDetailEditComponent },

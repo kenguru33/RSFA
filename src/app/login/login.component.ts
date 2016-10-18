@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.userChanged = this.userService.userChanged.subscribe(user=>{
       if(user) {
-        this.router.navigate(['skøyter']);
+        this.router.navigate(['fartøyer']);
         this.isLoading = false;
       }
     });

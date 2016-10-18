@@ -10,11 +10,11 @@ import {HomeComponent} from "./home/home.component";
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'skøyter', pathMatch: 'full'},
+  { path: '', redirectTo: 'fartøyer', pathMatch: 'full'},
   //{ path: '', component: HomeComponent, canActivate:[LoginGuard]},
 
   { path: 'logginn', component: LoginComponent},
-  //{ path: 'skøyter', component: VesselsComponent},
+  //{ path: 'fartøyer', component: VesselsComponent},
   //{ path: 'klasser', component: VesselClassesComponent},
   //{ path: 'stasjoner', component: StationsComponent}
 ];

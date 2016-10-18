@@ -82,13 +82,13 @@ export class VesselsDetailEditComponent implements OnInit, OnDestroy {
   onSubmit(vessel) {
     if (this.editMode) {
       this.vesselsService.updateVessel(this.vessel).subscribe((key: string) => {
-        this.router.navigate(['skøyter', key]);
+        this.router.navigate(['fartøyer', key]);
       }, error => {
         console.log(error);
       });
     } else {
       this.vesselsService.storeVessel(vessel).subscribe((key: string) => {
-        this.router.navigate(['skøyter', key]);
+        this.router.navigate(['fartøyer', key]);
       }, error => {
         console.log(error);
       });

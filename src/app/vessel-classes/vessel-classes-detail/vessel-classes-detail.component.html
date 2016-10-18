@@ -1,3 +1,32 @@
-<p>
-  vessel-classes-detail works!
-</p>
+<div class="panel panel-default animated fadeIn" *ngIf="!isLoading">
+  <div style="position: relative; left: 0; top: 0;">
+    <img class="img-circle"  src="/assets/img/ship.png" onError="this.onerror=null;this.src='http://imagineathena.com/wp-content/plugins/special-recent-posts/images/no-thumb.png';" style="position: absolute; top: 10px; left: 10px;"/>
+  </div>
+  <div class="panel-heading">
+    <div class="panel-title">
+      <div style="margin-left: 130px; min-height: 50px;">
+        <h4>{{vesselClass?.name}}</h4>
+        <p>{{vesselClass?.dnvClass}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+
+    <div style="margin-top: 20px; margin-left: 20px;">
+
+    <div class="media-right">
+
+    </div>
+    <div class=" col-sm-12" style="margin-top: 10px" >
+      <div style="border-bottom: solid 1px; border-color: black">
+        <h4><i class="fa fa-asterisk" aria-hidden="true"></i>&nbsp;&nbsp;Mer informasjon<i class="fa pull-right" [class.fa-chevron-left]="!viewTechnicalData" style="cursor: pointer;" [class.fa-chevron-down]="viewMoreStationData"  aria-hidden="true" (click)="onViewMoreStationData()"></i></h4>
+      </div>
+      <div [hidden]="!viewMoreStationData" style="margin-top: 10px">
+        <p><strong>GateAdresse: </strong>30</p>
+        <p><strong>Postnummer: </strong>300</p>
+        <p><strong>Poststed: </strong>33tonn</p>
+      </div>
+    </div>
+    <button style="margin-top: 20px" class="btn btn-primary" (click)="onEditStation()" [routerLink]="['../','edit',vesselClass?.key]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Rediger</button>
+  </div>
+</div>

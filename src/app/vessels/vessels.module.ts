@@ -15,6 +15,7 @@ import { SortPipe } from './sort.pipe';
 import { SearchPipe } from './search.pipe';
 
 
+
 // Initialize Firebase
 export const firebaseConfig = {
   apiKey: "AIzaSyDgAkPHkC2KabvWelAFggwWQvGB-dTU5eI",

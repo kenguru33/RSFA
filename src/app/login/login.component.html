@@ -6,7 +6,7 @@
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password" ngModel>
     <button class="btn btn btn-primary btn-block" type="submit">
-      <span *ngIf="!isLoading">Logg inn</span>
+      <span *ngIf="!isLoading"><i class="fa fa-sign-in" aria-hidden="true">&nbsp;&nbsp;Logg inn</i></span>
       <span *ngIf="isLoading"><i class="fa fa-refresh fa-spin fa-fw"></i></span>
     </button>
 </form>

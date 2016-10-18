@@ -7,3 +7,4 @@
   width: 150px; height: 150px; margin-bottom: 20px;
 }
 
+li.borderless { border-top: 0 none; }
