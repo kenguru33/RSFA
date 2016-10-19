@@ -10,7 +10,7 @@ const vesselsRoutes: Routes = [
       //{ path: 'edit',  component: VesselClassDetailEditComponent },
       //{ path: 'edit/:key',  component: VesselClassDetailEditComponent },
       { path: ':key',  component: VesselClassesDetailComponent},
-      { path: '', component:VesselClassesComponent}
+      { path: '', component:VesselClassesDetailComponent}
     ]
   }
 ];

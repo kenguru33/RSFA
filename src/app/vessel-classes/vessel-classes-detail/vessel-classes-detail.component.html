@@ -11,22 +11,22 @@
     </div>
   </div>
   <div class="panel-body">
-
-    <div style="margin-top: 20px; margin-left: 20px;">
-
-    <div class="media-right">
-
+    <div style="margin-left: 20px; margin-top: 20px;">
+      <p><strong>Rekkevidde:</strong>{{vesselClass?.range}}</p>
+      <p><strong>Telefon:</strong>{{vesselClass?.speed}}</p>
     </div>
     <div class=" col-sm-12" style="margin-top: 10px" >
       <div style="border-bottom: solid 1px; border-color: black">
-        <h4><i class="fa fa-asterisk" aria-hidden="true"></i>&nbsp;&nbsp;Mer informasjon<i class="fa pull-right" [class.fa-chevron-left]="!viewTechnicalData" style="cursor: pointer;" [class.fa-chevron-down]="viewMoreStationData"  aria-hidden="true" (click)="onViewMoreStationData()"></i></h4>
+        <h4><i class="fa fa-asterisk" aria-hidden="true"></i>&nbsp;&nbsp;Teknisk informasjon<i class="fa pull-right" [class.fa-chevron-left]="!viewTechnicalData" style="cursor: pointer;" [class.fa-chevron-down]="viewTechnicalData"  aria-hidden="true" (click)="onTechnicalDataClicked()"></i></h4>
       </div>
-      <div [hidden]="!viewMoreStationData" style="margin-top: 10px">
-        <p><strong>GateAdresse: </strong>30</p>
-        <p><strong>Postnummer: </strong>300</p>
-        <p><strong>Poststed: </strong>33tonn</p>
+      <div [hidden]="!viewTechnicalData" style="margin-top: 10px">
+        <p><strong>Hastighet: </strong>30</p>
+        <p><strong>Rekkevidde: </strong>300</p>
+        <p><strong>Vekt: </strong>33tonn</p>
+        <p><strong>Dypgang: </strong>3m</p>
       </div>
     </div>
-    <button style="margin-top: 20px" class="btn btn-primary" (click)="onEditStation()" [routerLink]="['../','edit',vesselClass?.key]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Rediger</button>
+    <button style="margin-top: 20px" class="btn btn-primary" (click)="onEditVesselClass()" [routerLink]="['../','edit',vesselClass?.key]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Rediger</button>
   </div>
 </div>
+

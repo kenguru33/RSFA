@@ -7,8 +7,8 @@ import {Router, ActivatedRoute, Params} from "@angular/router";
 import {Subscription} from "rxjs";
 import {Station} from "../../stations/models/station";
 import {StationsService} from "../../stations/stations.service";
-import {VesselClass} from "../models/vessel-class.model";
 import {VesselClassesService} from "../../vessel-classes/vessel-classes.service";
+import {VesselClass} from "../../vessel-classes/models/vessel-class";
 
 @Component({
   selector: 'rs-vessels-detail-edit',

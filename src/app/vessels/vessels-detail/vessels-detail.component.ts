@@ -6,8 +6,10 @@ import {VesselsService} from "../vessels.service";
 import {Location} from "@angular/common";
 import {StationsService} from "../../stations/stations.service";
 import {Station} from "../../stations/models/station";
-import {VesselClass} from "../models/vessel-class.model";
 import {VesselClassesService} from "../../vessel-classes/vessel-classes.service";
+import {VesselClass} from "../../vessel-classes/models/vessel-class";
+import {AisService} from "../ais.service";
+import {VesselPosition} from "../models/vessel-position";
 
 @Component({
   selector: 'rs-vessel-detail',
@@ -21,13 +23,15 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
   isLoading = true;
   station: Station;
   vesselClass: VesselClass;
+  vesselPosition: VesselPosition;
 
   constructor(private vesselsService: VesselsService,
               private stationsService: StationsService,
               private vesselClassesService: VesselClassesService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private location: Location) { }
+              private location: Location,
+              private aisService: AisService) { }
 
   ngOnInit() {
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
@@ -35,6 +39,9 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
         this.isLoading = true;
         this.vesselsService.getVessel(params['key']).subscribe(vessel=> {
           this.vessel = vessel;
+          this.aisService.getVesselPosition(vessel).subscribe((vesselPosition: VesselPosition) => {
+            this.vesselPosition = vesselPosition;
+          });
           this.isLoading = false;
           this.stationsService.getStation(vessel.stationKey).subscribe((station: Station) => {
             this.station = station;

@@ -13,6 +13,7 @@ import {SpinnerModule} from "../spinner/spinner.module";
 import {FilterPipe} from "./filter.pipe";
 import { SortPipe } from './sort.pipe';
 import { SearchPipe } from './search.pipe';
+import {AisService} from "./ais.service";
 
 
 
@@ -47,7 +48,7 @@ export const firebaseConfig = {
   exports:[
     VesselsComponent
   ],
-  providers: [ VesselsService ]
+  providers: [ VesselsService, AisService ]
 })
 export class VesselsModule {
 }

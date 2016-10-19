@@ -9,6 +9,7 @@ import {VesselStatusCode} from "./models/vessel-status-code";
 import {UserServiceToken} from "../user-manager/shared/services/firebase/firebase-user.service";
 import {UserService} from "../user-manager/shared/services/user.service";
 import {Station} from "../stations/models/station";
+import {VesselClass} from "../vessel-classes/models/vessel-class";
 
 @Injectable()
 export class VesselsService {
@@ -108,5 +109,9 @@ export class VesselsService {
       console.log(error);
       return Observable.throw(error);
     });
+  }
+  getVesselsInVesselClass(vesselClass: VesselClass) : Observable<Vessel[]> {
+    //TODO: to be implemented.
+    return undefined;
   }
 }

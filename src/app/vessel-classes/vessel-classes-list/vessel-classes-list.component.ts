@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {VesselClassesService} from "../vessel-classes.service";
-import {VesselClass} from "../../vessels/models/vessel-class.model";
 
 @Component({
   selector: 'rs-vessel-classes-list',

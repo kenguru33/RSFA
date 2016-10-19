@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {Subscription} from "rxjs";
+import {Params, ActivatedRoute} from "@angular/router";
+import {VesselClassesService} from "../vessel-classes.service";
+import {VesselsService} from "../../vessels/vessels.service";
+import {Vessel} from "../../vessels/models/vessel.model";
+import {VesselClass} from "../models/vessel-class";
 
 @Component({
   selector: 'rs-vessel-classes-detail',
@@ -7,9 +13,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VesselClassesDetailComponent implements OnInit {
 
-  constructor() { }
+  vesselClass: VesselClass;
+  activatedRouteSubscription: Subscription;
+  private viewMoreStationData = false;
+  vesselsInClass: Vessel[] = [];
+
+  isLoading = false;
+
+  constructor(private vesselsClassesSerice: VesselClassesService, private vesselsService: VesselsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
+      this.isLoading = true;
+      if(params['key']) {
+        this.vesselsClassesSerice.getVesselClass(params['key']).subscribe((vesselClass) => {
+          this.vesselClass = vesselClass;
+          this.isLoading = false;
+          this.vesselsService.getVesselsInVesselClass(vesselClass).subscribe((vessels: Vessel[])=>{
+            this.vesselsInClass = vessels;
+            console.log(this.vesselsInClass);
+          })
+        });
+      }
+    });
   }
 
 }
+
+

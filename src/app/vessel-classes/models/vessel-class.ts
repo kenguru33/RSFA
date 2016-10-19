@@ -1,4 +1,4 @@
-class VesselClass {
+export class VesselClass {
   // TODO:Make dynamic fields!!!!
 
   name: string;

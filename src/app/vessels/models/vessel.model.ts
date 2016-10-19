@@ -1,4 +1,3 @@
-import {VesselClass} from "./vessel-class.model";
 import {VesselLocation} from "./vessel-location.model";
 import {VesselStatusCode} from "./vessel-status-code";
 import {Station} from "../../stations/models/station";
