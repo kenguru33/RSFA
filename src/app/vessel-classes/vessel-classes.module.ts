@@ -8,6 +8,7 @@ import {VesselClassesService} from "./vessel-classes.service";
 import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
 import {vesselClassesRouting} from "./vessel-classes.routing";
+import {VesselClassesDetailEditComponent} from "./vessel-classes-detail/vessel-classes-detail-edit.component";
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {vesselClassesRouting} from "./vessel-classes.routing";
     VesselClassesComponent,
     VesselClassesListComponent,
     VesselClassesDetailComponent,
+    VesselClassesDetailEditComponent
   ],
 
   providers: [

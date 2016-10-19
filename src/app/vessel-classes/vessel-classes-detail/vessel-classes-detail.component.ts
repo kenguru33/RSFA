@@ -38,6 +38,9 @@ export class VesselClassesDetailComponent implements OnInit {
     });
   }
 
+  onEditVesselClass() {
+
+  }
 }
 
 

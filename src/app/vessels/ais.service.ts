@@ -27,6 +27,7 @@ export class AisService {
           vpos.mmsi = v['MMSI'];
           vpos.latitude = v['Latitude'];
           vpos.longitude = v['Longitude'];
+          vpos.timeStamp = new Date(v['Time_stamp']);
           return vpos;
         }
       }
