@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {VesselPosition} from "./models/vessel-position";
 import {Vessel} from "./models/vessel.model";
 import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
-import {vesselsRouting} from "./vessels.routing";
+import {IntervalObservable} from "rxjs/observable/IntervalObservable";
 
 @Injectable()
 export class AisService {
 
-  private baseUrl = "http://192.168.1.20";
+  private baseUrl = "http://ais.rs.no";
+  vesselPositionRefreshed: EventEmitter<null> = new EventEmitter<null>();
 
   constructor(private http: Http) {}
 

@@ -42,6 +42,9 @@ export class VesselsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.vesselsService.tokenExpired.subscribe(()=>{
+      console.log('token needs to be refreshed!');
+    });
     this.vesselChangedSubscription = this.vesselsService.vesselListChanged.subscribe( key => {
       this.getVessels();
     });
@@ -59,12 +62,12 @@ export class VesselsListComponent implements OnInit, OnDestroy {
       this.isLoading = false;
     }, error => {
       console.log('error code', error.status);
-      if (error.status === 401) {
+      /*if (error.status === 401) {
         localStorage.removeItem('userToken');
         this.router.navigate(['logginn']).then(()=>{
           console.log("Are we navigating?");
         });
-      }
+      }*/
     });
   }
 

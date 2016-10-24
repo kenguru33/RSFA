@@ -22,6 +22,7 @@ export class VesselsService {
   baseUrl = 'https://rsfa-e3c2f.firebaseio.com';
 
   vesselListChanged: EventEmitter<string> = new EventEmitter<string>();
+  tokenExpired : EventEmitter<null> = new EventEmitter<null>();
 
   getVessels(): Observable<Vessel[]> {
     return this.http.get(`${this.baseUrl}/vessels.json?auth=${localStorage.getItem('userToken')}`).map((response: Response) => {
@@ -36,6 +37,9 @@ export class VesselsService {
 
     }).catch(error => {
       console.log(error);
+      if(error.status == 401) {
+        this.tokenExpired.emit();
+      }
       return Observable.throw(error);
     });
   }
@@ -47,6 +51,9 @@ export class VesselsService {
       return vessel;
     }).catch(error => {
       console.log(error);
+      if(error.status == 401) {
+        this.tokenExpired.emit();
+      }
       let errorMsg = `${error.statusText}(${error.statusCode})`;
       return Observable.throw(errorMsg);
     });
