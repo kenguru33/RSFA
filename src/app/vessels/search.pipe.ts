@@ -14,13 +14,9 @@ export class SearchPipe implements PipeTransform {
     for(let vessel of vessels) {
       let match = vessel.prefix + '-' + vessel.id + ' ' + vessel.name;
       let containsSubString = match.toUpperCase().indexOf(args.toUpperCase());
-      console.log("contains?",containsSubString);
       if (containsSubString !== -1) {
         resultArray.push(vessel);
       }
-      /*if(vessel.name.toUpperCase().startsWith(args.toUpperCase()) || (vessel.prefix + '-' + vessel.id).toUpperCase().startsWith(args.toUpperCase())) {
-        resultArray.push(vessel);
-      }*/
     }
     return resultArray;
   }

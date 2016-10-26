@@ -17,8 +17,6 @@ export class FilterPipe implements PipeTransform {
 
     let resultArray = [];
 
-    console.log('filter start',args);
-
     if (!o&&!f&&!r) return vessels;
 
     if (!o&&!f&&r) {
@@ -70,14 +68,10 @@ export class FilterPipe implements PipeTransform {
     }
   }
 
-
-
-
   filterRsrk(vessels) {
     console.log('filterRsrk');
     let resultArray = [];
     for(let vessel of vessels) {
-      console.log('vessel object:',vessel);
       if(vessel.staff === 'RSRK') {
         resultArray.push(vessel);
       }
@@ -86,7 +80,6 @@ export class FilterPipe implements PipeTransform {
   }
 
   filterFast(vessels) {
-    console.log('filterFast');
     let resultArray = [];
     for(let vessel of vessels) {
       if(vessel.staff === 'Fast') {
@@ -97,7 +90,6 @@ export class FilterPipe implements PipeTransform {
   }
 
   filterOpertive(vessels) {
-    console.log('filterOperative');
     let resultArray = [];
     for(let vessel of vessels) {
       if(vessel.status === 0) {
