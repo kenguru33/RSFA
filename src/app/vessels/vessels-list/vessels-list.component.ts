@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, OnChanges, SimpleChanges } from "@angular/core";
+import {Component, OnInit, OnDestroy, OnChanges, SimpleChanges, Inject} from "@angular/core";
 import {Response} from "@angular/http";
 import {Router} from "@angular/router";
 import {VesselsService} from "../vessels.service";
@@ -7,6 +7,8 @@ import {Subscription} from "rxjs";
 import {Station} from "../../stations/models/station";
 import {StationsService} from "../../stations/stations.service";
 import {VesselStatusCode} from "../models/vessel-status-code";
+import {UserService} from "../../user-manager/shared/services/user.service";
+import {UserServiceToken} from "../../user-manager/shared/services/firebase/firebase-user.service";
 @Component({
   selector: 'rs-vessels-list',
   templateUrl: 'vessels-list.component.html',
@@ -37,7 +39,7 @@ export class VesselsListComponent implements OnInit, OnDestroy {
 
   private vesselSearch ="";
 
-  constructor(private vesselsService: VesselsService, private router: Router) {
+  constructor(private vesselsService: VesselsService, private router: Router,@Inject(UserServiceToken) private userService: UserService) {
 
   }
 
@@ -51,24 +53,27 @@ export class VesselsListComponent implements OnInit, OnDestroy {
     this.getVessels();
   }
 
-    ngOnDestroy(): void {
-        this.vesselChangedSubscription.unsubscribe();
-    }
+  ngOnDestroy(): void {
+    this.vesselChangedSubscription.unsubscribe();
+  }
+  getVessels() {
 
-    getVessels() {
-    this.isLoading = true;
-    this.vesselsService.getVessels().subscribe(vessels => {
-      this.vessels = vessels;
-      this.isLoading = false;
-    }, error => {
-      console.log('error code', error.status);
-      /*if (error.status === 401) {
-        localStorage.removeItem('userToken');
-        this.router.navigate(['logginn']).then(()=>{
-          console.log("Are we navigating?");
+    if (this.userService.authenticated){
+      this.isLoading = true;
+      this.userService.token.then(token=>{
+        this.vesselsService.getVessels().subscribe(vessels => {
+          this.vessels = vessels;
+          this.isLoading = false;
+        }, error => {
+          console.log('error code', error.status);
         });
-      }*/
-    });
+      });
+
+    } else {
+      this.router.navigate(['logginn']).then(()=>{
+        console.log("Are we navigating?");
+      });
+    }
   }
 
   private deleteVessel(value: boolean) {

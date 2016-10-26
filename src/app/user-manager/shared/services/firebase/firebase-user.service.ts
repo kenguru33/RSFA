@@ -2,41 +2,66 @@ import {Injectable, OpaqueToken, EventEmitter} from '@angular/core';
 import {UserService} from "../user.service";
 import {Observable} from "rxjs";
 import {User} from "../../models/user";
-import {AngularFire, FirebaseAuthState} from "angularfire2";
+import {AngularFire, FirebaseAuthState, AngularFireAuth} from "angularfire2";
 
 export let UserServiceToken = new OpaqueToken("UserService");
 
 @Injectable()
 export class FirebaseUserService implements UserService{
 
-  userChanged: EventEmitter<User> = new EventEmitter<User>();
+  private authState: FirebaseAuthState = null;
 
-  constructor(private af: AngularFire) {
-    this.af.auth.subscribe( firebaseUser => {
+  authStateChanged: EventEmitter<User> = new EventEmitter<User>();
+
+  constructor(private auth: AngularFireAuth) {
+    auth.subscribe( (state: FirebaseAuthState) => {
       let user: User;
-      console.log(firebaseUser);
-      if(firebaseUser) {
+      if(state) {
         // user logged in
         user = new User();
-        user.email = firebaseUser.auth['email'];
-        user.displayName = firebaseUser.auth['displayName'];
-        localStorage.setItem('userToken',firebaseUser.auth['kd']);
+        user.email = state.auth['email'];
+        user.displayName = state.auth['displayName'];
+        //noinspection TypeScriptUnresolvedFunction
+        state.auth.getToken(true).then(token=>{
+          localStorage.setItem('userToken',token);
+          //noinspection TypeScriptUnresolvedVariable
+          localStorage.setItem('refreshToken', state.auth.refreshToken);
+          this.authState = state;
+          this.authStateChanged.emit(user);
+        });
       }
       else {
         // user not logged in
         localStorage.removeItem('userToken');
+        localStorage.removeItem('refreshToken');
+        this.authState = state;
+        this.authStateChanged.emit(user);
       }
-      this.userChanged.emit(user);
     });
   }
 
   login(user: User) {
-    this.af.auth.login(user);
+    this.auth.login(user);
   }
 
   logout() {
-    this.af.auth.logout();
+    this.auth.logout();
   }
 
+  get authenticated(): boolean {
+    // trigger refresh token.
+    return this.authState !== null;
+  }
+
+  get token(): Promise<any>
+  {
+    if (this.authenticated) {
+      //noinspection TypeScriptUnresolvedFunction
+      return this.authState.auth.getToken(true) as Promise<any>;
+    }
+    else return null;
+
+
+  }
 
 }

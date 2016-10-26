@@ -8,17 +8,7 @@ import {Vessel} from "./models/vessel.model";
   styleUrls: ['vessels.component.css']
 })
 export class VesselsComponent {
-  constructor(private aisService: AisService){
-    this.aisService.getVesselPositions().subscribe(pos => {
-      console.log(pos);
-    });
 
-    let v = new Vessel();
-    v.mmsi = 257054000;
-    this.aisService.getVesselPosition(v).subscribe(pos=>{
-      console.log(pos);
-    })
-  }
 
 }
 

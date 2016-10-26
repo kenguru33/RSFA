@@ -13,14 +13,14 @@ import {Subscription} from "rxjs";
 })
 export class LoginComponent implements OnInit {
 
-  private userChanged: Subscription;
+  private authStateChanged: Subscription;
 
   private isLoading = false;
 
   constructor(@Inject(UserServiceToken) private userService: UserService, private router: Router, private location: Location ) { }
 
   ngOnInit() {
-    this.userChanged = this.userService.userChanged.subscribe(user=>{
+    this.authStateChanged = this.userService.authStateChanged.subscribe(user=>{
       if(user) {
         this.router.navigate(['fartøyer']);
         this.isLoading = false;

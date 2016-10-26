@@ -16,8 +16,7 @@ export class VesselsService {
   headers: Headers;
   requestOptions: RequestOptions;
 
-  constructor(private http: Http, @Inject(UserServiceToken) private userService: UserService) {
-  }
+  constructor(private http: Http, @Inject(UserServiceToken) private userService: UserService) {}
 
   baseUrl = 'https://rsfa-e3c2f.firebaseio.com';
 
@@ -33,6 +32,7 @@ export class VesselsService {
         vessels[key].key = key;
         vesselArray.push(vessels[key])
       }
+
       return vesselArray;
 
     }).catch(error => {
@@ -42,6 +42,7 @@ export class VesselsService {
       }
       return Observable.throw(error);
     });
+
   }
 
   getVessel(key: any): Observable<Vessel> {
