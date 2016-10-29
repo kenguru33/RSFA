@@ -25,6 +25,8 @@ export class StationsListComponent implements OnInit {
   private buttonPrimaryText = '';
   private buttonSecondaryText = '';
 
+  private page = 1;
+
   constructor(private stationsService: StationsService, private router: Router) { }
 
   ngOnInit() {
@@ -80,5 +82,11 @@ export class StationsListComponent implements OnInit {
 
   onFilterOperativ() {
     console.log ('filter operative...');
+  }
+
+  onPageSelect(page: number) {
+    setTimeout(()=>{
+      this.page = page;
+    },0);
   }
 }

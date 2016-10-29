@@ -10,6 +10,7 @@ import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
 import { StationsDetailEditComponent } from './stations-detail/stations-detail-edit.component';
 import {SpinnerModule} from "../spinner/spinner.module";
+import {PaginationModule} from "../pagination/pagination.module";
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import {SpinnerModule} from "../spinner/spinner.module";
     FormsModule,
     HttpModule,
     ModalWindowModule,
-    SpinnerModule
+    SpinnerModule,
+    PaginationModule
   ],
   declarations: [StationsComponent, StationsListComponent, StationsDetailComponent, StationsDetailEditComponent],
   providers: [StationsService]

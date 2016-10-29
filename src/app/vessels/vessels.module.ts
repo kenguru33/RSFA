@@ -14,6 +14,7 @@ import {FilterPipe} from "./filter.pipe";
 import { SortPipe } from './sort.pipe';
 import { SearchPipe } from './search.pipe';
 import {AisService} from "./ais.service";
+import {PaginationModule} from "../pagination/pagination.module";
 
 
 
@@ -43,7 +44,8 @@ export const firebaseConfig = {
     HttpModule,
     vesselsRouting,
     ModalWindowModule,
-    SpinnerModule
+    SpinnerModule,
+    PaginationModule
   ],
   exports:[
     VesselsComponent

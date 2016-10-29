@@ -9,6 +9,9 @@ import {StationsService} from "../../stations/stations.service";
 import {VesselStatusCode} from "../models/vessel-status-code";
 import {UserService} from "../../user-manager/shared/services/user.service";
 import {UserServiceToken} from "../../user-manager/shared/services/firebase/firebase-user.service";
+import {PaginationService} from "../../pagination/pagination.service";
+import {timeout} from "rxjs/operator/timeout";
+
 @Component({
   selector: 'rs-vessels-list',
   templateUrl: 'vessels-list.component.html',
@@ -39,9 +42,12 @@ export class VesselsListComponent implements OnInit, OnDestroy {
 
   private vesselSearch ="";
 
-  constructor(private vesselsService: VesselsService, private router: Router,@Inject(UserServiceToken) private userService: UserService) {
+  private page = 1;
 
-  }
+  constructor(private vesselsService: VesselsService,
+              private router: Router,
+              @Inject(UserServiceToken) private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.vesselsService.tokenExpired.subscribe(()=>{
@@ -127,4 +133,11 @@ export class VesselsListComponent implements OnInit, OnDestroy {
     this.showFilterOptions = !this.showFilterOptions;
   }
 
+  onPageSelect(page: number) {
+    // Hack to avoid change detection error.
+    // https://www.bennadel.com/blog/3040-i-have-a-fundamental-misunderstanding-of-change-detection-in-angular-2-beta-8.htm
+    setTimeout(()=> {
+      this.page = page;
+    }, 0);
+  }
 }

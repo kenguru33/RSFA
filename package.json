@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "^2.2.30",
-    "angular-cli": "1.0.0-beta.15",
+    "angular-cli": "1.0.0-beta.16",
     "bootstrap": "^3.3.7",
     "bootswatch": "^3.3.7",
     "codelyzer": "~0.0.26",
