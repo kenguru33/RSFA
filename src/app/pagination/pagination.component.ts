@@ -16,6 +16,9 @@ export class PaginationComponent implements OnInit, OnDestroy {
   private numberOfPages: number;
   private page: number = 1;
 
+  private firstPage = true;
+  private lastPage= false;
+
   constructor(private paginationService: PaginationService) { }
 
   ngOnInit() {
