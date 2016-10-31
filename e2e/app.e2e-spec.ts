@@ -1,10 +1,10 @@
-import { Ang2Page } from './app.po';
+import { RSFAPage } from './app.po';
 
-describe('ang2 App', function() {
-  let page: Ang2Page;
+describe('rsfa App', function() {
+  let page: RSFAPage;
 
   beforeEach(() => {
-    page = new Ang2Page();
+    page = new RSFAPage();
   });
 
   it('should display message saying app works', () => {

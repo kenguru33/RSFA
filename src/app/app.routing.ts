@@ -6,7 +6,6 @@ import {LoginComponent} from "./login/login.component";
 import {VesselClassesComponent} from "./vessel-classes/vessel-classes.component";
 import {StationsComponent} from "./stations/stations.component";
 import {LoginGuard} from "./shared/login.guard";
-import {HomeComponent} from "./home/home.component";
 
 
 const appRoutes: Routes = [

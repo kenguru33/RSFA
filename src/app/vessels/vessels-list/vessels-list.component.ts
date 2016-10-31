@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, OnChanges, SimpleChanges, Inject} from "@angular/core";
+import {Component, OnInit, OnDestroy, OnChanges, SimpleChanges, Inject, Input, NgZone} from "@angular/core";
 import {Response} from "@angular/http";
 import {Router} from "@angular/router";
 import {VesselsService} from "../vessels.service";
@@ -36,7 +36,7 @@ export class VesselsListComponent implements OnInit, OnDestroy {
   private buttonPrimaryText = '';
   private buttonSecondaryText = '';
 
-  private isLoading;
+  @Input() private isLoading;
 
   private vesselChangedSubscription: Subscription;
 
@@ -46,16 +46,16 @@ export class VesselsListComponent implements OnInit, OnDestroy {
 
   constructor(private vesselsService: VesselsService,
               private router: Router,
-              @Inject(UserServiceToken) private userService: UserService
+              @Inject(UserServiceToken) private userService: UserService,
+              private zone: NgZone
   ) {}
 
   ngOnInit(): void {
-    this.vesselsService.tokenExpired.subscribe(()=>{
-      console.log('token needs to be refreshed!');
-    });
-    this.vesselChangedSubscription = this.vesselsService.vesselListChanged.subscribe( key => {
+    this.vesselChangedSubscription = this.vesselsService.vesselListChanged.subscribe( () => {
       this.getVessels();
     });
+
+
     this.getVessels();
   }
 
@@ -69,7 +69,8 @@ export class VesselsListComponent implements OnInit, OnDestroy {
       this.userService.token.then(token=>{
         this.vesselsService.getVessels().subscribe(vessels => {
           this.vessels = vessels;
-          this.isLoading = false;
+          // TODO: Wrapped in a Zone. Hack to fix change detection not reacting.
+          this.zone.run(()=>{this.isLoading = false;});
         }, error => {
           console.log('error code', error.status);
         });
@@ -139,5 +140,6 @@ export class VesselsListComponent implements OnInit, OnDestroy {
     setTimeout(()=> {
       this.page = page;
     }, 0);
+
   }
 }

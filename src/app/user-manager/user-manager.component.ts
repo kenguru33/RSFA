@@ -20,7 +20,6 @@ export class UserManagerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userChanged = this.userService.authStateChanged.subscribe(user => {
       this.user = user;
-      console.log(user);
     });
   }
 

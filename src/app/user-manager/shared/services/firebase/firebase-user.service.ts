@@ -25,7 +25,7 @@ export class FirebaseUserService implements UserService{
         state.auth.getToken(true).then(token=>{
           localStorage.setItem('userToken',token);
           //noinspection TypeScriptUnresolvedVariable
-          localStorage.setItem('refreshToken', state.auth.refreshToken);
+          //localStorage.setItem('refreshToken', state.auth.refreshToken);
           this.authState = state;
           this.authStateChanged.emit(user);
         });
@@ -33,7 +33,7 @@ export class FirebaseUserService implements UserService{
       else {
         // user not logged in
         localStorage.removeItem('userToken');
-        localStorage.removeItem('refreshToken');
+        //localStorage.removeItem('refreshToken');
         this.authState = state;
         this.authStateChanged.emit(user);
       }
