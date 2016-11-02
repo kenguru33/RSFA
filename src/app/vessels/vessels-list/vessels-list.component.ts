@@ -1,4 +1,7 @@
-import {Component, OnInit, OnDestroy, OnChanges, SimpleChanges, Inject, Input, NgZone} from "@angular/core";
+import {
+  Component, OnInit, OnDestroy, OnChanges, SimpleChanges, Inject, Input, NgZone,
+  ChangeDetectorRef
+} from "@angular/core";
 import {Response} from "@angular/http";
 import {Router} from "@angular/router";
 import {VesselsService} from "../vessels.service";
@@ -47,7 +50,8 @@ export class VesselsListComponent implements OnInit, OnDestroy {
   constructor(private vesselsService: VesselsService,
               private router: Router,
               @Inject(UserServiceToken) private userService: UserService,
-              private zone: NgZone
+              private zone: NgZone,
+              private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -87,11 +91,11 @@ export class VesselsListComponent implements OnInit, OnDestroy {
     this.showDialog = false;
     if (!value) return;
     let index = this.vessels.indexOf(this.selectedVessel);
-    if (index > -1) {
-      this.vessels.splice(index, 1);
-    }
     this.vesselsService.deleteVessel(this.selectedVessel).subscribe(()=>{
       console.log('we have a successfull deletion');
+      this.vessels.splice(index,1);
+      this.selectedIndex = null;
+      this.selectedVessel = null;
     },error => {
       if (error.status === 401) {
         localStorage.removeItem('userToken');
@@ -100,9 +104,11 @@ export class VesselsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  onDeleteVessel(index: number) {
-    if (index > -1) {
-      this.selectedVessel = this.vessels[index];
+  onDeleteVessel(key: string) {
+
+    if (key) {
+      this.selectedVessel = this.vessels.find(vessel=>vessel.key === key);
+      this.selectedIndex = this.vessels.findIndex(vessel=>vessel.key === key);
     }
     this.showDialogBox('Slette ' + this.selectedVessel.id + '-' + this.selectedVessel.name + '?');
   }
@@ -124,10 +130,10 @@ export class VesselsListComponent implements OnInit, OnDestroy {
   onAddVessel() {
   }
 
-  onSelectVessel(index: number) {
+  onSelectVessel(key: string) {
 
-    this.selectedVessel = this.vessels[index];
-    this.selectedIndex = index;
+    this.selectedVessel = this.vessels.find(vessel=>vessel.key === key);
+    this.selectedIndex = this.vessels.findIndex(vessel=>vessel.key);
   }
 
   onShowFilterOptions() {

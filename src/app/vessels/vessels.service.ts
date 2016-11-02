@@ -40,6 +40,7 @@ export class VesselsService {
   }
 
   getVessel(key: any): Observable<Vessel> {
+    if (!key) return;
     return this.http.get(`${this.baseUrl}/vessels/${key}.json?auth=${localStorage.getItem('userToken')}`).map((response: Response) => {
       let vessel = response.json();
       vessel.key = key;

@@ -8,7 +8,7 @@ import {IntervalObservable} from "rxjs/observable/IntervalObservable";
 @Injectable()
 export class AisService {
 
-  private baseUrl = "http://ais.rs.no";
+  private baseUrl = "https://ais.rs.no";
   vesselPositionRefreshed: EventEmitter<null> = new EventEmitter<null>();
 
   constructor(private http: Http) {}
