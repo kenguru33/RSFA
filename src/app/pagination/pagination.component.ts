@@ -14,7 +14,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   @Output() pageSelect: EventEmitter<number> = new EventEmitter<number>();
 
   private numberOfPages: number;
-  private page: number = 1;
+  private currentPage: number = 1;
 
   private firstPage = true;
   private lastPage= false;
@@ -57,16 +57,15 @@ export class PaginationComponent implements OnInit, OnDestroy {
   }
 
   onPageSelect(page: number) {
-    this.page = page;
-    this.pageSelect.emit(this.page);
+    this.currentPage = page;
+    this.pageSelect.emit(this.currentPage);
   }
 
   onPreviousPage() {
-    this.onPageSelect(this.page-1);
+    this.onPageSelect(this.currentPage-1);
   }
 
   onNextPage() {
-    this.onPageSelect(this.page+1);
+    this.onPageSelect(this.currentPage+1);
   }
-
 }

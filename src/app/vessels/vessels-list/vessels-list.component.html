@@ -33,7 +33,8 @@
   <spinner [visible]="isLoading"></spinner>
   <div class="col-md-12 animated fadeIn" style="margin-top: 10px" [hidden]="isLoading">
     <app-pagination (pageSelect)="onPageSelect($event)"></app-pagination>
-    <a class="list-group-item clearfix" style="cursor: pointer;" *ngFor="let vessel of vessels | filter:[filterOperativ, filterBemannet, filterRSRK] | search: vesselSearch | sort | paginate: [{pageSize: 10, page: page}];" (click)="onSelectVessel(vessel.key)" [routerLink]="vessel.key">
+    <a class="list-group-item clearfix" [ngClass]="{active: vessel?.key === selectedVessel?.key}"  style="cursor: pointer;"
+       *ngFor="let vessel of vessels | filter:[filterOperativ, filterBemannet, filterRSRK] | search: vesselSearch | sort | paginate: [{pageSize: 10, page: page}];" (click)="onSelectVessel(vessel.key)" [routerLink]="vessel.key">
       <i class="fa fa-circle" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel.status]?.color"></i>&nbsp;&nbsp;{{vessel.prefix}}-{{vessel.id}} {{vessel.name}}
       <span class="btn btn-danger btn-xs pull-right" (click)="onDeleteVessel(vessel.key)"><i class="fa fa-times" aria-hidden="true"></i></span>
       <!--<span class="btn btn-primary btn-sm pull-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>-->

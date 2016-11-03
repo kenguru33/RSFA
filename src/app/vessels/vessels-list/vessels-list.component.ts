@@ -96,6 +96,8 @@ export class VesselsListComponent implements OnInit, OnDestroy {
       this.vessels.splice(index,1);
       this.selectedIndex = null;
       this.selectedVessel = null;
+      this.getVessels();
+      this.router.navigate(['fartøyer']);
     },error => {
       if (error.status === 401) {
         localStorage.removeItem('userToken');
@@ -143,9 +145,8 @@ export class VesselsListComponent implements OnInit, OnDestroy {
   onPageSelect(page: number) {
     // Hack to avoid change detection error.
     // https://www.bennadel.com/blog/3040-i-have-a-fundamental-misunderstanding-of-change-detection-in-angular-2-beta-8.htm
-    setTimeout(()=> {
-      this.page = page;
-    }, 0);
-
+    setTimeout(()=> {this.page = page;},0);
   }
+
+
 }
