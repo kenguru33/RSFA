@@ -37,9 +37,13 @@ export class AisService {
   }
 
 
-  getDecPos(dmsString: string) {
+  getDecPos(dmsString: string): any {
     if(!dmsString) return;
     dmsString = dmsString.trim();
+
+    // Code borrowed from https://www.npmjs.com/package/parse-dms
+    // Credits to Gregor MacLennan
+
 
     // Inspired by https://gist.github.com/JeffJacobson/2955437
     // See https://regex101.com/r/kS2zR1/3
@@ -96,41 +100,41 @@ export class AisService {
   };
 
   private decDegFromMatch(m) {
-  var signIndex = {
-    "-": -1,
-    "N": 1,
-    "S": -1,
-    "E": 1,
-    "W": -1
-  };
+    var signIndex = {
+      "-": -1,
+      "N": 1,
+      "S": -1,
+      "E": 1,
+      "W": -1
+    };
 
-  var latLonIndex = {
-    "N": "lat",
-    "S": "lat",
-    "E": "lon",
-    "W": "lon"
-  };
-  var degrees, minutes, seconds, sign, latLon;
+    var latLonIndex = {
+      "N": "lat",
+      "S": "lat",
+      "E": "lon",
+      "W": "lon"
+    };
+    var degrees, minutes, seconds, sign, latLon;
 
-  sign = signIndex[m[2]] || signIndex[m[1]] || signIndex[m[6]] || 1;
-  degrees = Number(m[3]);
-  minutes = m[4] ? Number(m[4]) : 0;
-  seconds = m[5] ? Number(m[5]) : 0;
-  latLon = latLonIndex[m[1]] || latLonIndex[m[6]];
+    sign = signIndex[m[2]] || signIndex[m[1]] || signIndex[m[6]] || 1;
+    degrees = Number(m[3]);
+    minutes = m[4] ? Number(m[4]) : 0;
+    seconds = m[5] ? Number(m[5]) : 0;
+    latLon = latLonIndex[m[1]] || latLonIndex[m[6]];
 
-  if (!this.inRange(degrees, 0, 180)) throw 'Degrees out of range';
-  if (!this.inRange(minutes, 0, 60)) throw 'Minutes out of range';
-  if (!this.inRange(seconds, 0, 60)) throw 'Seconds out of range';
+    if (!this.inRange(degrees, 0, 180)) throw 'Degrees out of range';
+    if (!this.inRange(minutes, 0, 60)) throw 'Minutes out of range';
+    if (!this.inRange(seconds, 0, 60)) throw 'Seconds out of range';
 
-  return {
-    decDeg: sign * (degrees + minutes / 60 + seconds / 3600),
-    latLon: latLon
-  };
-}
+    return {
+      decDeg: sign * (degrees + minutes / 60 + seconds / 3600),
+      latLon: latLon
+    };
+  }
 
   private inRange(value, a, b) {
-  return value >= a && value <= b;
-}
+    return value >= a && value <= b;
+  }
 
 
 }
