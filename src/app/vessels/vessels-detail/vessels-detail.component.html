@@ -11,6 +11,9 @@
       </div>
       </div>
   </div>
+  <sebm-google-map [latitude]="aisService.getDecPos(vesselPosition?.latitude)" [longitude]="aisService.getDecPos(vesselPosition?.longitude)" class="pull-right">
+    <sebm-google-map-marker [latitude]="aisService.getDecPos(vesselPosition?.latitude)" [longitude]="aisService.getDecPos(vesselPosition?.longitude)"></sebm-google-map-marker>
+  </sebm-google-map>
   <div class="panel-body">
       <div style="margin-left: 20px; margin-top: 20px;">
         <p><strong>Stasjon:</strong> <a routerLink="/stasjoner/{{station?.key}}">{{station?.name}}</a></p>

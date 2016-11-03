@@ -7,3 +7,8 @@
     width: 150px; height: 150px; margin-bottom: 20px;
 }
 
+.sebm-google-map-container {
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+}
