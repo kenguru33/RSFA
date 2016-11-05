@@ -25,6 +25,8 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
   vesselClass: VesselClass;
   vesselPosition: VesselPosition;
 
+  page = 1;
+
   constructor(private vesselsService: VesselsService,
               private stationsService: StationsService,
               private vesselClassesService: VesselClassesService,
@@ -68,7 +70,7 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
     console.log('trigger edit vessel', this.vessel);
   }
 
-  pageSelect(page: number) {
-    alert(page);
+  onPageSelect(page: number) {
+    this.page = page;
   }
 }

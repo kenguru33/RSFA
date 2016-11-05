@@ -14,7 +14,7 @@ export class Ng2baPaginationComponent implements OnInit {
   @Input() pageSize: number;
   @Input() showRange: boolean = false;
   @Input() numberOfPages: number;
-  @Input() currentPage: number;
+  @Input() currentPage: number = 1;
 
   @Output() pageSelected: EventEmitter<number> = new EventEmitter<number>();
 
