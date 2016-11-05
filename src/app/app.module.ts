@@ -13,6 +13,7 @@ import {StationsModule} from "./stations/stations.module";
 import {SpinnerModule} from "./spinner/spinner.module";
 import {LoginGuard} from "./shared/login.guard";
 import {UserManagerModule} from "./user-manager/user-manager.module";
+import {Ng2PaginationModule} from "ng2-pagination";
 
 @NgModule({
   declarations: [

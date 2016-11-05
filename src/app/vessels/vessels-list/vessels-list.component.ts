@@ -12,7 +12,6 @@ import {StationsService} from "../../stations/stations.service";
 import {VesselStatusCode} from "../models/vessel-status-code";
 import {UserService} from "../../user-manager/shared/services/user.service";
 import {UserServiceToken} from "../../user-manager/shared/services/firebase/firebase-user.service";
-import {PaginationService} from "../../pagination/pagination.service";
 import {timeout} from "rxjs/operator/timeout";
 
 @Component({

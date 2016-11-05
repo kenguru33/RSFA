@@ -6,7 +6,6 @@ import {PaginationService, PaginationEvent} from "./pagination.service";
 })
 export class PaginationPipe implements PipeTransform {
 
-
   constructor(private paginationService: PaginationService) {}
 
   transform(items: Array<any>, args?: any): Array<any> {

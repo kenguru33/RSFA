@@ -15,7 +15,8 @@
     <sebm-google-map-marker [latitude]="aisService.getDecPos(vesselPosition?.latitude)" [longitude]="aisService.getDecPos(vesselPosition?.longitude)"></sebm-google-map-marker>
   </sebm-google-map>
   <div class="panel-body">
-      <div style="margin-left: 20px; margin-top: 20px;">
+      <div style="margin-left: 20px; margin-top: 10px;">
+        <app-ng2ba-pagination [id]="2" [pageSize]="1" [numberOfPages]="3"></app-ng2ba-pagination>
         <p><strong>Stasjon:</strong> <a routerLink="/stasjoner/{{station?.key}}">{{station?.name}}</a></p>
         <p><strong>Fartøysklasse:</strong> <a routerLink="/klasser/{{vesselClass?.key}}">{{vesselClass?.name}}</a></p>
         <p><strong>Epost:</strong><a href="mailto:{{vessel?.email}}"> {{vessel?.email}}</a></p>

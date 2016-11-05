@@ -1,5 +1,5 @@
 .img-circle {
-    border-radius: 50%; width: 100px; height: 100px; margin-bottom: 20px;
+    border-radius: 50%; width: 100px; height: 100px; margin-bottom: 0px;
     margin: 4px 0 0 4px;
     box-shadow: 0 0 0 4px #fff;
 }
@@ -8,7 +8,8 @@
 }
 
 .sebm-google-map-container {
-  width: 200px;
-  height: 200px;
-  margin: 10px;
+  width: 220px;
+  height: 220px;
+  margin-top: 20px;
+  margin-right: 20px;
 }

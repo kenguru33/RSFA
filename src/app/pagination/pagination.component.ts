@@ -11,9 +11,8 @@ export class PaginationComponent implements OnInit, OnDestroy {
 
   @Input() pageSize: number;
   @Input() itemsCount: number = 0;
-  @Output() pageSelect: EventEmitter<number> = new EventEmitter<number>();
 
-  private numberOfPages: number;
+  @Input() numberOfPages: number;
   private currentPage: number = 1;
 
   private firstPage = true;
@@ -23,14 +22,13 @@ export class PaginationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.paginationService.paginationEventEmitter.subscribe((event) => {
-      this.pageSize = event.pageSize;
-      this.itemsCount = event.itemsCount;
+    this.paginationService.paginationEventEmitter.subscribe((paginationEvent) => {
+      this.pageSize = paginationEvent.pageSize;
+      this.itemsCount = paginationEvent.itemsCount;
       if (this.itemsCount<this.pageSize){
         this.pageSize = this.itemsCount;
       }
       this.numberOfPages = Math.ceil( this.itemsCount / this.pageSize);
-      this.pageSelect.emit(event.page);
     });
   }
 
@@ -58,7 +56,6 @@ export class PaginationComponent implements OnInit, OnDestroy {
 
   onPageSelect(page: number) {
     this.currentPage = page;
-    this.pageSelect.emit(this.currentPage);
   }
 
   onPreviousPage() {

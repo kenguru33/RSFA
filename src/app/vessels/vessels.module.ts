@@ -14,8 +14,8 @@ import {FilterPipe} from "./filter.pipe";
 import { SortPipe } from './sort.pipe';
 import { SearchPipe } from './search.pipe';
 import {AisService} from "./ais.service";
-import {PaginationModule} from "../pagination/pagination.module";
 import {AgmCoreModule} from "angular2-google-maps/core";
+import {Ng2baPaginationModule} from "../ng2ba-pagination/ng2ba-pagination.module";
 
 
 
@@ -46,7 +46,7 @@ export const firebaseConfig = {
     vesselsRouting,
     ModalWindowModule,
     SpinnerModule,
-    PaginationModule,
+    Ng2baPaginationModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAkkr1PCZqPd2S4-tX0ociz2-_mtdQsUcg'
     })

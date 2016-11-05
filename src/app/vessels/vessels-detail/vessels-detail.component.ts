@@ -67,4 +67,8 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
   onEditVessel() {
     console.log('trigger edit vessel', this.vessel);
   }
+
+  pageSelect(page: number) {
+    alert(page);
+  }
 }
