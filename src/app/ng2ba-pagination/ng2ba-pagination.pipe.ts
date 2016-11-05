@@ -12,6 +12,7 @@ export class Ng2baPaginationPipe implements PipeTransform {
   transform(items: Array<any>, paginationInfo: Ng2BaPaginationInfo): any {
 
     paginationInfo.totalItems = items.length;
+    if(paginationInfo.totalItems < paginationInfo.pageSize) paginationInfo.currentPage=1;
     this.paginationService.itemsPaginated.emit(paginationInfo);
     return this.paginationService.paginatedItems(items, paginationInfo.pageSize, paginationInfo.currentPage);
   }

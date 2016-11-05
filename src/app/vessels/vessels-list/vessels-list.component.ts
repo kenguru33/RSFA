@@ -50,15 +50,12 @@ export class VesselsListComponent implements OnInit, OnDestroy {
               private router: Router,
               @Inject(UserServiceToken) private userService: UserService,
               private zone: NgZone,
-              private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.vesselChangedSubscription = this.vesselsService.vesselListChanged.subscribe( () => {
       this.getVessels();
     });
-
-
     this.getVessels();
   }
 
