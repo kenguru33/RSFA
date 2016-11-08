@@ -16,6 +16,8 @@ export class Ng2baPaginationComponent implements OnInit {
   @Input() numberOfPages: number;
   @Input() currentPage: number = 1;
 
+  @Input() labels: Array<string>;
+
   @Output() pageSelected: EventEmitter<number> = new EventEmitter<number>();
 
   totalItems: number;
@@ -24,6 +26,12 @@ export class Ng2baPaginationComponent implements OnInit {
   constructor(private paginationService: Ng2baPaginationService) {}
 
   ngOnInit() {
+
+    if(this.labels) {
+      this.numberOfPages = this.labels.length;
+      this.pageSize = 1;
+    }
+
     this.itemsPaginated = this.paginationService.itemsPaginated.subscribe(paginationInfo=>{
       if (this.id != paginationInfo.id) return;
       this.pageSize = paginationInfo.pageSize;
@@ -50,6 +58,12 @@ export class Ng2baPaginationComponent implements OnInit {
         } else {
           pages.push(`${fromPage}-${toPage}`);
         }
+      }
+    }
+    else if(this.labels) {
+      this.numberOfPages =  this.labels.length;
+      for (let i = 0; i < this.labels.length; i++) {
+        pages.push(this.labels[i]);
       }
     }
     else {

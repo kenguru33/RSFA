@@ -1,0 +1,36 @@
+<!--<spinner [visible]="isLoading"></spinner>-->
+<div class="panel panel-default animated fadeIn"*ngIf="!isLoading">
+  <div style="position: relative; left: 0; top: 0;">
+    <img class="img-circle"  src="{{vessel?.imgUrl}}" onError="this.onerror=null;this.src='assets/img/camera.png';" style="position: absolute; top: 10px; left: 10px;"/>
+  </div>
+  <div class="panel-heading">
+    <div class="panel-title">
+      <div style="margin-left: 130px;">
+        <h4>{{vessel?.prefix}}-{{vessel?.id}} {{vessel?.name}}</h4>
+        <p><span [style.color]="vesselsService.getStatusCodes()[vessel?.status]?.color"><i class="fa fa-circle" aria-hidden="true"></i></span>&nbsp;&nbsp;{{vesselsService.getStatusCodes()[vessel?.status]?.code}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin:20px 20px 0 20px" >
+    <app-ng2ba-pagination [id]="2" [labels]="['Generelt', 'Tonnasje og Dimmensjoner', 'Motorkraft', 'Utstyr']" [numberOfPages]="3" [pageSize]="1" (pageSelected)="onPageSelect($event)"></app-ng2ba-pagination>
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+      <p><strong>Stasjon:</strong> <a routerLink="/stasjoner/{{station?.key}}">{{station?.name}}</a></p>
+      <p><strong>Fartøysklasse:</strong> <a routerLink="/klasser/{{vesselClass?.key}}">{{vesselClass?.name}}</a></p>
+      <p><strong>Epost:</strong><a href="mailto:{{vessel?.email}}"> {{vessel?.email}}</a></p>
+      <p><strong>Telefon:</strong><a href="tel:{{vessel?.phone}}"> {{vessel?.phone}}</a></p>
+      <p><strong>Bemannning:</strong> {{vessel?.staff}}</p>
+      <p><strong>MMSI:</strong> {{vessel?.mmsi}}</p>
+      <p><strong>Posisjon:</strong> lat: {{vesselPosition?.latitude}} &nbsp; long: {{vesselPosition?.longitude}} &nbsp;&nbsp; Tid:&nbsp;{{vesselPosition?.timeStamp.toLocaleDateString()}}&nbsp;&nbsp;{{vesselPosition?.timeStamp.toLocaleTimeString()}}</p>
+    </div>
+    <div class="col-md-5">
+      <sebm-google-map [latitude]="aisService.getDecPos(vesselPosition?.latitude)" [longitude]="aisService.getDecPos(vesselPosition?.longitude)" class="pull-right">
+        <sebm-google-map-marker [latitude]="aisService.getDecPos(vesselPosition?.latitude)" [longitude]="aisService.getDecPos(vesselPosition?.longitude)"></sebm-google-map-marker>
+      </sebm-google-map>
+    </div>
+  </div>
+  <div>
+    <button style="margin-top: 20px" class="btn btn-primary" (click)="onEditVessel()" [routerLink]="['../','edit',vessel?.key]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Rediger</button>
+  </div>
+</div>

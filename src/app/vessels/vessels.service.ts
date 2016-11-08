@@ -84,8 +84,16 @@ export class VesselsService {
   getStatusCodes(): Array<VesselStatusCode> {
     return [
       {code: 'Operativ', color: '#5cb85c'},
+      {code: 'Transit', color: '#428bca'},
+      {code: 'Spesialoppdrag', color: '#428bca'},
+      {code: 'Verksted', color: '#428bca'},
       {code: 'Ute av tjeneste', color: '	#d9534f'},
-      {code: 'Reserve', color: '#428bca'}
+      {code: 'Redusert beredskap', color: '#FF8C00'},
+      {code: 'Reserve', color: '#428bca'},
+      {code: 'Solgt', color: '#D3D3D3'},
+      {code: 'Museum', color: '#D3D3D3'},
+      {code: 'Forlist', color: '#D3D3D3'},
+      {code: 'Under bygging', color: '#D3D3D3'}
     ]
   }
 

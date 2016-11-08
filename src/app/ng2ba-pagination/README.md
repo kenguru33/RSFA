@@ -19,6 +19,7 @@ currentPage - turn to this page
 
 id - unique identifier for this component
 showRange - label navigation button with the range
+labels - array of labels
 (pageSelected) - event fired when navigation button is clicked. use this to set the current page in pipe. (Can this be done automatically inside n2ba-pagination?)
 
-
+TODO: enable size property.

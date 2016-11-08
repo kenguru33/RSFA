@@ -14,12 +14,14 @@ import {SpinnerModule} from "./spinner/spinner.module";
 import {LoginGuard} from "./shared/login.guard";
 import {UserManagerModule} from "./user-manager/user-manager.module";
 import {Ng2PaginationModule} from "ng2-pagination";
+import { OverviewComponent } from './overview/overview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,

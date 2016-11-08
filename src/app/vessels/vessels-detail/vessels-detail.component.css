@@ -7,9 +7,39 @@
     width: 150px; height: 150px; margin-bottom: 20px;
 }
 
+.panel-heading {
+  margin-bottom: 20px;
+}
+
+.panel-title {
+  margin-left: 130px;
+}
+
 .sebm-google-map-container {
   width: 220px;
   height: 220px;
-  margin-top: 20px;
-  margin-right: 20px;
 }
+
+.media-body {
+  border-top-width: 0px;
+  border-width: 1;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 400px;
+}
+
+@media (min-width: 568px) {
+  .pull-right-md {
+    float: right;
+  }
+}
+
+.utstyr-element {
+  margin-bottom: 20px;
+  line-height: 15px;
+}
+
+.details-panel {
+  height:660px;
+}
+

@@ -1,0 +1,71 @@
+<!--<spinner [visible]="isLoading"></spinner>-->
+<div class="panel panel-default animated fadeIn"*ngIf="!isLoading">
+  <div style="position: relative; left: 0; top: 0;">
+    <img class="img-circle"  src="{{vessel?.imgUrl}}" onError="this.onerror=null;this.src='assets/img/camera.png';" style="position: absolute; top: 10px; left: 10px;"/>
+  </div>
+  <div class="panel-heading">
+    <div class="panel-title">
+      <div style="margin-left: 130px;">
+        <h4>{{vessel?.prefix}}-{{vessel?.id}} {{vessel?.name}}</h4>
+        <p><span [style.color]="vesselsService.getStatusCodes()[vessel?.status]?.color"><i class="fa fa-circle" aria-hidden="true"></i></span>&nbsp;&nbsp;{{vesselsService.getStatusCodes()[vessel?.status]?.code}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="map">
+  <sebm-google-map [latitude]="aisService.getDecPos(vesselPosition?.latitude)" [longitude]="aisService.getDecPos(vesselPosition?.longitude)" class="pull-right">
+    <sebm-google-map-marker [latitude]="aisService.getDecPos(vesselPosition?.latitude)" [longitude]="aisService.getDecPos(vesselPosition?.longitude)"></sebm-google-map-marker>
+  </sebm-google-map>
+  </div>
+    <div class="panel-body">
+    <div style="margin-left: 20px; margin-top: 10px;">
+
+      <p><strong>Stasjon:</strong> <a routerLink="/stasjoner/{{station?.key}}">{{station?.name}}</a></p>
+        <p><strong>Fartøysklasse:</strong> <a routerLink="/klasser/{{vesselClass?.key}}">{{vesselClass?.name}}</a></p>
+        <p><strong>Epost:</strong><a href="mailto:{{vessel?.email}}"> {{vessel?.email}}</a></p>
+        <p><strong>Telefon:</strong><a href="tel:{{vessel?.phone}}"> {{vessel?.phone}}</a></p>
+        <p><strong>Bemannning:</strong> {{vessel?.staff}}</p>
+        <p><strong>MMSI:</strong> {{vessel?.mmsi}}</p>
+        <p><strong>Posisjon:</strong> lat: {{vesselPosition?.latitude}} &nbsp; long: {{vesselPosition?.longitude}} &nbsp;&nbsp; Tid:&nbsp;{{vesselPosition?.timeStamp.toLocaleDateString()}}&nbsp;&nbsp;{{vesselPosition?.timeStamp.toLocaleTimeString()}}</p>
+      </div>
+    <div class=" col-sm-12" style="margin-top: 10px" >
+      <div style="border-bottom: solid 1px; border-color: black">
+        <h4><i class="fa fa-asterisk" aria-hidden="true"></i>&nbsp;&nbsp;Mer informasjon<i class="fa pull-right" [class.fa-chevron-left]="!viewTechnicalData" style="cursor: pointer;" [class.fa-chevron-down]="viewTechnicalData"  aria-hidden="true" (click)="onTechnicalDataClicked()"></i></h4>
+      </div>
+      <div [hidden]="!viewTechnicalData" style="margin-top: 10px">
+        <app-ng2ba-pagination [id]="2" [pageSize]="1" [numberOfPages]="3"  (pageSelected)="onPageSelect($event)"></app-ng2ba-pagination>
+
+        <!--<div id="page1" *ngIf="page==1">
+          <p><strong>Kallesignal:</strong></p>
+          <p><strong>Byggeår:</strong></p>
+          <p><strong>Konstruksjonsmateriale:</strong></p>
+          <p><strong>DNV klasse:</strong></p>
+          <p><strong>Hastighet:</strong></p>
+          <p><strong>Rekkevidde:</strong></p>
+          <p><strong>-</strong></p>
+          <p><strong>-</strong></p>
+          </div>
+        <div id="page2" *ngIf="page==2">
+          <p><strong>Nettovekt:</strong></p>
+          <p><strong>Bruttovekt:</strong></p>
+          <p><strong>Lengde:</strong></p>
+          <p><strong>Breddegang:</strong></p>
+          <p><strong>Dybdegang</strong></p>
+          <p><strong>Bunkerolje:</strong></p>
+          <p><strong>Ballastvann:</strong></p>
+          <p><strong>Ferskvannstank:</strong></p>
+        </div>-->
+
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="#">Tonnasje</a></li>
+          <li role="presentation"><a>Dimmensjoner</a></li>
+          <li role="presentation"><a>Tank</a></li>
+          <li role="presentation"><a>Trekkkraft</a></li>
+          <li role="presentation"><a>Motor</a></li>
+          <li role="presentation"><a>Propeller</a></li>
+
+        </ul>
+      </div>
+    </div>
+    <button style="margin-top: 20px" class="btn btn-primary" (click)="onEditVessel()" [routerLink]="['../','edit',vessel?.key]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Rediger</button>
+  </div>
+</div>

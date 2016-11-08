@@ -14,27 +14,23 @@
     </div>
   </div>
   <div class=" col-md-12" style="margin-top: 10px">
-    <div style="border-bottom: solid 1px">
+    <div class="table-bordered" style="border-width:0; border-bottom-width: 2px">
       <h5><i class="fa fa-filter" aria-hidden="true"></i>&nbsp;&nbsp;Filter <span class="badge" *ngIf="filterBemannet||filterRSRK||filterOperativ">Aktivt</span>
         <i class="fa pull-right" [class.fa-chevron-left]="!showFilterOptions" style="cursor: pointer;" [class.fa-chevron-down]="showFilterOptions"  aria-hidden="true" (click)="onShowFilterOptions()"></i></h5>
     </div>
     <div *ngIf="showFilterOptions" style="margin-top: 10px;">
-      <button class="btn" type="button" [class.btn-link]="!filterBemannet" [class.btn-info]="filterBemannet" (click)="filterBemannet=!filterBemannet;">
-        Fast Bemannet
-      </button>
-      <button class="btn" type="button" [class.btn-link]="!filterRSRK" [class.btn-info]="filterRSRK" (click)="filterRSRK=!filterRSRK;">
-        RSRK
-      </button>
-      <button class="btn" type="button" [class.btn-link]="!filterOperativ" [class.btn-info]="filterOperativ" (click)="filterOperativ=!filterOperativ;">
-        Operativ
-      </button>
+    <ul class="nav nav-pills">
+      <li style="cursor: pointer;" role="filter" (click)="filterBemannet=!filterBemannet;" [class.active]="filterBemannet"><a>Fast bemannet</a></li>
+      <li style="cursor: pointer;" role="filter" (click)="filterRSRK=!filterRSRK;" [class.active]="filterRSRK"><a>RSRK</a></li>
+      <li style="cursor: pointer;" role="filter" (click)="filterOperativ=!filterOperativ;" [class.active]="filterOperativ"><a>Operativ</a></li>
+    </ul>
     </div>
   </div>
   <spinner [visible]="isLoading"></spinner>
   <div class="col-md-12 animated fadeIn" style="margin-top: 10px" [hidden]="isLoading">
     <app-ng2ba-pagination [id]="1" [showRange]="true" (pageSelected)="onPageSelect($event)" ></app-ng2ba-pagination>
     <a class="list-group-item clearfix" [ngClass]="{active: vessel?.key === selectedVessel?.key}"  style="cursor: pointer;"
-       *ngFor="let vessel of vessels | filter:[filterOperativ, filterBemannet, filterRSRK] | search: vesselSearch | sort | paginate: {id:1, pageSize:12, currentPage: page};" (click)="onSelectVessel(vessel.key)" [routerLink]="vessel.key">
+       *ngFor="let vessel of vessels | filter:[filterOperativ, filterBemannet, filterRSRK] | search: vesselSearch | sort | paginate: {id:1, pageSize:10, currentPage: page};" (click)="onSelectVessel(vessel.key)" [routerLink]="vessel.key">
       <i class="fa fa-circle" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel.status]?.color"></i>&nbsp;&nbsp;{{vessel.prefix}}-{{vessel.id}} {{vessel.name}}
       <span class="btn btn-danger btn-xs pull-right" (click)="onDeleteVessel(vessel.key)"><i class="fa fa-times" aria-hidden="true"></i></span>
       <!--<span class="btn btn-primary btn-sm pull-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>-->
