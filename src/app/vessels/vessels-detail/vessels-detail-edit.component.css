@@ -1,0 +1,12 @@
+.img-circle {
+  border-radius: 50%; width: 100px; height: 100px; margin-bottom: 0px;
+  margin: 4px 0 0 4px;
+  box-shadow: 0 0 0 4px #fff;
+}
+
+.details-header {
+  margin-bottom: 20px;
+}
+textarea {
+  height: 40px;
+}

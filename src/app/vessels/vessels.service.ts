@@ -88,7 +88,7 @@ export class VesselsService {
       {code: 'Spesialoppdrag', color: '#428bca'},
       {code: 'Verksted', color: '#428bca'},
       {code: 'Ute av tjeneste', color: '	#d9534f'},
-      {code: 'Redusert beredskap', color: '#FF8C00'},
+      {code: 'Redusert', color: '#FF8C00'},
       {code: 'Reserve', color: '#428bca'},
       {code: 'Solgt', color: '#D3D3D3'},
       {code: 'Museum', color: '#D3D3D3'},

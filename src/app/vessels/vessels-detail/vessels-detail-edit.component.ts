@@ -13,7 +13,7 @@ import {VesselClass} from "../../vessel-classes/models/vessel-class";
 @Component({
   selector: 'rs-vessels-detail-edit',
   templateUrl: 'vessels-detail-edit.component.html',
-  styleUrls: ['vessels-detail.component.css']
+  styleUrls: ['vessels-detail-edit.component.css']
 })
 export class VesselsDetailEditComponent implements OnInit, OnDestroy {
   vessel: Vessel;
@@ -31,7 +31,7 @@ export class VesselsDetailEditComponent implements OnInit, OnDestroy {
 
   showImagePath = false;
 
-  page = 2;
+  page = 1;
 
   constructor(private vesselsService: VesselsService,
               private stationsService: StationsService,

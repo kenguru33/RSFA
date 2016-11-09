@@ -30,10 +30,11 @@
           <p><strong>Antall mannskap:</strong></p>
           <p><strong>Bemannningtype:</strong> {{vessel?.staff}}</p>
           <p><strong>MMSI:</strong> {{vessel?.mmsi}}</p>
-          <p><strong>Kallesignal:</strong></p>
-          <p><strong>Verft:</strong></p>
-          <p><strong>Byggeår:</strong></p>
-          <p><strong>Finasiering:</strong></p>
+          <p><strong>Kallesignal:</strong>{{vessel?.callSign}}</p>
+          <p><strong>Verft:</strong> {{vessel?.buildingYard}}</p>
+          <p><strong>DNV klasse:</strong> {{vessel?.dnvClass}}</p>
+          <p><strong>Byggeår:</strong> {{vessel.buildingYear}}</p>
+          <p><strong>Finasiering:</strong> {{vessel?.financing}}</p>
         </div>
 
         <div *ngIf="page==1" class="col-md-4">

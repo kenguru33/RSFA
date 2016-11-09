@@ -15,5 +15,17 @@ export class Vessel {
     stationKey: any;
     station: Station;
     staff: string;
+    callSign: string;
+    financing: string;
+    buildingYard: string;
+    buildingYear: string;
+    dnvClass: string;
+    statusInfo: string;
+    deckMachinery: string;
+    salvageEquipment: string;
+    divingEquipment: string;
+    navigationEquipment: string;
+    communicationEquipment: string;
+
     //private Position: VesselLocation;
 }
