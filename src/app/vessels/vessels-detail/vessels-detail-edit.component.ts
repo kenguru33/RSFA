@@ -32,6 +32,7 @@ export class VesselsDetailEditComponent implements OnInit, OnDestroy {
   showImagePath = false;
 
   page = 1;
+  subPage = 1;
 
   constructor(private vesselsService: VesselsService,
               private stationsService: StationsService,

@@ -1,3 +1,40 @@
-<p>
-  vessel-classes-detail-edit works!
-</p>
+<spinner [visible]="isLoading"></spinner>
+<div class="panel panel-default animated fadeIn" *ngIf="!isLoading">
+
+  <!-- Header component start-->
+  <div style="position: relative; left: 0; top: 0;">
+    <img class="img-circle"  src="{{vessel?.imgUrl}}" onError="this.onerror=null;this.src='assets/img/camera.png';" style="position: absolute; top: 10px; left: 10px; cursor: pointer;" (click)="toggleImagePath()"/>
+  </div>
+
+  <div class="panel-heading" style="margin-bottom: 20px;">
+    <div class="panel-title" style="margin-left: 130px;">
+      <h4></h4>
+      <p><span><i class="fa fa-circle" aria-hidden="true"></i></span>&nbsp;&nbsp;</p>
+    </div>
+  </div>
+  <!-- Header component end -->
+  <div class="panel-body">
+    <ul class="nav nav-tabs">
+      <li style="cursor: pointer;" role="presentation" [class.active]="page==1" (click)="page=1"><a>Generelt</a></li>
+      <li style="cursor: pointer;" role="presentation" [class.active]="page==2" (click)="page=2"><a>Teknisk</a></li>
+      <li style="cursor: pointer;" role="presentation" [class.active]="page==3" (click)="page=3"><a>Annet</a></li>
+    </ul>
+
+    <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+      <div class="panel panel-default" style="border-top-width: 0; ">
+        <div class="panel-body" style="padding: 10px 0 0; min-height: 440px">
+
+        </div>
+      </div>
+      <!-- Knapper -->
+      <button type="submit" class="btn btn-primary" *ngIf="form.valid&&!editMode">Opprett</button>
+      <button type="submit" class="btn btn-primary" *ngIf="form.valid&&editMode&&form.dirty">Lagre</button>
+      <button type="button" class="btn btn-warning" (click)="onCancel()">Avbryt</button>
+    </form>
+  </div>
+
+
+
+
+
+</div>

@@ -9,6 +9,7 @@ import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
 import {vesselClassesRouting} from "./vessel-classes.routing";
 import {VesselClassesDetailEditComponent} from "./vessel-classes-detail/vessel-classes-detail-edit.component";
+import {SpinnerModule} from "../spinner/spinner.module";
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import {VesselClassesDetailEditComponent} from "./vessel-classes-detail/vessel-c
     FormsModule,
     HttpModule,
     ModalWindowModule,
-    vesselClassesRouting
+    vesselClassesRouting,
+    SpinnerModule
   ],
   declarations: [
     VesselClassesComponent,

@@ -30,7 +30,7 @@
   <div class="col-md-12 animated fadeIn" style="margin-top: 10px" [hidden]="isLoading">
     <app-ng2ba-pagination [id]="1" [showRange]="true" (pageSelected)="onPageSelect($event)" ></app-ng2ba-pagination>
     <a class="list-group-item clearfix" [ngClass]="{active: vessel?.key === selectedVessel?.key}"  style="cursor: pointer;"
-       *ngFor="let vessel of vessels | filter:[filterOperativ, filterBemannet, filterRSRK] | search: vesselSearch | sort | paginate: {id:1, pageSize:10, currentPage: page};" (click)="onSelectVessel(vessel.key)" [routerLink]="vessel.key">
+       *ngFor="let vessel of vessels | filter:[filterOperativ, filterBemannet, filterRSRK] | search: vesselSearch | sort | paginate: {id:1, pageSize:12, currentPage: page};" (click)="onSelectVessel(vessel.key)" [routerLink]="vessel.key">
       <i class="fa fa-circle" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel.status]?.color"></i>&nbsp;&nbsp;{{vessel.prefix}}-{{vessel.id}} {{vessel.name}}
       <span class="btn btn-danger btn-xs pull-right" (click)="onDeleteVessel(vessel.key)"><i class="fa fa-times" aria-hidden="true"></i></span>
       <!--<span class="btn btn-primary btn-sm pull-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>-->

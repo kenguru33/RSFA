@@ -2,7 +2,6 @@ export class VesselClass {
   // TODO:Make dynamic fields!!!!
 
   name: string;
-  dnvClass: string;
 
   speed: number;
   range: number;

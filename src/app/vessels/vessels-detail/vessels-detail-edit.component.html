@@ -20,11 +20,10 @@
       <li style="cursor: pointer;" role="presentation" [class.active]="page==3" (click)="page=3"><a>Utstyr</a></li>
     </ul>
 
-
-
     <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
       <div class="panel panel-default" style="border-top-width: 0; ">
-        <div class="panel-body" style="padding: 10px 0 0;">
+        <div class="panel-body" style="padding: 10px 0 0; min-height: 440px">
+
           <!-- Bilde -->
           <div class="form-group col-md-12" [hidden]="!showImagePath">
             <label for="imgurl">Bildesti</label>
@@ -32,143 +31,155 @@
                    pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)">
           </div>
           <div [hidden]="!(page==1)">
-            <!-- Prefiks -->
-            <div class="form-group col-md-3">
-              <label for="exampleSelect1">Prefiks</label>
-              <select class="form-control" id="exampleSelect1" name="prefix" [(ngModel)]="vessel.prefix" required>
-                <option>RS</option>
-                <option>EYR</option>
-              </select>
-            </div>
-            <!-- RS Nummer -->
-            <div class="form-group col-md-3">
-              <label for="rsid">Id</label>
-              <input type="text" class="form-control" id="rsid" aria-describedby="emailHelp" placeholder="nummer" name="id" [(ngModel)]="vessel.id" required
-                     pattern="^[0-9]*$">
-            </div>
-            <!-- Fartøysnavn -->
-            <div class="form-group col-md-6">
-              <label for="exampleInputEmail1">Fartøysnavn</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" placeholder="Skriv inn fartøyets navn" [(ngModel)]="vessel.name" required>
-            </div>
+            <div [hidden]="!(subPage==1)">
+              <!-- Prefiks -->
+              <div class="form-group col-md-3">
+                <label for="exampleSelect1">Prefiks</label>
+                <select class="form-control" id="exampleSelect1" name="prefix" [(ngModel)]="vessel.prefix" required>
+                  <option>RS</option>
+                  <option>EYR</option>
+                </select>
+              </div>
+              <!-- RS Nummer -->
+              <div class="form-group col-md-3">
+                <label for="rsid">Id</label>
+                <input type="text" class="form-control" id="rsid" aria-describedby="emailHelp" placeholder="nummer" name="id" [(ngModel)]="vessel.id" required
+                       pattern="^[0-9]*$">
+              </div>
+              <!-- Fartøysnavn -->
+              <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Fartøysnavn</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" placeholder="Skriv inn fartøyets navn" [(ngModel)]="vessel.name" required>
+              </div>
 
-            <!-- Stasjon -->
-            <div class="form-group col-md-6">
-              <label for="station">Stasjon</label>
-              <select class="form-control" id="station" name="stationKey"  [(ngModel)]="vessel.stationKey" required>
-                <option *ngFor="let station of stations;" [value]="station?.key">
-                  {{station.name}}
-                </option>
-              </select>
-            </div>
-            <!-- Klasse -->
-            <div class="form-group col-md-6">
-              <label for="vesselClass">Klasse</label>
-              <select class="form-control" id="vesselClass" name="vesselClassKey" [(ngModel)]="vessel.vesselClassKey" required>
-                <option *ngFor="let vesselClass of vesselClasses;" [value]="vesselClass.key">
-                  {{vesselClass.name}}
-                </option>
-              </select>
-            </div>
-            <!-- Bemanningstype -->
-            <div class="form-group col-md-4">
-              <label for="vesselClass">Bemanningstype</label>
-              <select class="form-control" id="bemanning" name="staff" [(ngModel)]="vessel.staff" required>
-                <option>Fast</option>
-                <option>RSRK</option>
-              </select>
-            </div>
+              <!-- Stasjon -->
+              <div class="form-group col-md-6">
+                <label for="station">Stasjon</label>
+                <select class="form-control" id="station" name="stationKey"  [(ngModel)]="vessel.stationKey" required>
+                  <option *ngFor="let station of stations;" [value]="station?.key">
+                    {{station.name}}
+                  </option>
+                </select>
+              </div>
+              <!-- Klasse -->
+              <div class="form-group col-md-6">
+                <label for="vesselClass">Klasse</label>
+                <select class="form-control" id="vesselClass" name="vesselClassKey" [(ngModel)]="vessel.vesselClassKey" required>
+                  <option *ngFor="let vesselClass of vesselClasses;" [value]="vesselClass.key">
+                    {{vesselClass.name}}
+                  </option>
+                </select>
+              </div>
+              <!-- Bemanningstype -->
+              <div class="form-group col-md-4">
+                <label for="vesselClass">Bemanningstype</label>
+                <select class="form-control" id="bemanning" name="staff" [(ngModel)]="vessel.staff" required>
+                  <option>Fast</option>
+                  <option>RSRK</option>
+                </select>
+              </div>
 
-            <!-- MMSI -->
-            <div class="form-group col-md-4">
-              <label for="rsid">MMSI</label>
-              <input type="text" class="form-control" id="mmsi" aria-describedby="emailHelp" placeholder="9 siffer" name="mmsi" [(ngModel)]="vessel.mmsi"
-                     pattern="\d{9}" required>
+              <!-- MMSI -->
+              <div class="form-group col-md-4">
+                <label for="rsid">MMSI</label>
+                <input type="text" class="form-control" id="mmsi" aria-describedby="emailHelp" placeholder="9 siffer" name="mmsi" [(ngModel)]="vessel.mmsi"
+                       pattern="\d{9}" required>
+              </div>
+              <!-- Telefon -->
+              <div class="form-group col-md-4">
+                <label for="phone">Telefon</label>
+                <input type="text" class="form-control" id="phone" name="phone" aria-describedby="emailHelp" placeholder="land + 8 tall" [(ngModel)]="vessel.phone"
+                       pattern="^(?:\+?\d{2}[ -]?\d{3}[ -]?\d{5}|\d{4})$" required>
+              </div>
+              <!-- EPOST -->
+              <div class="form-group col-md-6">
+                <label for="email">Epost</label>
+                <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Fartøyets epost"[(ngModel)]="vessel.email"
+                       pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" required>
+              </div>
             </div>
-            <!-- Telefon -->
-            <div class="form-group col-md-4">
-              <label for="phone">Telefon</label>
-              <input type="text" class="form-control" id="phone" name="phone" aria-describedby="emailHelp" placeholder="land + 8 tall" [(ngModel)]="vessel.phone"
-                     pattern="^(?:\+?\d{2}[ -]?\d{3}[ -]?\d{5}|\d{4})$" required>
+            <div [hidden]="!(subPage==2)">
+              <!-- FINANCING -->
+              <div class="form-group col-md-6">
+                <label for="financing">Finansiering</label>
+                <input type="text" class="form-control" id="financing" name="financing" aria-describedby="emailHelp" placeholder="Finansiert av..."[(ngModel)]="vessel.financing">
+              </div>
+              <!-- DNV CLASS -->
+              <div class="form-group col-md-6">
+                <label for="dnvclass">DNV klasse</label>
+                <input type="text" class="form-control" id="dnvclass" name="dnvclass" aria-describedby="emailHelp" placeholder="DNV klasse"[(ngModel)]="vessel.dnvClass">
+              </div>
+              <!-- CALLSIGN -->
+              <div class="form-group col-md-6">
+                <label for="callsign">Callsign</label>
+                <input type="text" class="form-control" id="callsign" name="callsign" aria-describedby="emailHelp" placeholder="Fartøyets kallesignal"[(ngModel)]="vessel.callSign">
+              </div>
+              <!-- BUILDINGYARD -->
+              <div class="form-group col-md-6">
+                <label for="buildingyard">Verft</label>
+                <input type="text" class="form-control" id="buildingyard" name="buildingyard" aria-describedby="emailHelp" placeholder="Bygget av..."[(ngModel)]="vessel.buildingYard">
+              </div>
+              <!-- BUILDINGYEAR -->
+              <div class="form-group col-md-4">
+                <label for="buildingyear">Byggeår</label>
+                <input type="text" class="form-control" id="buildingyear" name="buildingyear" aria-describedby="emailHelp" placeholder="Byggeår"[(ngModel)]="vessel.buildingYear">
+              </div>
             </div>
-            <!-- EPOST -->
-            <div class="form-group col-md-6">
-              <label for="email">Epost</label>
-              <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Fartøyets epost"[(ngModel)]="vessel.email"
-                     pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" required>
-            </div>
-            <!-- FINANCING -->
-            <div class="form-group col-md-6">
-              <label for="financing">Finansiering</label>
-              <input type="text" class="form-control" id="financing" name="financing" aria-describedby="emailHelp" placeholder="Finansiert av..."[(ngModel)]="vessel.financing">
-            </div>
-            <!-- DNV CLASS -->
-            <div class="form-group col-md-6">
-              <label for="dnvclass">DNV klasse</label>
-              <input type="text" class="form-control" id="dnvclass" name="dnvclass" aria-describedby="emailHelp" placeholder="Finansiert av..."[(ngModel)]="vessel.dnvClass">
-            </div>
-            <!-- CALLSIGN -->
-            <div class="form-group col-md-6">
-              <label for="callsign">Callsign</label>
-              <input type="text" class="form-control" id="callsign" name="callsign" aria-describedby="emailHelp" placeholder="Fartøyets kallesignal"[(ngModel)]="vessel.callSign">
-            </div>
-            <!-- BUILDINGYARD -->
-            <div class="form-group col-md-6">
-              <label for="buildingyard">Verft</label>
-              <input type="text" class="form-control" id="buildingyard" name="buildingyard" aria-describedby="emailHelp" placeholder="Bygget av..."[(ngModel)]="vessel.buildingYard">
-            </div>
-            <!-- BUILDINGYEAR -->
-            <div class="form-group col-md-4">
-              <label for="buildingyear">Byggeår</label>
-              <input type="text" class="form-control" id="buildingyear" name="buildingyear" aria-describedby="emailHelp" placeholder="Byggeår"[(ngModel)]="vessel.buildingYear">
-            </div>
+            <ul class="pager col-sm-12" style="margin-left:10px;margin-right: 10px; ">
+              <li [class.disabled]="subPage==1"><a (click)="subPage=1">Previous</a></li>
+              <li [class.disabled]="subPage==2"><a (click)="subPage=2">Next</a></li>
+            </ul>
+            <!-- End -->
           </div>
           <!-- PAGE2 -->
-          <div [hidden]="!(page==2)" class="col-md-12">
-            <fieldset class="form-group col-md-12" style="margin: 20px 0 20px 0;">
-              <div class="form-group">
-                <div class="form-check" *ngFor="let statusCode of statusCodes; let i = index;">
-                  <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="status" [value]="i" [(ngModel)]="vessel.status" [style.background-color]="statusCode?.color" required>
-                    {{statusCode?.code}}
-                  </label>
-                </div>
+          <div [hidden]="!(page==2)">
+
+            <div style="padding-right: 20px; padding-left: 20px;">
+              <div class="radio" *ngFor="let statusCode of statusCodes; let i = index;">
+                <label class="col-sm-4"><input type="radio"  name="status" [value]="i" [(ngModel)]="vessel.status">{{statusCode?.code}}</label>
               </div>
-            </fieldset>
-            <div class="form-group col-md-12">
-              <label for="statusinfo"><strong>Tillegsinformasjon</strong></label>
-              <textarea id="statusinfo" class="form-control" name="statusinfo" [(ngModel)]="vessel.statusInfo"></textarea>
+            </div>
+
+            <div class="form-group col-md-12" style="margin-top: 20px;">
+              <label for="statusinfo"><strong>Tilleggsinformasjon</strong></label>
+              <textarea id="statusinfo" class="form-control" style="height: 200px;" name="statusinfo" [(ngModel)]="vessel.statusInfo"></textarea>
             </div>
           </div>
+
           <!-- PAGE3 -->
           <div [hidden]="!(page==3)" class="col-md-12">
-            <div class="form-group col-md-12">
-              <label for="deckmachinery"><strong>Dekksutstyr</strong></label>
-              <textarea id="deckmachinery" class="form-control" name="deckmachinery" [(ngModel)]="vessel.deckMachinery"></textarea>
+            <div [hidden]="!(subPage==1)">
+              <div class="form-group col-md-12">
+                <label for="deckmachinery"><strong>Dekksutstyr</strong></label>
+                <textarea id="deckmachinery" class="form-control" name="deckmachinery" [(ngModel)]="vessel.deckMachinery"></textarea>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="salvageequipment"><strong>Bergingsutstyr</strong></label>
+                <textarea id="salvageequipment" class="form-control" name="salvageequipment" [(ngModel)]="vessel.salvageEquipment"></textarea>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="divingequipment"><strong>Dykkeutstyr</strong></label>
+                <textarea id="divingequipment" class="form-control" name="divingequipment" [(ngModel)]="vessel.divingEquipment"></textarea>
+              </div>
             </div>
-            <div class="form-group col-md-12">
-              <label for="salvageequipment"><strong>Bergingsutstyr</strong></label>
-              <textarea id="salvageequipment" class="form-control" name="salvageequipment" [(ngModel)]="vessel.salvageEquipment"></textarea>
-            </div>
-            <div class="form-group col-md-12">
-              <label for="divingequipment"><strong>Dykkeutstyr</strong></label>
-              <textarea id="divingequipment" class="form-control" name="divingequipment" [(ngModel)]="vessel.divingEquipment"></textarea>
-            </div>
-            <div class="form-group col-md-12">
-              <label for="navigationequipment"><strong>Navigasjonsutstyr</strong></label>
-              <textarea id="navigationequipment" class="form-control" name="navigationequipment" [(ngModel)]="vessel.navigationEquipment"></textarea>
-            </div>
-            <div class="form-group col-md-12">
-              <label for="communicationequipment"><strong>Kommunikasjonsutstyr</strong></label>
-              <textarea id="communicationequipment" class="form-control" name="communicationequipment" [(ngModel)]="vessel.communicationEquipment"></textarea>
+            <div [hidden]="!(subPage==2)">
+              <div class="form-group col-md-12">
+                <label for="navigationequipment"><strong>Navigasjonsutstyr</strong></label>
+                <textarea id="navigationequipment" class="form-control" name="navigationequipment" [(ngModel)]="vessel.navigationEquipment"></textarea>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="communicationequipment"><strong>Kommunikasjonsutstyr</strong></label>
+                <textarea id="communicationequipment" class="form-control" name="communicationequipment" [(ngModel)]="vessel.communicationEquipment"></textarea>
+              </div>
             </div>
             <!--- PAGE 3 END -->
+            <ul class="pager col-sm-12" style="margin-left:10px;margin-right: 10px; ">
+              <li [class.disabled]="subPage==1"><a (click)="subPage=1">Previous</a></li>
+              <li [class.disabled]="subPage==2"><a (click)="subPage=2">Next</a></li>
+            </ul>
           </div>
-          <!--- End og panel detail view -->
         </div>
       </div>
-
-
       <!-- Knapper -->
       <button type="submit" class="btn btn-primary" *ngIf="form.valid&&!editMode">Opprett</button>
       <button type="submit" class="btn btn-primary" *ngIf="form.valid&&editMode&&form.dirty">Lagre</button>

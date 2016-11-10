@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VesselClassesDetailEditComponent implements OnInit {
 
+  page: number = 1;
+
+  isLoading: boolean;
+
   constructor() { }
 
   ngOnInit() {
