@@ -3,6 +3,8 @@ export class VesselClass {
 
   name: string;
 
+  key: any;
+
   speed: number;
   range: number;
   tonnageGross: number;

@@ -20,18 +20,19 @@ export class VesselClassesDetailComponent implements OnInit {
 
   isLoading = false;
 
-  constructor(private vesselsClassesSerice: VesselClassesService, private vesselsService: VesselsService, private activatedRoute: ActivatedRoute) { }
+  constructor(private vesselsClassesService: VesselClassesService, private vesselsService: VesselsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
       this.isLoading = true;
       if(params['key']) {
-        this.vesselsClassesSerice.getVesselClass(params['key']).subscribe((vesselClass) => {
+        this.vesselsClassesService.getVesselClass(params['key']).subscribe((vesselClass) => {
           this.vesselClass = vesselClass;
+          console.log('vesselclass...',vesselClass)
           this.isLoading = false;
           this.vesselsService.getVesselsInVesselClass(vesselClass).subscribe((vessels: Vessel[])=>{
             this.vesselsInClass = vessels;
-            console.log(this.vesselsInClass);
+            console.log('veesels in class',this.vesselsInClass);
           })
         });
       }

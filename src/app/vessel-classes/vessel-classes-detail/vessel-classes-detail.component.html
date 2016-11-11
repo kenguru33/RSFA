@@ -6,26 +6,24 @@
     <div class="panel-title">
       <div style="margin-left: 130px; min-height: 50px;">
         <h4>{{vesselClass?.name}}</h4>
-        <p>{{vesselClass?.dnvClass}}</p>
+        <p>subtitle</p>
       </div>
     </div>
   </div>
   <div class="panel-body">
+    <ul class="nav nav-tabs">
+      <li style="cursor: pointer;" role="presentation" [class.active]="page==1" (click)="page=1"><a>Generelt</a></li>
+      <li style="cursor: pointer;" role="presentation" [class.active]="page==2" (click)="page=2"><a>Teknisk</a></li>
+      <li style="cursor: pointer;" role="presentation" [class.active]="page==3" (click)="page=3"><a>Fartøyer</a></li>
+    </ul>
     <div style="margin-left: 20px; margin-top: 20px;">
+      <p><strong>Fartøyer:</strong>
+        <span *ngFor="let vessel of vesselsInClass" routerLink="/fartøyer/{{vessel.key}}"> <span style="white-space: nowrap; cursor: pointer;">&nbsp;<i class="fa fa-circle" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel.status]?.color"></i>&nbsp;&nbsp;<a>{{vessel.prefix}}-{{vessel.id}} {{vessel.name}}</a></span>&nbsp;&nbsp;</span>
+      </p>
       <p><strong>Rekkevidde:</strong> {{vesselClass?.range}} nm</p>
       <p><strong>Hastighet:</strong> {{vesselClass?.speed}} knop</p>
     </div>
-    <div class=" col-sm-12" style="margin-top: 10px" >
-      <div style="border-bottom: solid 1px; border-color: black">
-        <h4><i class="fa fa-asterisk" aria-hidden="true"></i>&nbsp;&nbsp;Teknisk informasjon<i class="fa pull-right" [class.fa-chevron-left]="!viewTechnicalData" style="cursor: pointer;" [class.fa-chevron-down]="viewTechnicalData"  aria-hidden="true" (click)="onTechnicalDataClicked()"></i></h4>
-      </div>
-      <div [hidden]="!viewTechnicalData" style="margin-top: 10px">
-        <p><strong>Hastighet: </strong>30</p>
-        <p><strong>Rekkevidde: </strong>300</p>
-        <p><strong>Vekt: </strong>33tonn</p>
-        <p><strong>Dypgang: </strong>3m</p>
-      </div>
-    </div>
+
     <button style="margin-top: 20px" class="btn btn-primary" (click)="onEditVesselClass()" [routerLink]="['../','edit',vesselClass?.key]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Rediger</button>
   </div>
 </div>

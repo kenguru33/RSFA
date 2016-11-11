@@ -3,13 +3,13 @@
 
   <!-- Header component start-->
   <div style="position: relative; left: 0; top: 0;">
-    <img class="img-circle"  src="{{vessel?.imgUrl}}" onError="this.onerror=null;this.src='assets/img/camera.png';" style="position: absolute; top: 10px; left: 10px; cursor: pointer;" (click)="toggleImagePath()"/>
+    <img class="img-circle"   src="/assets/img/ship.png" onError="this.onerror=null;this.src='assets/img/camera.png';" style="position: absolute; top: 10px; left: 10px; cursor: pointer;" (click)="toggleImagePath()"/>
   </div>
 
   <div class="panel-heading" style="margin-bottom: 20px;">
     <div class="panel-title" style="margin-left: 130px;">
-      <h4></h4>
-      <p><span><i class="fa fa-circle" aria-hidden="true"></i></span>&nbsp;&nbsp;</p>
+      <h4>title</h4>
+      <p>subtitle</p>
     </div>
   </div>
   <!-- Header component end -->
@@ -23,7 +23,20 @@
     <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
       <div class="panel panel-default" style="border-top-width: 0; ">
         <div class="panel-body" style="padding: 10px 0 0; min-height: 440px">
-
+          <div [hidden]="!(page==1)">
+            <div class="form-group col-md-12">
+              <label for="vesselclass">Klassenavn</label>
+              <input type="text" class="form-control" id="vesselclass" name="vesselclassname" aria-describedby="emailHelp" placeholder="Skriv inn klassenavnet" [(ngModel)]="vessel.name" required>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="staff">Mannskap</label>
+              <input type="text" class="form-control" id="staff" name="staff" aria-describedby="emailHelp" placeholder="Skriv inn klassenavnet" [(ngModel)]="vessel.name" required>
+            </div>
+            <div class="form-group col-md-8">
+              <label for="design">Design</label>
+              <input type="text" class="form-control" id="design" name="design" aria-describedby="emailHelp" placeholder="Skriv inn klassenavnet" [(ngModel)]="vessel.name" required>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Knapper -->

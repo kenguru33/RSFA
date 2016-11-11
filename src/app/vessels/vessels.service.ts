@@ -115,7 +115,21 @@ export class VesselsService {
     });
   }
   getVesselsInVesselClass(vesselClass: VesselClass) : Observable<Vessel[]> {
-    //TODO: to be implemented.
-    return undefined;
+    return this.http.get(`${this.baseUrl}/vessels.json?auth=${localStorage.getItem('userToken')}`).map((response: Response) =>{
+      let vessels = response.json() || {};
+      let vesselArray = [];
+      console.log('kokovesselclass',vesselClass);
+      for (let key in vessels) {
+        if (vessels[key].vesselClassKey === vesselClass.key) {
+          vessels[key].key = key;
+          vesselArray.push(vessels[key]);
+        }
+      }
+      return vesselArray;
+
+    }).catch(error => {
+      console.log(error);
+      return Observable.throw(error);
+    });
   }
 }

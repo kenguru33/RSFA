@@ -27,10 +27,10 @@
           <p><strong>Fartøysklasse:</strong> <a routerLink="/klasser/{{vesselClass?.key}}">{{vesselClass?.name}}</a></p>
           <p><strong>Epost:</strong><a href="mailto:{{vessel?.email}}"> {{vessel?.email}}</a></p>
           <p><strong>Telefon:</strong><a href="tel:{{vessel?.phone}}"> {{vessel?.phone}}</a></p>
-          <p><strong>Antall mannskap:</strong></p>
           <p><strong>Bemannningtype:</strong> {{vessel?.staff}}</p>
           <p><strong>MMSI:</strong> {{vessel?.mmsi}}</p>
           <p><strong>Kallesignal:</strong>{{vessel?.callSign}}</p>
+          <p><strong>Posisjon:</strong> lat: {{vesselPosition?.latitude}} &nbsp; long: {{vesselPosition?.longitude}} &nbsp;&nbsp; Tid:&nbsp;{{vesselPosition?.timeStamp.toLocaleDateString()}}&nbsp;&nbsp;{{vesselPosition?.timeStamp.toLocaleTimeString()}}</p>
           <p><strong>Verft:</strong> {{vessel?.buildingYard}}</p>
           <p><strong>DNV klasse:</strong> {{vessel?.dnvClass}}</p>
           <p><strong>Byggeår:</strong> {{vessel.buildingYear}}</p>

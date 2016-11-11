@@ -22,7 +22,7 @@
 
     <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
       <div class="panel panel-default" style="border-top-width: 0; ">
-        <div class="panel-body" style="padding: 10px 0 0; min-height: 440px">
+        <div id="form-view" class="panel-body" style="padding: 10px 0 0;">
 
           <!-- Bilde -->
           <div class="form-group col-md-12" [hidden]="!showImagePath">
@@ -98,7 +98,7 @@
                        pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" required>
               </div>
             </div>
-            <div [hidden]="!(subPage==2)">
+            <div [hidden]="!(subPage==1)">
               <!-- FINANCING -->
               <div class="form-group col-md-6">
                 <label for="financing">Finansiering</label>
@@ -125,10 +125,6 @@
                 <input type="text" class="form-control" id="buildingyear" name="buildingyear" aria-describedby="emailHelp" placeholder="Byggeår"[(ngModel)]="vessel.buildingYear">
               </div>
             </div>
-            <ul class="pager col-sm-12" style="margin-left:10px;margin-right: 10px; ">
-              <li [class.disabled]="subPage==1"><a (click)="subPage=1">Previous</a></li>
-              <li [class.disabled]="subPage==2"><a (click)="subPage=2">Next</a></li>
-            </ul>
             <!-- End -->
           </div>
           <!-- PAGE2 -->
@@ -147,7 +143,7 @@
           </div>
 
           <!-- PAGE3 -->
-          <div [hidden]="!(page==3)" class="col-md-12">
+          <div [hidden]="!(page==3)" class="col-md-12" style="position: relative">
             <div [hidden]="!(subPage==1)">
               <div class="form-group col-md-12">
                 <label for="deckmachinery"><strong>Dekksutstyr</strong></label>
@@ -162,7 +158,7 @@
                 <textarea id="divingequipment" class="form-control" name="divingequipment" [(ngModel)]="vessel.divingEquipment"></textarea>
               </div>
             </div>
-            <div [hidden]="!(subPage==2)">
+            <div [hidden]="!(subPage==1)">
               <div class="form-group col-md-12">
                 <label for="navigationequipment"><strong>Navigasjonsutstyr</strong></label>
                 <textarea id="navigationequipment" class="form-control" name="navigationequipment" [(ngModel)]="vessel.navigationEquipment"></textarea>
@@ -173,10 +169,6 @@
               </div>
             </div>
             <!--- PAGE 3 END -->
-            <ul class="pager col-sm-12" style="margin-left:10px;margin-right: 10px; ">
-              <li [class.disabled]="subPage==1"><a (click)="subPage=1">Previous</a></li>
-              <li [class.disabled]="subPage==2"><a (click)="subPage=2">Next</a></li>
-            </ul>
           </div>
         </div>
       </div>
