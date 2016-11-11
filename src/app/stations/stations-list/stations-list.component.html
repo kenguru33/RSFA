@@ -28,7 +28,7 @@
   </div>
   <spinner [visible]="isLoading"></spinner>
   <div class="col-md-12" style="margin-top: 10px" [hidden]="isLoading">
-    <a class="list-group-item clearfix" style="cursor: pointer;" *ngFor="let station of stations; let i = index" (click)="onStationSelect(i)" [routerLink]="station.key">
+    <a class="list-group-item clearfix" [class.active]="station?.key === selectedStation?.key" style="cursor: pointer;" *ngFor="let station of stations; let i = index" (click)="onStationSelect(station.key)" [routerLink]="station.key">
       <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{station.name}}
       <span class="btn btn-danger btn-xs pull-right" (click)="onDeleteStation(i)"><i class="fa fa-times" aria-hidden="true"></i></span>
     </a>

@@ -5,8 +5,7 @@ import {StationsDetailComponent} from "./stations-detail/stations-detail.compone
 import {StationsDetailEditComponent} from "./stations-detail/stations-detail-edit.component";
 const vesselsRoutes: Routes = [
   {
-    path: 'stasjoner',
-    component: StationsComponent,
+    path: 'stasjoner', component: StationsComponent,
     children: [
       { path: 'edit', component: StationsDetailEditComponent},
       { path: 'edit/:key',  component: StationsDetailEditComponent },

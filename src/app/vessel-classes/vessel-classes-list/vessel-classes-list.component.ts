@@ -16,6 +16,8 @@ export class VesselClassesListComponent implements OnInit {
   private isLoading;
 
   vesselClasses = [];
+  private selectedVesselClass;
+  private selectedIndex;
 
   constructor(private vesselClassesService: VesselClassesService) { }
 
@@ -28,6 +30,12 @@ export class VesselClassesListComponent implements OnInit {
 
   onAddVesselClass() {
     console.log('add vessel class')
+  }
+
+  onVesselClassSelected(key: string) {
+
+    this.selectedVesselClass = this.vesselClasses.find(station=>station.key === key);
+    this.selectedIndex = this.vesselClasses.findIndex(station=>station.key);
   }
 
 }

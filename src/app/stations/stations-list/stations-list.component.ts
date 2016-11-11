@@ -44,9 +44,10 @@ export class StationsListComponent implements OnInit {
     });
   }
 
-  onStationSelect(index) {
-    this.selectedIndex = index;
-    this.selectedStation = this.stations[index];
+  onStationSelect(key: string) {
+
+    this.selectedStation = this.stations.find(station=>station.key === key);
+    this.selectedIndex = this.stations.findIndex(station=>station.key);
   }
 
   onAddStation() {
