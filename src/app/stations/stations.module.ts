@@ -10,6 +10,8 @@ import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
 import { StationsDetailEditComponent } from './stations-detail/stations-detail-edit.component';
 import {SpinnerModule} from "../spinner/spinner.module";
+import {SortPipe} from "./sort.pipe";
+import {FilterPipe} from "./filter.pipe";
 
 @NgModule({
   imports: [
@@ -20,7 +22,14 @@ import {SpinnerModule} from "../spinner/spinner.module";
     ModalWindowModule,
     SpinnerModule
   ],
-  declarations: [StationsComponent, StationsListComponent, StationsDetailComponent, StationsDetailEditComponent],
+  declarations: [
+    StationsComponent,
+    StationsListComponent,
+    StationsDetailComponent,
+    StationsDetailEditComponent,
+    SortPipe,
+    FilterPipe
+  ],
   providers: [StationsService]
 })
 export class StationsModule { }

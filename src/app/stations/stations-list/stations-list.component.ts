@@ -19,6 +19,13 @@ export class StationsListComponent implements OnInit {
 
   stationChangedSubscription: Subscription;
 
+  private showFilterOptions = false;
+  private filterPrimary = false;
+  private filterRSRK = false;
+  private filterAmbulanse = false;
+  private filterSecondary = false;
+
+
   private showDialog = false;
   private dialogMessage = '';
   private dialogTitle = '';
@@ -86,8 +93,8 @@ export class StationsListComponent implements OnInit {
   }
 
 
-  onFilterOperativ() {
-    console.log ('filter operative...');
+  onShowFilterOptions() {
+    this.showFilterOptions = !this.showFilterOptions;
   }
 
   onPageSelect(page: number) {

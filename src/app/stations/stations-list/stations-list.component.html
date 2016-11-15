@@ -11,24 +11,21 @@
   </div><!-- /.col-lg-6 -->
   <div class=" col-md-12" style="margin-top: 10px">
     <div style="border-bottom: solid 1px">
-      <h5><i class="fa fa-filter" aria-hidden="true"></i>&nbsp;&nbsp;Filter <span class="badge" *ngIf="filterBemannet||filterRSRK||filterOperativ">Aktivt</span>
+      <h5><i class="fa fa-filter" aria-hidden="true"></i>&nbsp;&nbsp;Filter <span class="badge" *ngIf="filterPrimary||filterRSRK||filterSecondary||filterAmbulanse">Aktivt</span>
         <i class="fa pull-right" [class.fa-chevron-left]="!showFilterOptions" style="cursor: pointer;" [class.fa-chevron-down]="showFilterOptions"  aria-hidden="true" (click)="onShowFilterOptions()"></i></h5>
     </div>
     <div *ngIf="showFilterOptions" style="margin-top: 10px;">
-      <button class="btn" type="button" [class.btn-link]="!filterBemannet" [class.btn-info]="filterBemannet" (click)="filterBemannet=!filterBemannet">
-        Fast Bemannet
-      </button>
-      <button class="btn" type="button" [class.btn-link]="!filterRSRK" [class.btn-info]="filterRSRK" (click)="filterRSRK=!filterRSRK">
-        RSRK
-      </button>
-      <button class="btn" type="button" [class.btn-link]="!filterOperativ" [class.btn-info]="filterOperativ" (click)="filterOperativ=!filterOperativ">
-        Operativ
-      </button>
+      <ul class="nav nav-pills">
+        <li style="cursor: pointer;" role="filter" (click)="filterPrimary=!filterPrimary;" [class.active]="filterPrimary"><a>Primær</a></li>
+        <li style="cursor: pointer;" role="filter" (click)="filterRSRK=!filterRSRK;" [class.active]="filterRSRK"><a>RSRK</a></li>
+        <li style="cursor: pointer;" role="filter" (click)="filterSecondary=!filterSecondary;" [class.active]="filterSecondary"><a>Sekundær</a></li>
+        <li style="cursor: pointer;" role="filter" (click)="filterAmbulanse=!filterAmbulanse;" [class.active]="filterAmbulanse"><a>Ambulanse</a></li>
+      </ul>
     </div>
   </div>
   <spinner [visible]="isLoading"></spinner>
   <div class="col-md-12" style="margin-top: 10px" [hidden]="isLoading">
-    <a class="list-group-item clearfix" [class.active]="station?.key === selectedStation?.key" style="cursor: pointer;" *ngFor="let station of stations; let i = index" (click)="onStationSelect(station.key)" [routerLink]="station.key">
+    <a class="list-group-item clearfix" [class.active]="station?.key === selectedStation?.key" style="cursor: pointer;" *ngFor="let station of stations | filter:[filterPrimary, filterSecondary, filterRSRK, filterAmbulanse] | sort; let i = index" (click)="onStationSelect(station.key)" [routerLink]="station.key">
       <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{station.name}}
       <span class="btn btn-danger btn-xs pull-right" (click)="onDeleteStation(station.key)"><i class="fa fa-times" aria-hidden="true"></i></span>
     </a>
