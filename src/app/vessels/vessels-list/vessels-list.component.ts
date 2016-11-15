@@ -131,7 +131,8 @@ export class VesselsListComponent implements OnInit, OnDestroy {
   onSelectVessel(key: string) {
 
     this.selectedVessel = this.vessels.find(vessel=>vessel.key === key);
-    this.selectedIndex = this.vessels.findIndex(vessel=>vessel.key);
+    this.selectedIndex = this.vessels.findIndex(vessel=>vessel.key === key);
+    console.log('vessel selected Index', this.selectedIndex);
   }
 
   onShowFilterOptions() {

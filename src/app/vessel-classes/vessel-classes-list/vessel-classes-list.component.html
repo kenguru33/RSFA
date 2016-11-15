@@ -1,11 +1,13 @@
 <div class="col-md-5">
-  <rs-modal-window [primaryButtonText]="'Slett'" [secondaryButtonText]="'Avbryt'" [show]="showDialog" [contentText]="dialogMessage" [title]="dialogTitle"></rs-modal-window>
+  <rs-modal-window [primaryButtonText]="'Slett'" [secondaryButtonText]="'Avbryt'" [show]="showDialog" [contentText]="dialogMessage" [title]="dialogTitle" (response)="deleteVesselClass($event)"></rs-modal-window>
   <div class="col-md-12" style="margin-top: 10px">
-    <button class="btn btn-success" (click)="onAddVesselClass()" [disabled]="isLoading"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Ny klasse</button>
+    <button class="btn btn-success" (click)="onAddVesselClass()" [disabled]="isLoading" [routerLink]="'edit'"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Ny klasse</button>
   </div>
+  <spinner [visible]="isLoading"></spinner>
   <div class="col-md-12" style="margin-top: 10px" [hidden]="isLoading">
     <a class="list-group-item clearfix" [class.active]="vesselClass?.key===selectedVesselClass?.key"  style="cursor: pointer;" *ngFor="let vesselClass of vesselClasses; let i = index" (click)="onVesselClassSelected(vesselClass.key)" [routerLink]="vesselClass.key">
-      {{vesselClass.name}}
+      <i class="fa fa fa-th-large" aria-hidden="true"></i>&nbsp;&nbsp;{{vesselClass.name}}
+      <span class="btn btn-danger btn-xs pull-right" (click)="onDeleteVesselClass(vesselClass.key)"><i class="fa fa-times" aria-hidden="true"></i></span>
     </a>
   </div>
 </div>

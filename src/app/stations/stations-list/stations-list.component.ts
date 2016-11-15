@@ -47,7 +47,7 @@ export class StationsListComponent implements OnInit {
   onStationSelect(key: string) {
 
     this.selectedStation = this.stations.find(station=>station.key === key);
-    this.selectedIndex = this.stations.findIndex(station=>station.key);
+    this.selectedIndex = this.stations.findIndex(station=>station.key === key);
   }
 
   onAddStation() {
@@ -61,6 +61,8 @@ export class StationsListComponent implements OnInit {
   }
 
   private deleteStation(value: boolean) {
+    console.log('selected Station', this.selectedStation);
+    console.log('selected Index Station', this.selectedIndex);
     this.showDialog = false;
     if (!value) return;
     let index = this.selectedIndex;
@@ -73,13 +75,16 @@ export class StationsListComponent implements OnInit {
       console.log(error);
     });
   }
-  onDeleteStation(index: number) {
-    if (index > -1) {
-      this.selectedStation= this.stations[index];
-      this.selectedIndex = index;
+
+  onDeleteStation(key: string) {
+
+    if (key) {
+      this.selectedStation = this.stations.find(station=>station.key === key);
+      this.selectedIndex = this.stations.findIndex(station=>station.key === key);
     }
-    this.showDialogBox('Slette ' + this.stations[index].name + '?');
+    this.showDialogBox('Slette ' + this.selectedStation.name + '?');
   }
+
 
   onFilterOperativ() {
     console.log ('filter operative...');

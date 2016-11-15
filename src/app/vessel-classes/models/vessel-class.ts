@@ -32,5 +32,9 @@ export class VesselClass {
   gear: string;
   controllablePitchProps: string;
 
+  // Crew
+  crew: number
 
+  // Design by
+  design: string;
 }

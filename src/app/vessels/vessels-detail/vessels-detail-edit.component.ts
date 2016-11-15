@@ -39,9 +39,7 @@ export class VesselsDetailEditComponent implements OnInit, OnDestroy {
               private vesselClassesService: VesselClassesService,
               private location: Location,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
-
-  }
+              private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.isLoading = true;
