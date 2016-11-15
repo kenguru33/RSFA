@@ -14,9 +14,9 @@ export class FilterPipe implements PipeTransform {
     let a = args[3]; // ambulanse
 
     let rsrkArray = [];
+    let ambulanseArray = [];
     let primaryArray = [];
     let secondaryArray = [];
-    let ambulanse = [];
 
     let resultArray = [];
 
@@ -24,31 +24,83 @@ export class FilterPipe implements PipeTransform {
 
     if (!p && !s && !r && a) {
       resultArray = this.filterAmbulanse(stations);
-      console.log('filter ambulanse', resultArray);
+      console.log('a', resultArray);
       return resultArray;
     }
 
     if (!p && !s && r && !a) {
       resultArray = this.filterRsrk(stations);
-      console.log('filter rsrk', resultArray);
+      console.log('r');
+      return resultArray;
+    }
+
+    if (!p && !s && r && a) {
+      console.log('r+a');
+      ambulanseArray = this.filterAmbulanse(stations);
+      rsrkArray = this.filterRsrk(stations);
+      resultArray = ambulanseArray.concat(rsrkArray);
       return resultArray;
     }
 
     if (!p && s && !r && !a) {
       resultArray = this.filterSecondary(stations);
-      console.log('filter ambulanse', resultArray);
+      console.log('s');
+      return resultArray;
+    }
+
+    if (!p && s && !r && a) {
+      console.log('s+a');
+      ambulanseArray = this.filterAmbulanse(stations);
+      secondaryArray = this.filterSecondary(stations);
+      resultArray = ambulanseArray.concat(secondaryArray)
+      return resultArray;
+    }
+
+    if (!p && s && r && !a) {
+      console.log('s+r');
+    }
+
+    if (!p && s && r && a) {
+      console.log('s+r+a');
+    }
+
+    if (p && !s && !r && !a) {
+      resultArray = this.filterPrimary(stations);
+      console.log('p');
       return resultArray;
     }
 
     if (p && !s && !r && a) {
-      resultArray = this.filterPrimary(stations);
-      console.log('filter ambulanse', resultArray);
-      return resultArray;
+      console.log('p+a');
     }
 
-    return resultArray;
+    if (p && !s && r && !a) {
+      console.log('p+r');
+    }
 
+    if (p && !s && r && a) {
+      console.log('p+r+a');
+    }
+
+    if (p && s && !r && !a) {
+      console.log('p+s');
+    }
+
+    if (p && s && !r && a) {
+      console.log('p+s+a');
+    }
+
+    if (p && s && r && !a) {
+      console.log('p+s+r');
+    }
+
+    if (p && s && r && a) {
+      console.log('p+s+r+a');
+    }
+    return stations;
   }
+
+
 
   private filterAmbulanse(stations: Array<Station>) {
     let resultArray = [];
@@ -61,7 +113,13 @@ export class FilterPipe implements PipeTransform {
   }
 
   private filterPrimary(stations: Array<Station>) {
-    return stations;
+    let resultArray = [];
+    for (let station of stations) {
+      if (station.stationType === 'Primærstasjon') {
+        resultArray.push(station);
+      }
+    }
+    return resultArray;
   }
 
   private filterRsrk(stations: Array<Station>) {
@@ -76,7 +134,13 @@ export class FilterPipe implements PipeTransform {
 
 
   private filterSecondary(stations: Array<Station>) {
-    return stations;
+    let resultArray = [];
+    for (let station of stations) {
+      if (station.stationType === 'Sekundærstasjon') {
+        resultArray.push(station);
+      }
+    }
+    return resultArray;
   }
 }
 
