@@ -28,7 +28,6 @@ export class VesselClassesDetailComponent implements OnInit {
       if(params['key']) {
         this.vesselsClassesService.getVesselClass(params['key']).subscribe((vesselClass) => {
           this.vesselClass = vesselClass;
-          console.log('vesselclass...',vesselClass)
           this.isLoading = false;
           this.vesselsService.getVesselsInVesselClass(vesselClass).subscribe((vessels: Vessel[])=>{
             this.vesselsInClass = vessels;
