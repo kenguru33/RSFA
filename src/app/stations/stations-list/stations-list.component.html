@@ -4,10 +4,16 @@
     <button class="btn btn-success" (click)="onAddStation()" [disabled]="isLoading" [routerLink]="'edit'"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Opprett stasjon</button>
   </div>
   <div class="col-md-6" style="margin-top: 10px">
-    <div class="input-group">
+
+    <div class="form-group has-feedback">
+      <i class="fa fa-search form-control-feedback"></i>
+      <input type="text" class="form-control" placeholder="Søk fartøy..." [disabled]="isLoading" name="vesselSearch" [(ngModel)]="stationSearch" />
+    </div>
+
+    <!--<div class="input-group">
       <input type="text" class="form-control" placeholder="Søk stasjon" [disabled]="isLoading">
       <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search" aria-hidden="true"></i></span>
-    </div>
+    </div>-->
   </div><!-- /.col-lg-6 -->
   <div class=" col-md-12" style="margin-top: 10px">
     <div style="border-bottom: solid 1px">
@@ -25,7 +31,7 @@
   </div>
   <spinner [visible]="isLoading"></spinner>
   <div class="col-md-12" style="margin-top: 10px" [hidden]="isLoading">
-    <a class="list-group-item clearfix" [class.active]="station?.key === selectedStation?.key" style="cursor: pointer;" *ngFor="let station of stations | filter:[filterPrimary, filterSecondary, filterRSRK, filterAmbulanse] | sort; let i = index" (click)="onStationSelect(station.key)" [routerLink]="station.key">
+    <a class="list-group-item clearfix" [class.active]="station?.key === selectedStation?.key" style="cursor: pointer;" *ngFor="let station of stations | filter:[filterPrimary, filterSecondary, filterRSRK, filterAmbulanse] | search: stationSearch| sort ; let i = index" (click)="onStationSelect(station.key)" [routerLink]="station.key">
       <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{station.name}}
       <span class="btn btn-danger btn-xs pull-right" (click)="onDeleteStation(station.key)"><i class="fa fa-times" aria-hidden="true"></i></span>
     </a>

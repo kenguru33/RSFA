@@ -34,6 +34,8 @@ export class StationsListComponent implements OnInit {
 
   private page = 1;
 
+  private stationSearch ="";
+
   constructor(private stationsService: StationsService, private router: Router) { }
 
   ngOnInit() {

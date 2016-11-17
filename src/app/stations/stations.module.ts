@@ -12,6 +12,7 @@ import { StationsDetailEditComponent } from './stations-detail/stations-detail-e
 import {SpinnerModule} from "../spinner/spinner.module";
 import {SortPipe} from "./sort.pipe";
 import {FilterPipe} from "./filter.pipe";
+import {SearchPipe} from "./search.pipe";
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import {FilterPipe} from "./filter.pipe";
     StationsDetailComponent,
     StationsDetailEditComponent,
     SortPipe,
-    FilterPipe
+    FilterPipe,
+    SearchPipe
   ],
   providers: [StationsService]
 })
