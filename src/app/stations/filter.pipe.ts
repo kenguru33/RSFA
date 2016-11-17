@@ -58,10 +58,19 @@ export class FilterPipe implements PipeTransform {
 
     if (!p && s && r && !a) {
       console.log('s+r');
+      secondaryArray = this.filterSecondary(stations);
+      rsrkArray = this.filterRsrk(stations);
+      resultArray = secondaryArray.concat(rsrkArray);
+      return resultArray;
     }
 
     if (!p && s && r && a) {
       console.log('s+r+a');
+      secondaryArray = this.filterSecondary(stations);
+      rsrkArray = this.filterRsrk(stations);
+      ambulanseArray = this.filterAmbulanse(stations);
+      resultArray = ambulanseArray.concat(secondaryArray.concat(rsrkArray));
+      return resultArray;
     }
 
     if (p && !s && !r && !a) {
@@ -72,32 +81,64 @@ export class FilterPipe implements PipeTransform {
 
     if (p && !s && !r && a) {
       console.log('p+a');
+      primaryArray = this.filterPrimary(stations);
+      ambulanseArray = this.filterAmbulanse(stations);
+      resultArray = primaryArray.concat(ambulanseArray);
+      return resultArray;
     }
 
     if (p && !s && r && !a) {
       console.log('p+r');
+      primaryArray = this.filterPrimary(stations);
+      rsrkArray = this.filterRsrk(stations);
+      resultArray = primaryArray.concat(rsrkArray);
+      return resultArray;
     }
 
     if (p && !s && r && a) {
       console.log('p+r+a');
+      primaryArray = this.filterPrimary(stations);
+      rsrkArray = this.filterRsrk(stations);
+      ambulanseArray = this.filterAmbulanse(stations);
+      resultArray = primaryArray.concat(rsrkArray.concat(ambulanseArray));
+      return resultArray;
     }
 
     if (p && s && !r && !a) {
       console.log('p+s');
+      primaryArray = this.filterPrimary(stations);
+      secondaryArray = this.filterSecondary(stations);
+      resultArray = primaryArray.concat(secondaryArray);
+      return resultArray;
     }
 
     if (p && s && !r && a) {
       console.log('p+s+a');
+      primaryArray = this.filterPrimary(stations);
+      secondaryArray = this.filterSecondary(stations);
+      ambulanseArray = this.filterAmbulanse(stations);
+      resultArray = primaryArray.concat(secondaryArray.concat(ambulanseArray));
+      return resultArray;
     }
 
     if (p && s && r && !a) {
       console.log('p+s+r');
+      primaryArray = this.filterPrimary(stations);
+      secondaryArray = this.filterSecondary(stations);
+      rsrkArray = this.filterRsrk(stations);
+      resultArray = primaryArray.concat(secondaryArray.concat(rsrkArray));
+      return resultArray;
     }
 
     if (p && s && r && a) {
       console.log('p+s+r+a');
+      primaryArray = this.filterPrimary(stations);
+      secondaryArray = this.filterSecondary(stations);
+      rsrkArray = this.filterRsrk(stations);
+      ambulanseArray = this.filterAmbulanse(stations);
+      resultArray = primaryArray.concat(secondaryArray.concat(rsrkArray.concat(ambulanseArray)));
+      return resultArray;
     }
-    return stations;
   }
 
 
