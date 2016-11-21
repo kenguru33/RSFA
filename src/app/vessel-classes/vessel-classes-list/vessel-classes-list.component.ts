@@ -24,6 +24,8 @@ export class VesselClassesListComponent implements OnInit {
 
   vesselClassesChangedSubscription: Subscription;
 
+  private vesselClassSearch = "";
+
   constructor(private vesselClassesService: VesselClassesService, private router: Router) { }
 
   ngOnInit() {

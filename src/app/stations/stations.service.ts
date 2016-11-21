@@ -65,4 +65,21 @@ export class StationsService {
       return Observable.throw(errorMsg);
     });
   }
+
+  getStationsTypeColor(stationType: string): string {
+    if (stationType.toLowerCase() == "primærstasjon") {
+      return '#5cb85c';
+    }
+    if (stationType.toLowerCase() == "sekundærstasjon") {
+      return '#D3D3D3';
+    }
+
+    if (stationType.toLowerCase() == "ambulansestasjon") {
+      return '#FF8C00';
+    }
+
+    if (stationType.toLowerCase() == "sjøredningskorps") {
+      return '#428bca';
+    }
+  }
 }

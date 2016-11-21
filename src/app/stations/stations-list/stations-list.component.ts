@@ -78,8 +78,13 @@ export class StationsListComponent implements OnInit {
     if (index > -1) {
       this.stations.splice(index, 1);
     }
+
     this.stationsService.deleteStation(this.selectedStation).subscribe(()=>{
       console.log('we have a successfull deltion');
+      this.selectedIndex = null;
+      this.selectedStation = null;
+      this.getStations();
+      this.router.navigate(['stasjoner']);
     },error => {
       console.log(error);
     });

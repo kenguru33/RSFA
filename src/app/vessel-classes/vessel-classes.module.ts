@@ -10,6 +10,8 @@ import {FormsModule} from "@angular/forms";
 import {vesselClassesRouting} from "./vessel-classes.routing";
 import {VesselClassesDetailEditComponent} from "./vessel-classes-detail/vessel-classes-detail-edit.component";
 import {SpinnerModule} from "../spinner/spinner.module";
+import {SortPipe} from "./sort.pipe";
+import {SearchPipe} from "./search.pipe";
 
 @NgModule({
   imports: [
@@ -24,7 +26,9 @@ import {SpinnerModule} from "../spinner/spinner.module";
     VesselClassesComponent,
     VesselClassesListComponent,
     VesselClassesDetailComponent,
-    VesselClassesDetailEditComponent
+    VesselClassesDetailEditComponent,
+    SortPipe,
+    SearchPipe
   ],
 
   providers: [

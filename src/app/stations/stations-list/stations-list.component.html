@@ -7,7 +7,7 @@
 
     <div class="form-group has-feedback">
       <i class="fa fa-search form-control-feedback"></i>
-      <input type="text" class="form-control" placeholder="Søk fartøy..." [disabled]="isLoading" name="vesselSearch" [(ngModel)]="stationSearch" />
+      <input type="text" class="form-control" placeholder="Søk stasjon..." [disabled]="isLoading" name="stationSearch" [(ngModel)]="stationSearch" />
     </div>
 
     <!--<div class="input-group">
@@ -16,7 +16,8 @@
     </div>-->
   </div><!-- /.col-lg-6 -->
   <div class=" col-md-12" style="margin-top: 10px">
-    <div style="border-bottom: solid 1px">
+
+    <div class="table-bordered" style="border-width:0; border-bottom-width: 2px">
       <h5><i class="fa fa-filter" aria-hidden="true"></i>&nbsp;&nbsp;Filter <span class="badge" *ngIf="filterPrimary||filterRSRK||filterSecondary||filterAmbulanse">Aktivt</span>
         <i class="fa pull-right" [class.fa-chevron-left]="!showFilterOptions" style="cursor: pointer;" [class.fa-chevron-down]="showFilterOptions"  aria-hidden="true" (click)="onShowFilterOptions()"></i></h5>
     </div>
@@ -31,8 +32,9 @@
   </div>
   <spinner [visible]="isLoading"></spinner>
   <div class="col-md-12" style="margin-top: 10px" [hidden]="isLoading">
-    <a class="list-group-item clearfix" [class.active]="station?.key === selectedStation?.key" style="cursor: pointer;" *ngFor="let station of stations | filter:[filterPrimary, filterSecondary, filterRSRK, filterAmbulanse] | search: stationSearch| sort ; let i = index" (click)="onStationSelect(station.key)" [routerLink]="station.key">
-      <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{station.name}}
+    <app-ng2ba-pagination [id]="1" [showRange]="true" (pageSelected)="onPageSelect($event)" ></app-ng2ba-pagination>
+    <a class="list-group-item clearfix" [class.active]="station?.key === selectedStation?.key" style="cursor: pointer;" *ngFor="let station of stations | filter:[filterPrimary, filterSecondary, filterRSRK, filterAmbulanse] | search: stationSearch| sort | paginate: {id:1, pageSize:12, currentPage: page};" (click)="onStationSelect(station.key)" [routerLink]="station.key">
+      <i class="fa fa-map-marker" aria-hidden="true" [style.color]="stationsService.getStationsTypeColor(station.stationType)"></i>&nbsp;&nbsp;{{station.name}}
       <span class="btn btn-danger btn-xs pull-right" (click)="onDeleteStation(station.key)"><i class="fa fa-times" aria-hidden="true"></i></span>
     </a>
   </div>
