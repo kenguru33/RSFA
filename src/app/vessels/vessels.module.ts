@@ -16,6 +16,7 @@ import { SearchPipe } from './search.pipe';
 import {AisService} from "./ais.service";
 import {AgmCoreModule} from "angular2-google-maps/core";
 import {Ng2baPaginationModule} from "../ng2ba-pagination/ng2ba-pagination.module";
+import {YrWeatherModule} from "../yr-weather/yr-weather.module";
 
 
 
@@ -37,7 +38,7 @@ export const firebaseConfig = {
     VesselsDetailEditComponent,
     FilterPipe,
     SortPipe,
-    SearchPipe
+    SearchPipe,
   ],
   imports: [
     CommonModule,
@@ -49,7 +50,8 @@ export const firebaseConfig = {
     Ng2baPaginationModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAkkr1PCZqPd2S4-tX0ociz2-_mtdQsUcg'
-    })
+    }),
+    YrWeatherModule
 
   ],
   exports:[
