@@ -1,5 +1,4 @@
 import {Component, OnInit, Input} from '@angular/core';
-var yrno = require('yr.no-forecast');
 
 @Component({
   selector: 'app-yr-weather',
@@ -8,7 +7,6 @@ var yrno = require('yr.no-forecast');
 })
 export class YrWeatherComponent implements OnInit {
 
-  weather: any;
   @Input() position = {
     lat: 53.3478,
     lon: 6.2597
@@ -19,15 +17,21 @@ export class YrWeatherComponent implements OnInit {
   }
 
   ngOnInit() {
-    yrno.getWeather(this.position,function (error, location) {
-      console.log(location);
-      location.getCurrentSummary(function (error, summary) {
-        console.log(summary);
-      });
-      location.getFiveDaySummary(function (error, summary) {
-        console.log(summary);
-      });
-    }, '1.9');
+    var yrno = require('yr.no-interface'),
+      dublin = {
+        lat: 53.3478,
+        lon: 6.2597
+      },
+      LOC_VER = 1.9;
+
+
+    yrno.locationforecast(dublin, LOC_VER, function (err, xml) {
+      if (err) {
+        // Something went wrong...
+      } else {
+        console.log(xml);
+      }
+    });
   }
 
 }

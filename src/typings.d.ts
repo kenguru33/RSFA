@@ -4,8 +4,7 @@
 
 declare var System: any;
 
-declare module 'yr.no-forecast';
-
+declare module 'yr.no-interface';
 
 
 
