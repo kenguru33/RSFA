@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-let yrno = require('yr.no-forecast');
+var yrno = require('yr.no-forecast');
 
 @Component({
   selector: 'app-yr-weather',
