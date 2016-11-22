@@ -19,7 +19,7 @@ export class YrWeatherComponent implements OnInit {
   ngOnInit() {
 
     YrNoForecast.getWeather(this.position, (error,location)=>{
-      location.getWeather((error, summary)=>{
+      location.getCurrentSummary((error, summary)=>{
         console.log('weather', summary );
       });
     },'1.9');
