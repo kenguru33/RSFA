@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import * as yrno from 'yr.no-forecast';
+import * as Weather from 'yr.no-forecast';
 
 @Component({
   selector: 'app-yr-weather',
@@ -14,10 +14,12 @@ export class YrWeatherComponent implements OnInit {
     lon: 6.2597
   };
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
-
+    let yrno = new Weather;
     yrno.getWeather(this.position,function (error, location) {
       if (error) {
         console.log(error);
