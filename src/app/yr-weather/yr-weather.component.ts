@@ -20,7 +20,7 @@ export class YrWeatherComponent implements OnInit {
 
   ngOnInit() {
     yrno.getWeather(this.position,function (error, location) {
-
+      console.log(location);
       location.getCurrentSummary(function (error, summary) {
         console.log(summary);
       });
