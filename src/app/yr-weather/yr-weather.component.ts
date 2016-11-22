@@ -10,16 +10,16 @@ export class YrWeatherComponent implements OnInit {
 
   weather: any;
   @Input() position = {
-    lat: 0,
-    lng: 0
+    lat: 53.3478,
+    lon: 6.2597
   };
 
   constructor() { }
 
   ngOnInit() {
 
-    YrNoForecast.getWeather((error,position)=>{
-      position.getWeather((error, summary)=>{
+    YrNoForecast.getWeather(this.position, (error,location)=>{
+      location.getWeather((error, summary)=>{
         console.log('weather', summary );
       });
     },'1.9');
