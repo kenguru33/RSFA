@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import * as YrNoForecast from 'yr.no-forecast';
+import * as yrno from 'yr.no-forecast';
 
 @Component({
   selector: 'app-yr-weather',
@@ -18,11 +18,18 @@ export class YrWeatherComponent implements OnInit {
 
   ngOnInit() {
 
-    YrNoForecast.getWeather(this.position, (error,location)=>{
-      location.getCurrentSummary((error, summary)=>{
-        console.log('weather', summary );
+    yrno.getWeather(this.position,function (error, location) {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      location.getCurrentSummary(function (error, summary) {
+        console.log(summary);
       });
-    },'1.9');
+      location.getFiveDaySummary(function (error, summary) {
+        console.log(summary);
+      });
+    }, '1.9');
   }
 
 }
