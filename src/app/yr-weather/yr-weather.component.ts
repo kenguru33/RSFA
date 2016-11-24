@@ -1,28 +1,48 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, OnDestroy} from '@angular/core';
+import {YrWeatherService} from "./yr-weather.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-yr-weather',
   templateUrl: './yr-weather.component.html',
   styleUrls: ['./yr-weather.component.css']
 })
-export class YrWeatherComponent implements OnInit {
+export class YrWeatherComponent implements OnInit, OnDestroy {
 
-  @Input() position = {
-    lat: 53.3478,
-    lon: 6.2597
-  };
 
-  constructor() {
+  @Input() latitude = 0;
+  @Input() longitude = 0;
+
+  showWeather = false;
+
+  weatherSub: Subscription;
+
+  icon = "";
+  temperature = "";
+  windSpeed: "";
+  windDirection: "";
+
+  constructor(private yrWeatherService: YrWeatherService) {
 
   }
 
   ngOnInit() {
-    var client = require("metno-client");
-    client.getWeather({
-      params: {lat: 20.123, lon: 43.232},
-      request: {timeout: 1000}
-    }, function(error, report){
-      console.log(report);
+    this.showWeather = false;
+    this.getWeather();
+  }
+
+  ngOnDestroy(): void {
+    this.weatherSub.unsubscribe();
+  }
+
+  private getWeather() {
+    this.weatherSub =  this.yrWeatherService.getWeather(this.latitude, this.longitude).subscribe((response)=>{
+      let weather = response.json().weatherReport.times[0] || {};
+      this.icon = `http://api.met.no/weatherapi/weathericon/1.1/?symbol=${weather.symbol.number};content_type=image/png`;
+      this.temperature = weather.temperature.value;
+      this.windSpeed = weather.windSpeed.name;
+      this.windDirection = weather.windDirection.name;
+      this.showWeather = true;
     });
   }
 

@@ -1,12 +1,12 @@
 <!--<spinner [visible]="isLoading"></spinner>-->
-<div class="panel details-panel panel-default animated fadeIn"*ngIf="!isLoading">
+<div class="panel details-panel panel-default animated fadeIn" *ngIf="!isLoading">
 
   <div style="position: relative; left: 0; top: 0;">
-    <img class="img-circle"  src="{{vessel?.imgUrl}}" onError="this.onerror=null;this.src='assets/img/camera.png';" style="position: absolute; top: 10px; left: 10px;"/>
+    <img class="img-circle" src="{{vessel?.imgUrl}}" onError="this.onerror=null;this.src='assets/img/camera.png';" style="position: absolute; top: 10px; left: 10px;"/>
   </div>
 
   <div style="position: relative; right: 0; top: 0;">
-    <app-yr-weather style="position: absolute; top: 0px; right: 10px;"></app-yr-weather>
+    <app-yr-weather [latitude]="aisService.getDecPos(vesselPosition?.latitude)" [longitude]="aisService.getDecPos(vesselPosition?.longitude)" style="position: absolute; top: 0; right: 10px;"></app-yr-weather>
   </div>
 
   <div class="panel-heading">
