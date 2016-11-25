@@ -28,6 +28,8 @@ export class AisService {
           vpos.mmsi = v['MMSI'];
           vpos.latitude = v['Latitude'];
           vpos.longitude = v['Longitude'];
+          vpos.latitude_dec = this.getDecPos(vpos.latitude);
+          vpos.longitude_dec = this.getDecPos(vpos.longitude);
           vpos.timeStamp = new Date(v['Time_stamp']);
           return vpos;
         }

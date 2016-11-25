@@ -1,0 +1,18 @@
+.image {
+  position: relative;
+  width: 100%; /* for IE 6 */
+}
+
+h4 {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 100%;
+}
+
+h4 span {
+  color: white;
+  font: bold 24px/45px Helvetica, Sans-Serif;
+  letter-spacing: -1px;
+
+}

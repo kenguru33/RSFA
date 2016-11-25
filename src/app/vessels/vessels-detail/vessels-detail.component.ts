@@ -24,6 +24,7 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
   station: Station;
   vesselClass: VesselClass;
   vesselPosition: VesselPosition;
+  vesselStatusColor: string;
 
   page = 1;
 
@@ -36,21 +37,21 @@ export class VesselsDetailComponent implements OnInit, OnDestroy {
               private aisService: AisService) { }
 
   ngOnInit() {
+
     this.activatedRouteSubscription = this.activatedRoute.params.subscribe((params: Params) => {
       if(params['key']) {
         this.isLoading = true;
         this.vesselsService.getVessel(params['key']).subscribe(vessel=> {
           this.vessel = vessel;
+          this.vesselStatusColor = this.vesselsService.getStatusCodes()[vessel.status].color;
           this.aisService.getVesselPosition(vessel).subscribe((vesselPosition: VesselPosition) => {
             this.vesselPosition = vesselPosition;
+            this.isLoading = false;
           });
-          this.isLoading = false;
           this.stationsService.getStation(vessel.stationKey).subscribe((station: Station) => {
             this.station = station;
             this.vesselClassesService.getVesselClass(vessel.vesselClassKey).subscribe((vesselClass: VesselClass) => {
               this.vesselClass = vesselClass;
-              console.log('stasjon lastet', this.station);
-              console.log('fartøy lastet', this.vessel);
             });
           });
         })

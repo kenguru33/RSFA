@@ -6,13 +6,13 @@
   </div>
 
   <div style="position: relative; right: 0; top: 0;">
-    <app-yr-weather [latitude]="aisService.getDecPos(vesselPosition?.latitude)" [longitude]="aisService.getDecPos(vesselPosition?.longitude)" style="position: absolute; top: 0; right: 10px;"></app-yr-weather>
+    <app-yr-weather [latitude]="vesselPosition?.latitude_dec" [longitude]="vesselPosition?.longitude_dec" style="position: absolute; top: 0px; right: 10px;"></app-yr-weather>
   </div>
 
   <div class="panel-heading">
     <div class="panel-title">
       <h4>{{vessel?.prefix}}-{{vessel?.id}} {{vessel?.name}}</h4>
-      <p><span [style.color]="vesselsService.getStatusCodes()[vessel?.status]?.color"><i class="fa fa-circle" aria-hidden="true"></i></span>&nbsp;&nbsp;{{vesselsService.getStatusCodes()[vessel?.status]?.code}}</p>
+      <p><span [style.color]="vesselStatusColor"><i class="fa fa-circle" aria-hidden="true"></i></span>&nbsp;&nbsp;{{vesselsService.getStatusCodes()[vessel?.status]?.code}}</p>
     </div>
   </div>
 
@@ -42,8 +42,8 @@
         </div>
 
         <div *ngIf="page==1" class="col-md-4">
-          <sebm-google-map [latitude]="aisService.getDecPos(vesselPosition?.latitude)" [longitude]="aisService.getDecPos(vesselPosition?.longitude)" class="pull-right-md img-circle">
-            <sebm-google-map-marker [latitude]="aisService.getDecPos(vesselPosition?.latitude)" [longitude]="aisService.getDecPos(vesselPosition?.longitude)"></sebm-google-map-marker>
+          <sebm-google-map [latitude]="vesselPosition?.latitude_dec" [longitude]="vesselPosition?.longitude_dec" class="pull-right-md img-circle">
+            <sebm-google-map-marker [latitude]="vesselPosition?.latitude_dec" [longitude]="vesselPosition?.longitude_dec"></sebm-google-map-marker>
           </sebm-google-map>
         </div>
 
