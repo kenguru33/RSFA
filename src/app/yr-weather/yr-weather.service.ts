@@ -5,7 +5,7 @@ import {Response, Http} from "@angular/http";
 @Injectable()
 export class YrWeatherService {
 
-  baseUrl = "http://81.0.146.52:8080/api/json2";
+  baseUrl = "http://192.168.50.27:8080/api/json2";
 
   constructor(private http: Http) {
   }
