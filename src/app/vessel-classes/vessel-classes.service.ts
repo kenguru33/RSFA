@@ -38,7 +38,7 @@ export class VesselClassesService {
   updateVesselClass(vesselClass: VesselClass): Observable<string> {
     let key = vesselClass.key;
     delete vesselClass['key'];
-    return this.http.put(`${this.baseUrl}/vessel-classes/${key}.json`, JSON.stringify(vesselClass)).map((response: Response) => {
+    return this.http.put(`${this.baseUrl}/vessel-classes/${key}.json?auth=${localStorage.getItem('userToken')}`, JSON.stringify(vesselClass)).map((response: Response) => {
       return response.json().name;
     }).catch(error=>{
       let errorMsg = `${error.statusText}(${error.statusCode})`;

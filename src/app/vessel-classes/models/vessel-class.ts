@@ -31,10 +31,16 @@ export class VesselClass {
   // Propulsion
   gear: string;
   controllablePitchProps: string;
+  bowThrust: string;
+  waterJet: string;
 
   // Crew
   crew: number
 
   // Design by
   design: string;
+
+  constructionMaterial: string;
+
+  rescueAccommodation: string;
 }
