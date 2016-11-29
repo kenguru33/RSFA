@@ -24,6 +24,7 @@ export class YrWeatherComponent implements OnInit, OnDestroy, OnChanges {
   temperature: string;
   windSpeed: string;
   windDirection: string;
+  fog: string;
 
   weatherReport: any;
 
@@ -45,6 +46,7 @@ export class YrWeatherComponent implements OnInit, OnDestroy, OnChanges {
         this.temperature = weather.temperature.value;
         this.windSpeed = weather.windSpeed.name;
         this.windDirection = weather.windDirection.name;
+        this.fog = weather.fog.percent;
         this.showWeather = true;
       }
     });
