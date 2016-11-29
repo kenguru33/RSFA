@@ -8,8 +8,8 @@
 
   <div class="panel-heading" style="margin-bottom: 20px;">
     <div class="panel-title" style="margin-left: 130px;">
-      <h4>title</h4>
-      <p>subtitle</p>
+      <h4>{{vesselClass.name}}</h4>
+      <p>{{vesselClass.design}}</p>
     </div>
   </div>
   <!-- Header component end -->
@@ -31,93 +31,93 @@
             </div>
             <div class="form-group col-md-4">
               <label for="staff">Mannskap</label>
-              <input type="text" class="form-control" id="staff" name="crew" aria-describedby="emailHelp" placeholder="Antall mannskap" [(ngModel)]="vesselClass.crew" required>
+              <input type="text" class="form-control" id="staff" name="crew" aria-describedby="emailHelp" placeholder="Antall mannskap" [(ngModel)]="vesselClass.crew">
             </div>
             <div class="form-group col-md-8">
               <label for="design">Design</label>
-              <input type="text" class="form-control" id="design" name="design" aria-describedby="emailHelp" placeholder="Designet av..." [(ngModel)]="vesselClass.design" required>
+              <input type="text" class="form-control" id="design" name="design" aria-describedby="emailHelp" placeholder="Designet av..." [(ngModel)]="vesselClass.design">
             </div>
             <div class="form-group col-md-12">
               <label for="constructionMaterial">Konstruksjonsmaterialet</label>
-              <input type="text" class="form-control" id="constructionMaterial" name="constructionMaterial" aria-describedby="emailHelp" placeholder="Konstruksjonsmaterialet..." [(ngModel)]="vesselClass.constructionMaterial" required>
+              <input type="text" class="form-control" id="constructionMaterial" name="constructionMaterial" aria-describedby="emailHelp" placeholder="Konstruksjonsmaterialet..." [(ngModel)]="vesselClass.constructionMaterial">
             </div>
           </div>
 
           <div [hidden]="!(page==2)">
             <div class="form-group col-md-4">
               <label for="staff">Rekkevidde (nm)</label>
-              <input type="number" class="form-control" id="range" name="range" aria-describedby="emailHelp" placeholder="Rekkevidde" [(ngModel)]="vesselClass.range" required>
+              <input type="number" class="form-control" id="range" name="range" aria-describedby="emailHelp" placeholder="Rekkevidde" [(ngModel)]="vesselClass.range">
             </div>
             <div class="form-group col-md-4">
               <label for="staff">Hastighet (knots)</label>
-              <input type="number" class="form-control" id="speed" name="speed" aria-describedby="emailHelp" placeholder="Rekkevide" [(ngModel)]="vesselClass.speed" required>
+              <input type="number" class="form-control" id="speed" name="speed" aria-describedby="emailHelp" placeholder="Rekkevide" [(ngModel)]="vesselClass.speed">
             </div>
             <div class="form-group col-md-4">
               <label for="staff">Slepekraft (Nm)</label>
-              <input type="number" class="form-control" id="maxPull" name="maxPull" aria-describedby="emailHelp" placeholder="Slepekraft" [(ngModel)]="vesselClass.maxPull" required>
+              <input type="number" class="form-control" id="maxPull" name="maxPull" aria-describedby="emailHelp" placeholder="Slepekraft" [(ngModel)]="vesselClass.maxPull">
             </div>
             <div class="form-group col-md-4">
               <label for="staff">Tauekrok (Nm)</label>
-              <input type="number" class="form-control" id="towingHook" name="towingHook" aria-describedby="emailHelp" placeholder="Slepekraft" [(ngModel)]="vesselClass.towingHook" required>
+              <input type="number" class="form-control" id="towingHook" name="towingHook" aria-describedby="emailHelp" placeholder="Slepekraft" [(ngModel)]="vesselClass.towingHook">
             </div>
             <div class="form-group col-md-6">
               <label for="staff">Hovedmotor</label>
-              <input type="text" class="form-control" id="mainEngine" name="mainEngine" aria-describedby="emailHelp" placeholder="Hovedmotor..." [(ngModel)]="vesselClass.mainEngine" required>
+              <input type="text" class="form-control" id="mainEngine" name="mainEngine" aria-describedby="emailHelp" placeholder="Hovedmotor..." [(ngModel)]="vesselClass.mainEngine">
             </div>
             <div class="form-group col-md-6">
               <label for="staff">Hjelpemotor</label>
-              <input type="text" class="form-control" id="auxEngine" name="auxEngine" aria-describedby="emailHelp" placeholder="Hjelpemotor" [(ngModel)]="vesselClass.auxEngine" required>
+              <input type="text" class="form-control" id="auxEngine" name="auxEngine" aria-describedby="emailHelp" placeholder="Hjelpemotor" [(ngModel)]="vesselClass.auxEngine">
             </div>
             <div class="form-group col-md-6">
               <label for="staff">Gir</label>
-              <input type="text" class="form-control" id="gear" name="gear" aria-describedby="emailHelp" placeholder="gir" [(ngModel)]="vesselClass.gear" required>
+              <input type="text" class="form-control" id="gear" name="gear" aria-describedby="emailHelp" placeholder="gir" [(ngModel)]="vesselClass.gear">
             </div>
             <div class="form-group col-md-6">
               <label for="staff">Propellkontroll</label>
-              <input type="text" class="form-control" id="controllablePitchProps" name="controllablePitchProps" aria-describedby="emailHelp" placeholder="Hjelpemotor" [(ngModel)]="vesselClass.controllablePitchProps" required>
+              <input type="text" class="form-control" id="controllablePitchProps" name="controllablePitchProps" aria-describedby="emailHelp" placeholder="Hjelpemotor" [(ngModel)]="vesselClass.controllablePitchProps">
             </div>
             <div class="form-group col-md-6">
               <label for="staff">BaugProppel</label>
-              <input type="text" class="form-control" id="bowThrust" name="bowThrust" aria-describedby="emailHelp" placeholder="Hjelpemotor" [(ngModel)]="vesselClass.bowThrust" required>
+              <input type="text" class="form-control" id="bowThrust" name="bowThrust" aria-describedby="emailHelp" placeholder="Hjelpemotor" [(ngModel)]="vesselClass.bowThrust">
             </div>
             <div class="form-group col-md-6">
               <label for="staff">Vannjet</label>
-              <input type="text" class="form-control" id="waterJet" name="waterJet" aria-describedby="emailHelp" placeholder="VannJet" [(ngModel)]="vesselClass.waterJet" required>
+              <input type="text" class="form-control" id="waterJet" name="waterJet" aria-describedby="emailHelp" placeholder="VannJet" [(ngModel)]="vesselClass.waterJet">
             </div>
 
           </div>
           <div [hidden]="!(page==3)">
             <div class="form-group col-md-4">
               <label for="length">Lengde</label>
-              <input type="number" class="form-control" id="length" name="length" aria-describedby="emailHelp" placeholder="Lengde (m)" [(ngModel)]="vesselClass.length" required>
+              <input type="number" class="form-control" id="length" name="length" aria-describedby="emailHelp" placeholder="Lengde (m)" [(ngModel)]="vesselClass.length">
             </div>
             <div class="form-group col-md-4">
               <label for="beam">Bredde</label>
-              <input type="number" class="form-control" id="beam" name="beam" aria-describedby="emailHelp" placeholder="Bredde (m)..." [(ngModel)]="vesselClass.beam" required>
+              <input type="number" class="form-control" id="beam" name="beam" aria-describedby="emailHelp" placeholder="Bredde (m)..." [(ngModel)]="vesselClass.beam">
             </div>
             <div class="form-group col-md-4">
               <label for="draft">Dybde</label>
-              <input type="number" class="form-control" id="draft" name="draft" aria-describedby="emailHelp" placeholder="Dybde (m)..." [(ngModel)]="vesselClass.draft" required>
+              <input type="number" class="form-control" id="draft" name="draft" aria-describedby="emailHelp" placeholder="Dybde (m)..." [(ngModel)]="vesselClass.draft">
             </div>
             <div class="form-group col-md-4">
               <label for="tonnageGross">Bruttovekt</label>
-              <input type="number" class="form-control" id="tonnageGross" name="tonnageGross" aria-describedby="emailHelp" placeholder="(tonn)..." [(ngModel)]="vesselClass.tonnageGross" required>
+              <input type="number" class="form-control" id="tonnageGross" name="tonnageGross" aria-describedby="emailHelp" placeholder="(tonn)..." [(ngModel)]="vesselClass.tonnageGross">
             </div>
             <div class="form-group col-md-4">
               <label for="tonnageNet">Nettovekt</label>
-              <input type="number" class="form-control" id="tonnageNet" name="tonnageNet" aria-describedby="emailHelp" placeholder="(tonn)..." [(ngModel)]="vesselClass.tonnageNet" required>
+              <input type="number" class="form-control" id="tonnageNet" name="tonnageNet" aria-describedby="emailHelp" placeholder="(tonn)..." [(ngModel)]="vesselClass.tonnageNet">
             </div>
             <div class="form-group col-md-4">
               <label for="bunkerOil">Oljetank</label>
-              <input type="number" class="form-control" id="bunkerOil" name="bunkerOil" aria-describedby="emailHelp" placeholder="Bunker (m3)..." [(ngModel)]="vesselClass.bunkerOil" required>
+              <input type="number" class="form-control" id="bunkerOil" name="bunkerOil" aria-describedby="emailHelp" placeholder="Bunker (m3)..." [(ngModel)]="vesselClass.bunkerOil">
             </div>
             <div class="form-group col-md-4">
               <label for="ballastWater">Ballastvannstank</label>
-              <input type="number" class="form-control" id="ballastWater" name="ballastWater" aria-describedby="emailHelp" placeholder="(m3)..." [(ngModel)]="vesselClass.ballastWater" required>
+              <input type="number" class="form-control" id="ballastWater" name="ballastWater" aria-describedby="emailHelp" placeholder="(m3)..." [(ngModel)]="vesselClass.ballastWater">
             </div>
             <div class="form-group col-md-4">
               <label for="freshWater">Ferskvannstank</label>
-              <input type="number" class="form-control" id="freshWater" name="freshWater" aria-describedby="emailHelp" placeholder="(m3)..." [(ngModel)]="vesselClass.freshWater" required>
+              <input type="number" class="form-control" id="freshWater" name="freshWater" aria-describedby="emailHelp" placeholder="(m3)..." [(ngModel)]="vesselClass.freshWater">
             </div>
           </div>
         </div>

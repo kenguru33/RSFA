@@ -1,10 +1,7 @@
 
 <div style="margin-top:0" *ngIf="showWeather">
-  <div style="margin: 0;">
-    <img src="{{icon}}" height="60px" alt="...">
-  </div>
   <div style="font-size: x-small; margin: 0; line-height: 3px;">
-    <p><strong>{{temperature}} °C</strong></p>
+    <p><img src="{{icon}}"  alt=""><strong>&nbsp;{{temperature}} °C</strong></p>
     <p>{{windSpeed}} ({{windDirection}})</p>
     <p>Tåke: {{fog}}%</p>
   </div>

@@ -1,30 +1,56 @@
 <div class="panel panel-default animated fadeIn" *ngIf="!isLoading">
+  <!-- Header component start-->
   <div style="position: relative; left: 0; top: 0;">
-    <img class="img-circle"  src="/assets/img/ship.png" onError="this.onerror=null;this.src='http://imagineathena.com/wp-content/plugins/special-recent-posts/images/no-thumb.png';" style="position: absolute; top: 10px; left: 10px;"/>
+    <img class="img-circle"   src="/assets/img/ship.png" onError="this.onerror=null;this.src='assets/img/camera.png';" style="position: absolute; top: 10px; left: 10px; cursor: pointer;" (click)="toggleImagePath()"/>
   </div>
-  <div class="panel-heading" style="margin-bottom: 20px">
-    <div class="panel-title">
-      <div style="margin-left: 130px; min-height: 50px;">
-        <h4>{{vesselClass?.name}}</h4>
-        <p>subtitle</p>
-      </div>
+
+  <div class="panel-heading" style="margin-bottom: 20px;">
+    <div class="panel-title" style="margin-left: 130px;">
+      <h4>{{vesselClass.name}}</h4>
+      <p>{{vesselClass.design}}</p>
     </div>
   </div>
+  <!-- Header component end -->
   <div class="panel-body">
     <ul class="nav nav-tabs">
       <li style="cursor: pointer;" role="presentation" [class.active]="page==1" (click)="page=1"><a>Generelt</a></li>
       <li style="cursor: pointer;" role="presentation" [class.active]="page==2" (click)="page=2"><a>Teknisk</a></li>
-      <li style="cursor: pointer;" role="presentation" [class.active]="page==3" (click)="page=3"><a>Fartøyer</a></li>
+      <li style="cursor: pointer;" role="presentation" [class.active]="page==3" (click)="page=3"><a>Dimmensjoner</a></li>
     </ul>
-    <div style="margin-left: 20px; margin-top: 20px;">
-      <p><strong>Fartøyer:</strong>
-        <span *ngFor="let vessel of vesselsInClass" routerLink="/fartøyer/{{vessel.key}}"> <span style="white-space: nowrap; cursor: pointer;">&nbsp;<i class="fa fa-circle" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel.status]?.color"></i>&nbsp;&nbsp;<a>{{vessel.prefix}}-{{vessel.id}} {{vessel.name}}</a></span>&nbsp;&nbsp;</span>
-      </p>
-      <p><strong>Rekkevidde:</strong> {{vesselClass?.range}} nm</p>
-      <p><strong>Hastighet:</strong> {{vesselClass?.speed}} knop</p>
-    </div>
+    <div class="panel panel-default" style="border-top-width: 0; ">
+      <div class="panel-body" style="padding: 10px; min-height: 440px">
 
-    <button style="margin-top: 20px" class="btn btn-primary" (click)="onEditVesselClass()" [routerLink]="['../','edit',vesselClass?.key]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Rediger</button>
+        <div [hidden]="!(page==1)">
+          <p><strong>Rekkevidde:</strong> {{vesselClass.range || 'N/A'}} nm</p>
+          <p><strong>Hastighet:</strong> {{vesselClass.speed || 'N/A'}} knots</p>
+          <p><strong>Byggematerialet:</strong> {{vesselClass.constructionMaterial || 'N/A'}}</p>
+          <p><strong>Mannskap:</strong> {{vesselClass.crew || 'N/A'}}</p>
+        </div>
+
+        <div [hidden]="!(page==2)">
+          <p><strong>Slepekraft:</strong> {{vesselClass.maxPull || 'N/A'}}</p>
+          <p><strong>Tauekrok:</strong> {{vesselClass.towingHook || 'N/A'}} knots</p>
+          <p><strong>Hovedmotor: {{vesselClass.mainEngine || 'N/A'}}</strong></p>
+          <p><strong>Hjelpemotor: {{vesselClass.auxEngine || 'N/A'}}</strong></p>
+          <p><strong>Gir: {{vesselClass.gear || 'N/A'}}</strong></p>
+          <p><strong>Proppelkontroll: {{vesselClass.controllablePitchProps || 'N/A'}}</strong></p>
+          <p><strong>Baugproppel: {{vesselClass.bowThrust || 'N/A'}}</strong></p>
+          <p><strong>Vannjet: {{vesselClass.waterJet || 'N/A'}}</strong></p>
+        </div>
+
+        <div [hidden]="!(page==3)">
+          <p><strong>Lengde:</strong> {{vesselClass.length|| 'N/A'}} </p>
+          <p><strong>Bredde:</strong> {{vesselClass.draft || 'N/A'}} </p>
+          <p><strong>Dybde:</strong> {{vesselClass.beam || 'N/A'}} </p>
+          <p><strong>Bruttovekt:</strong> {{vesselClass.tonnageGross || 'N/A'}} </p>
+          <p><strong>Nettovekt:</strong> {{vesselClass.tonnageNet || 'N/A'}} </p>
+        </div>
+
+        <div [hidden]="!(page==4)">
+          <p>page4</p>
+        </div>
+      </div>
+    </div>
+    <button style="margin-top: 0px" class="btn btn-primary" (click)="onEditVesselClass()" [routerLink]="['../','edit',vesselClass?.key]"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Rediger</button>
   </div>
 </div>
-

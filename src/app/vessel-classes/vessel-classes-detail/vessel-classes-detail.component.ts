@@ -20,6 +20,8 @@ export class VesselClassesDetailComponent implements OnInit {
 
   isLoading = false;
 
+  page = 1;
+
   constructor(private vesselsClassesService: VesselClassesService, private vesselsService: VesselsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
