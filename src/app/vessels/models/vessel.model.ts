@@ -26,6 +26,6 @@ export class Vessel {
     divingEquipment: string;
     navigationEquipment: string;
     communicationEquipment: string;
-
-    //private Position: VesselLocation;
+    ansvarligInspector: string;
+    ansvarligOperation: string;
 }

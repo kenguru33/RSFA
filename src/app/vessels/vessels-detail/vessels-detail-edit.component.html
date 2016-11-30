@@ -140,6 +140,17 @@
               <label for="statusinfo"><strong>Tilleggsinformasjon</strong></label>
               <textarea id="statusinfo" class="form-control" style="height: 200px;" name="statusinfo" [(ngModel)]="vessel.statusInfo"></textarea>
             </div>
+
+            <!-- ansvarlig Inspektør -->
+            <div class="form-group col-md-6">
+              <label for="buildingyear">Ansvarlig inspektør</label>
+              <input type="text" class="form-control" id="ansvarligInspector" name="ansvarligInspector" aria-describedby="emailHelp" placeholder="Inspektør..."[(ngModel)]="vessel.ansvarligInspector">
+            </div>
+            <!-- ansvarlig operasjon -->
+            <div class="form-group col-md-6">
+              <label for="buildingyear">Operasjonsansvarlig</label>
+              <input type="text" class="form-control" id="ansvaligOperation" name="ansvarligOperation" aria-describedby="emailHelp" placeholder="Operasjonsansvarlig..."[(ngModel)]="vessel.ansvarligOperation">
+            </div>
           </div>
 
           <!-- PAGE3 -->

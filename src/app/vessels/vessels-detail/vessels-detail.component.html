@@ -34,6 +34,8 @@
           <p><strong>Bemannningtype:</strong> {{vessel?.staff}}</p>
           <p><strong>MMSI:</strong> {{vessel?.mmsi}}</p>
           <p><strong>Kallesignal:</strong>{{vessel?.callSign}}</p>
+          <p><strong>Ansvarlig inspektør:</strong> {{vessel?.ansvarligInspector}}</p>
+          <p><strong>Opersjonsansvarlig:</strong> {{vessel?.ansvarligOperation}}</p>
           <p><strong>Posisjon:</strong> lat: {{vesselPosition?.latitude}} &nbsp; long: {{vesselPosition?.longitude}} &nbsp;&nbsp; Tid:&nbsp;{{vesselPosition?.timeStamp.toLocaleDateString()}}&nbsp;&nbsp;{{vesselPosition?.timeStamp.toLocaleTimeString()}}</p>
           <p><strong>Verft:</strong> {{vessel?.buildingYard}}</p>
           <p><strong>DNV klasse:</strong> {{vessel?.dnvClass}}</p>

@@ -42,5 +42,4 @@ export class VesselClass {
 
   constructionMaterial: string;
 
-  rescueAccommodation: string;
 }
