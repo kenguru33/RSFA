@@ -1,3 +1,17 @@
-<p>
-  overview works!
-</p>
+<div class="col-md-12">
+  <p>
+    Her kommer stasjoner og fartøyer listet og plassert på kart. Mulighet for å klikke på kart for å få opp raskeste skøyte til punktet basert på fartøyets faktiske posisjon.
+  </p>
+  <p>
+    Alle skøyter har en transparent ring rundt seg som indikerer fartøyets rekkevidde.
+  </p>
+  <div class="col-md-4">
+    <span *ngFor="let vessel of vessels" routerLink="/fartøyer/{{vessel.key}}"><li><span style="white-space: nowrap; cursor: pointer;">&nbsp;<i class="fa fa-circle" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel.status]?.color"></i>&nbsp;&nbsp;<a>{{vessel.prefix}}-{{vessel.id}} {{vessel.name}}</a></span>&nbsp;&nbsp;</span>
+  </div>
+  <div class="col-md-8">
+    <img src="assets/img/map2.png" style="width: 600px">
+  </div>
+</div>
+
+
+

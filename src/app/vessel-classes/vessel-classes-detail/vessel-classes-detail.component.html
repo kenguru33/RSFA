@@ -16,6 +16,7 @@
       <li style="cursor: pointer;" role="presentation" [class.active]="page==1" (click)="page=1"><a>Generelt</a></li>
       <li style="cursor: pointer;" role="presentation" [class.active]="page==2" (click)="page=2"><a>Teknisk</a></li>
       <li style="cursor: pointer;" role="presentation" [class.active]="page==3" (click)="page=3"><a>Dimmensjoner</a></li>
+      <li style="cursor: pointer;" role="presentation" [class.active]="page==4" (click)="page=4"><a>Fartøyer</a></li>
     </ul>
     <div class="panel panel-default" style="border-top-width: 0; ">
       <div class="panel-body" style="padding: 10px; min-height: 440px">
@@ -47,7 +48,7 @@
         </div>
 
         <div [hidden]="!(page==4)">
-          <p>page4</p>
+            <span *ngFor="let vessel of vesselsInClass" routerLink="/fartøyer/{{vessel.key}}"> <span style="white-space: nowrap; cursor: pointer;">&nbsp;<i class="fa fa-circle" aria-hidden="true" [style.color]="vesselsService.getStatusCodes()[vessel.status]?.color"></i>&nbsp;&nbsp;<a>{{vessel.prefix}}-{{vessel.id}} {{vessel.name}}</a></span>&nbsp;&nbsp;</span>
         </div>
       </div>
     </div>
